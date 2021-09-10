@@ -1,7 +1,5 @@
 import 'package:flame/components.dart';
-import 'package:flame/flame.dart';
 import 'package:flame/gestures.dart';
-import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/game.dart';
 
@@ -17,7 +15,7 @@ class MyGame extends Game with TapDetector {
   late Sprite unpressedButton;
   // Just like our robot needs its position and size, here we create two
   // variables for the button as well
-  final buttonPosition = Vector2(200, 120);
+  final buttonPosition = Vector2(100, 120);
   final buttonSize = Vector2(120, 30);
   // Simple boolean variable to tell if the button is pressed or not
   bool isPressed = false;
