@@ -26,29 +26,30 @@ class MyGame extends Game {
     Flame.device.fullScreen();
 
     listEnemy = List.empty(growable: true);
-    listEnemy.add(EnemyWidget.enemyWidgetRandom(0, size.x, 0, size.y, 1));
-    listEnemy.add(EnemyWidget.enemyWidgetRandom(0, size.x, 0, size.y, 1));
+    for(int i = 0; i < 50 ; i++){
+      listEnemy.add(EnemyWidget.enemyWidgetRandom(0, size.x, 0, size.y, 2));
+    }
 
     for(int i = 0; i < listEnemy.length; i++)
     {
       switch(listEnemy[i].type) {
         case 1: {
           listEnemy[i].enemyAnimation = await loadSpriteAnimation(
-              'robot.png',
+              'heheboy.png',
               SpriteAnimationData.sequenced(
-                amount: 8,
-                textureSize: Vector2(16, 18),
-                stepTime: 0.1,
+                amount: 3,
+                textureSize: Vector2(944, 804),
+                stepTime: 0.2,
               ));
         }
         break;
 
         default: {
           listEnemy[i].enemyAnimation = await loadSpriteAnimation(
-              'robot.png',
+              'fe.png',
               SpriteAnimationData.sequenced(
-                amount: 8,
-                textureSize: Vector2(16, 18),
+                amount: 26,
+                textureSize: Vector2(40, 40),
                 stepTime: 0.1,
               ));
         }

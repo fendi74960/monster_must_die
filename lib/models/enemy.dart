@@ -34,7 +34,7 @@ class Enemy {
         damage = 1;
         health = 2;
         speed = 1;
-        enemySize = Vector2(48, 60);
+        enemySize = Vector2(60, 60);
       }
       break;
 
@@ -42,7 +42,7 @@ class Enemy {
         damage = 1;
         health = 2;
         speed = 1;
-        enemySize = Vector2(48, 60);
+        enemySize = Vector2(40, 40);
       }
       break;
     }
