@@ -25,16 +25,11 @@ class MyGame extends Game {
   Future<void> onLoad() async {
     Flame.device.fullScreen();
 
-    /*
-    listEnemy = List.generate(3, (index) => {
-      return EnemyWidget.enemyWidgetRandom(0, size.x, 0, size.y, 1);
-    });
-    */
-    //listEnemy = List.empty(growable: true);
-    //listEnemy.add(EnemyWidget.enemyWidgetRandom(0, size.x, 0, size.y, 1));
-    listEnemy = [EnemyWidget.enemyWidgetRandom(0, 100, 0, 100, 1)];
+    listEnemy = List.empty(growable: true);
+    listEnemy.add(EnemyWidget.enemyWidgetRandom(0, size.x, 0, size.y, 1));
+    listEnemy.add(EnemyWidget.enemyWidgetRandom(0, size.x, 0, size.y, 1));
 
-    for(int i = 0; i < listEnemy.length - 1; i++)
+    for(int i = 0; i < listEnemy.length; i++)
     {
       switch(listEnemy[i].type) {
         case 1: {
@@ -64,7 +59,7 @@ class MyGame extends Game {
 
   @override
   void render(Canvas canvas) {
-    for(int i = 0; i < listEnemy.length - 1; i++)
+    for(int i = 0; i < listEnemy.length; i++)
       {
         listEnemy[i].renderEnemy(canvas);
       }
@@ -72,7 +67,7 @@ class MyGame extends Game {
 
   @override
   void update(double dt) {
-    for(int i = 0; i < listEnemy.length - 1; i++)
+    for(int i = 0; i < listEnemy.length; i++)
     {
       listEnemy[i].updateEnemy(dt);
     }
