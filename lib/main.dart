@@ -38,7 +38,7 @@ class MyGame extends Game {
   @override
   Future<void> onLoad() async {
     Flame.device.fullScreen();
-    squarePos = Rect.fromLTWH(-20, -50, 100, 100);
+    squarePos = const Rect.fromLTWH(-20, -50, 100, 100);
   }
   // BasicPalette is a help class from Flame, which provides default, pre-built instances
   // of Paint that can be used by your game

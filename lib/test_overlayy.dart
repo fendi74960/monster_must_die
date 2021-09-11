@@ -1,8 +1,30 @@
 import 'package:dashbook/dashbook.dart';
 import 'package:flame/game.dart';
-import 'package:flame/input.dart';
+import 'package:flame/gestures.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
+
+
+void main() async {
+  final dashbook = Dashbook(
+    title: 'Flame Examples',
+    theme: ThemeData.dark(),
+  );
+
+
+  addWidgetsStories(dashbook);
+
+  runApp(dashbook);
+}
+void addWidgetsStories(Dashbook dashbook) {
+  dashbook.storiesOf('Widgets')
+    ..decorator(CenterDecorator())
+
+    ..add(
+      'Overlay',
+      overlayBuilder,
+    );
+}
 
 Widget overlayBuilder(DashbookContext ctx) {
   return const OverlayExampleWidget();
@@ -20,13 +42,15 @@ class _OverlayExampleWidgetState extends State<OverlayExampleWidget> {
 
   Widget pauseMenuBuilder(BuildContext buildContext, ExampleGame game) {
     return Center(
-      child: Container(
-        width: 100,
-        height: 100,
-        color: const Color(0xFFFF0000),
-        child: const Center(
-          child: Text('Paused'),
-        ),
+      child: GestureDetector(
+        onTap:(){game.chiffre=2;},
+        child:Container(width: 100,
+          height: 100,
+          color: const Color(0xFFFF0000),
+          child: const Center(
+            child: Text('Paused'),
+          ),)
+
       ),
     );
   }
@@ -51,7 +75,9 @@ class _OverlayExampleWidgetState extends State<OverlayExampleWidget> {
         onPressed: newGame,
         child: const Icon(Icons.add),
       ),
+
     );
+
   }
 
   void newGame() {
@@ -65,10 +91,11 @@ class _OverlayExampleWidgetState extends State<OverlayExampleWidget> {
 class ExampleGame extends Game with TapDetector {
   @override
   void update(double dt) {}
-
+  int chiffre=0;
   @override
   Future<void> onLoad() async {
     print('game loaded');
+    chiffre=1;
   }
 
   @override
@@ -77,6 +104,7 @@ class ExampleGame extends Game with TapDetector {
       const Rect.fromLTWH(100, 100, 100, 100),
       Paint()..color = BasicPalette.white.color,
     );
+    print(chiffre);
   }
 
   @override
