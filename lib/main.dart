@@ -14,7 +14,7 @@ void main() {
   );
 }
 
-class MyGame extends Game {
+class MyGame extends BaseGame {
   // A constant speed, represented in logical pixels per second
   static const int squareSpeed = 400;
 

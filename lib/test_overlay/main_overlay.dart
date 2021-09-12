@@ -35,7 +35,7 @@ class MyGameApp extends StatelessWidget {
         body: GameWidget(
           // This will dislpay a loading bar until [DinoRun] completes
           // its onLoad method.
-          loadingBuilder: (conetxt) => Center(
+          loadingBuilder: (context) => Center(
             child: Container(
               width: 200,
               child: LinearProgressIndicator(),
