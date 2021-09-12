@@ -21,6 +21,7 @@ io.on('connection', function (client) {
   })
 
   client.on('connect', function () {
+    
   })
 
   client.on('disconnect', function () {

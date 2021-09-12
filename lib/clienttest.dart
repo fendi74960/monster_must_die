@@ -78,7 +78,7 @@ class ClientTest extends MyGame with TapDetector { //Don't forget the TapDetecor
 
   @override
   void onTapDown(TapDownInfo event) {
-    
+
     final buttonArea = buttonPosition & buttonSize;
 
     isPressed = buttonArea.contains(event.eventPosition.game.toOffset());
