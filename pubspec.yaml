@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   #flame: ^0.29.4
   flame: ^1.0.0-releasecandidate.11
+  socket_io_client: ^1.0.1
 
 dev_dependencies:
   flutter_test:

@@ -21,29 +21,6 @@ class EnemyWidget extends Enemy {
   }
 
   //Flame functions to call in the main
-  /* //can't do it here because loadSpriteAnimation is in the Game class
-  Future<void> onLoadEnemy() async  {
-    switch(type) {
-      case 1: {
-        enemyAnimation = await loadSpriteAnimation(
-            'robot.png',
-            SpriteAnimationData.sequenced(
-            amount: 8,
-            textureSize: Vector2(16, 18),
-        stepTime: 0.1,
-        ));
-      }
-      break;
-
-      default: {
-        enemyAnimation = ;
-      }
-      break;
-    }
-
-  }
-  */
-
   void updateEnemy(double dt) {
     enemyAnimation.update(dt);
   }
