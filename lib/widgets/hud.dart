@@ -37,47 +37,44 @@ class Hud extends StatelessWidget {
                 Selector<PlayerData, int>(
                   selector: (_, playerData) => playerData.waves,
                   builder: (_, waves, __) {
-                    return Text(
-                      'Waves: $waves',
-                      style: TextStyle(color: Colors.white,fontSize: 20),
+                    return Expanded (
+                      child:Text(
+                        'Waves: $waves',
+                        style: TextStyle(color: Colors.white,fontSize: 20),
+                      )
                     );
                   },
                 ),
                 Selector<PlayerData, int>(
                   selector: (_, playerData) => playerData.lives,
                   builder: (_, lives, __) {
-                    return Row(
-                      children: List.generate(5, (index) {
-                        if (index < lives) {
-                          return Icon(
-                            Icons.favorite,
-                            color: Colors.red,
-                          );
-                        } else {
-                          return Icon(
-                            Icons.favorite_border,
-                            color: Colors.red,
-                          );
-                        }
-                      }),
+                    return Expanded (
+                        child:Text(
+                          'Lives: $lives',
+                          style: TextStyle(color: Colors.white,fontSize: 20),
+                        )
                     );
                   },
                 ),
                 Selector<PlayerData, int>(
                   selector: (_, playerData) => playerData.pointsPerso,
                   builder: (_, pointsPerso, __) {
-                    return Text(
-                      'pointsPerso: $pointsPerso',
-                      style: TextStyle(color: Colors.white,fontSize: 20),
+                    return Expanded(
+                      child: Text(
+                        'pointsPerso: $pointsPerso',
+                        style: TextStyle(color: Colors.white,fontSize: 20),
+                      ),
                     );
                   },
                 ),
                 Selector<PlayerData, int>(
                   selector: (_, playerData) => playerData.pointsCoop,
                   builder: (_, pointsCoop, __) {
-                    return Text(
-                      'pointsCoop: $pointsCoop',
-                      style: TextStyle(color: Colors.white,fontSize: 20),
+                    return Expanded(
+                      child: Text(
+                        'pointsCoop: $pointsCoop',
+                        style: TextStyle(color: Colors.white,fontSize: 20),
+                      ),
                     );
                   },
                 ),

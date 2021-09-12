@@ -113,6 +113,10 @@ class GameLoader extends BaseGame {
     for(int i = 0; i < listEnemy.length; i++)
     {
       listEnemy[i].updateEnemy(dt);
+      if(listEnemy[i].getPosition().y>size.y){
+        playerData.lives-=1;
+        listEnemy.removeAt(i);
+      }
     }
   }
 }

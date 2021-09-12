@@ -23,7 +23,7 @@ class EnemyWidget extends Enemy {
   //Flame functions to call in the main
   void updateEnemy(double dt) {
     enemyAnimation.update(dt);
-    this.setPosition(Vector2(this.getPosition().x+0.1,this.getPosition().y+0.1));
+    setPosition(Vector2(getPosition().x,getPosition().y+0.1));
   }
 
   void renderEnemy(Canvas canvas) {
