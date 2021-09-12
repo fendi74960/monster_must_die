@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../game/game.dart';
+import '../games/gameloader.dart';
 import '../models/player_data.dart';
 
 
@@ -14,7 +14,7 @@ class Hud extends StatelessWidget {
   static const id = 'Hud';
 
   // Reference to parent game.
-  final MyGame gameRef;
+  final GameLoader gameRef;
 
   const Hud(this.gameRef, {Key? key}) : super(key: key);
 

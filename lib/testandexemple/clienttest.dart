@@ -4,6 +4,7 @@ import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/game.dart';
 import 'package:flame/components.dart';
+import 'package:monster_must_die/games/gamesetting.dart';
 import 'package:monster_must_die/widgets/enemywidget.dart';
 import 'package:monster_must_die/main.dart';
 
@@ -32,7 +33,7 @@ void main() {
   );
 }
 
-class ClientTest extends MyGame with TapDetector { //Don't forget the TapDetecor !
+class ClientTest extends GameSetting with TapDetector { //Don't forget the TapDetecor !
 
   late Sprite pressedButton;
   late Sprite unpressedButton;
