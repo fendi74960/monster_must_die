@@ -33,7 +33,7 @@ class Enemy {
       case 1: {
         damage = 1;
         health = 2;
-        speed = 1;
+        speed = 0.1;
         enemySize = Vector2(60, 60);
       }
       break;
@@ -41,7 +41,7 @@ class Enemy {
       default: {
         damage = 1;
         health = 2;
-        speed = 1;
+        speed = 0.1;
         enemySize = Vector2(40, 40);
       }
       break;

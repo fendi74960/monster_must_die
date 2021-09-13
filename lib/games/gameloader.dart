@@ -8,6 +8,9 @@ import 'package:flame/components.dart';
 
 
 class GameLoader extends BaseGame {
+  static const _imageAssets = [
+    'heheboy.png'
+  ];
   // A constant speed, represented in logical pixels per second
   static const int squareSpeed = 400;
 
@@ -35,7 +38,7 @@ class GameLoader extends BaseGame {
 
   @override
   Future<void> onLoad() async {
-
+    await images.loadAll(_imageAssets);
     squarePos = const Rect.fromLTWH(-20, -50, 100, 100);
     playerData=PlayerData();
     unitLance=await loadSprite('Lance.png');
@@ -112,12 +115,40 @@ class GameLoader extends BaseGame {
 
     for(int i = 0; i < listEnemy.length; i++)
     {
-      listEnemy[i].updateEnemy(dt);
+      listEnemy[i].updateMovEnemy(dt,listEnemy[i].speed);
       if(listEnemy[i].getPosition().y>size.y){
         playerData.lives-=1;
-        listEnemy.removeAt(i);
+        listEnemy[i].setPosition(Vector2(0,0));
+        listEnemy[i].enemyAnimation = SpriteAnimation.fromFrameData(
+            images.fromCache('heheboy.png'),
+            SpriteAnimationData.sequenced(
+              amount: 3,
+              textureSize: Vector2(944, 804),
+              stepTime: 0.2,
+            ));
+        //listEnemy.removeAt(i);
       }
     }
+
+    //HIERARCHIE EN COMMENTAIRES DES FUTURS FONCTIONS COTE ENNEMIES
+    //check si en vie
+
+    //check si un unit from unitList a porte
+      //ATTENTION METTRE UN BOOLEAN SI PAS BESOIN DE RECHANGER ANIMATION
+      //Si non alors change animation to avance
+      //Si oui alors change animation puis attaque
+
+    //HIERARCHIE EN COMMENTAIRES DES FUTURS FONCTIONS COTE Unit
+    //check si en vie
+
+    //check si un unit from unitList a porte
+      //ATTENTION METTRE UN BOOLEAN SI PAS BESOIN DE RECHANGER ANIMATION
+      //Si non alors change animation to avance VERS ennemie plus proche
+      //Si oui alors change animation puis attaque
+
+    //HIERARCHIE EN COMMENTAIRES DES FUTURS FONCTIONS de la suite
+    //Check nb ennemie si 0 faire l'etape de pause
+    //si >0 rien faire
   }
 }
 
