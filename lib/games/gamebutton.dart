@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flame/game.dart';
 import 'package:flame/flame.dart';
 import '../games/gamenetwork.dart';
+import 'package:monster_must_die/widgets/unit_widget.dart';
 
 class GameButton extends GameNetwork with TapDetector {
 
@@ -26,5 +27,22 @@ class GameButton extends GameNetwork with TapDetector {
     super.render(canvas);
 
     //todo
+  }
+
+  @override
+  void onTapDown(TapDownInfo event) {
+    // On tap down we need to check if the event ocurred on the
+    // button area. There are several ways of doing it, for this
+    // tutorial we do that by transforming ours position and size
+    // vectors into a dart:ui Rect by using the `&` operator, and
+    // with that rect we can use its `contains` method which checks
+    // if a point (Offset) is inside that rect
+    final buttonArea = Vector2(size.x-unitButtonSize.x,0) & unitButtonSize;
+    print("yo");
+    print(listUnit.length);
+    if( buttonArea.contains(event.eventPosition.game.toOffset())){
+      listUnit.add(UnitWidget.unitWidgetSpawn(50,50,0,images));
+    }
+
   }
 }

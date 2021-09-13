@@ -31,4 +31,5 @@ class EnemyWidget extends Enemy {
         .getSprite()
         .render(canvas, position: getPosition(), size: enemySize);
   }
+
 }

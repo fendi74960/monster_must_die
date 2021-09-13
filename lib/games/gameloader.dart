@@ -3,13 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flame/game.dart';
 import 'package:flame/flame.dart';
 import 'package:monster_must_die/widgets/enemywidget.dart';
+import 'package:monster_must_die/widgets/unit_widget.dart';
 import '../models/player_data.dart';
 import 'package:flame/components.dart';
 
 
 class GameLoader extends BaseGame {
   static const _imageAssets = [
-    'heheboy.png'
+    'heheboy.png',
+    'Archer.png',
+    'Axe.png',
+    'Bishop.png',
+    'CavArcher.png',
+    'Lance.png',
+    'Mage.png',
   ];
   // A constant speed, represented in logical pixels per second
   static const int squareSpeed = 400;
@@ -36,6 +43,8 @@ class GameLoader extends BaseGame {
 
   late List<EnemyWidget> listEnemy;
 
+  late List<UnitWidget> listUnit;
+
   @override
   Future<void> onLoad() async {
     await images.loadAll(_imageAssets);
@@ -48,6 +57,8 @@ class GameLoader extends BaseGame {
     unitArcher=await loadSprite('Archer.png');
     unitCavArcher=await loadSprite('CavArcher.png');
 
+
+    listUnit = List.empty(growable: true);
     listEnemy = List.empty(growable: true);
     for(int i = 0; i < 50 ; i++){
       listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 2));
@@ -98,6 +109,11 @@ class GameLoader extends BaseGame {
     {
       listEnemy[i].renderEnemy(canvas);
     }
+
+    for(int i = 0; i < listUnit.length; i++)
+    {
+      listUnit[i].renderUnit(canvas);
+    }
   }
 
   @override
@@ -130,6 +146,12 @@ class GameLoader extends BaseGame {
       }
     }
 
+    for(int i = 0; i < listUnit.length; i++)
+    {
+      listUnit[i].updateMovUnit(dt,listUnit[i].speed);
+
+    }
+
     //HIERARCHIE EN COMMENTAIRES DES FUTURS FONCTIONS COTE ENNEMIES
     //check si en vie
 
@@ -150,5 +172,7 @@ class GameLoader extends BaseGame {
     //Check nb ennemie si 0 faire l'etape de pause
     //si >0 rien faire
   }
+
+
 }
 
