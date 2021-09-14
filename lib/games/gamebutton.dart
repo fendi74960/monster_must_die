@@ -38,10 +38,8 @@ class GameButton extends GameNetwork with TapDetector {
     // with that rect we can use its `contains` method which checks
     // if a point (Offset) is inside that rect
     final buttonArea = Vector2(size.x-unitButtonSize.x,0) & unitButtonSize;
-    print("yo");
-    print(listUnit.length);
     if( buttonArea.contains(event.eventPosition.game.toOffset())){
-      listUnit.add(UnitWidget.unitWidgetSpawn(50,50,0,images));
+      listUnit.add(UnitWidget.unitWidgetSpawn(size.x/2,size.y,0,images));
     }
 
   }

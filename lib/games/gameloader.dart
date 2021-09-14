@@ -105,15 +105,17 @@ class GameLoader extends BaseGame {
     unitArcher.render(canvas,position:Vector2(size.x-unitButtonSize.x,0+unitButtonSize.y*4) ,size: unitButtonSize);
     unitCavArcher.render(canvas,position:Vector2(size.x-unitButtonSize.x,0+unitButtonSize.y*5) ,size: unitButtonSize);
 
+    for(int i = 0; i < listUnit.length; i++)
+    {
+      listUnit[i].renderUnit(canvas);
+    }
+
     for(int i = 0; i < listEnemy.length; i++)
     {
       listEnemy[i].renderEnemy(canvas);
     }
 
-    for(int i = 0; i < listUnit.length; i++)
-    {
-      listUnit[i].renderUnit(canvas);
-    }
+
   }
 
   @override
@@ -128,29 +130,31 @@ class GameLoader extends BaseGame {
       squareDirection = 1;
       playerData.waves-=1;
     }
+    for(int i = 0; i < listUnit.length; i++)
+    {
+      listUnit[i].isStopped=listUnit[i].checkInRangeEnnemie(listEnemy) ;
+      listUnit[i].updateMovUnit(dt,-listUnit[i].speed);
+
+
+    }
 
     for(int i = 0; i < listEnemy.length; i++)
     {
       listEnemy[i].updateMovEnemy(dt,listEnemy[i].speed);
       if(listEnemy[i].getPosition().y>size.y){
         playerData.lives-=1;
-        listEnemy[i].setPosition(Vector2(0,0));
+        /*listEnemy[i].setPosition(Vector2(0,0));
         listEnemy[i].enemyAnimation = SpriteAnimation.fromFrameData(
             images.fromCache('heheboy.png'),
             SpriteAnimationData.sequenced(
               amount: 3,
               textureSize: Vector2(944, 804),
               stepTime: 0.2,
-            ));
-        //listEnemy.removeAt(i);
+            ));*/
+        listEnemy.removeAt(i);
       }
     }
 
-    for(int i = 0; i < listUnit.length; i++)
-    {
-      listUnit[i].updateMovUnit(dt,listUnit[i].speed);
-
-    }
 
     //HIERARCHIE EN COMMENTAIRES DES FUTURS FONCTIONS COTE ENNEMIES
     //check si en vie
