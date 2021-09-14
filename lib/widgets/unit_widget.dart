@@ -37,12 +37,14 @@ class UnitWidget extends Unit  {
   //Flame functions to call in the main
   void updateMovUnit(double dt,double speed) {
     unitAnimation.update(dt);
-    if(!isStopped) {
-      //TODO
-      //CHECK SI ON DOIT REMETTRE LE EN MARCHE
-      setPosition(Vector2(getPosition().x,getPosition().y+speed));
-    }
+    setPosition(Vector2(getPosition().x,getPosition().y+speed));
     //else mov towards ennemies
+  }
+
+  void attaque(double dt,EnemyWidget target) {
+    unitAnimation.update(dt);
+    target.health-=damage;
+
   }
 
   void renderUnit(Canvas canvas) {
@@ -55,7 +57,7 @@ class UnitWidget extends Unit  {
     return UnitWidget(x, y, type,images);
   }
 
-  bool checkInRangeEnnemie(List<EnemyWidget> ens){
+  EnemyWidget checkInRangeEnnemie(List<EnemyWidget> ens){
     double enemyX,enemyY;
     double unitX=getPosition().x+unitSize.x/2,unitY=getPosition().y+unitSize.y/2;
     for(int ii=0;ii<ens.length;ii++){
@@ -63,10 +65,14 @@ class UnitWidget extends Unit  {
       enemyY=ens[ii].getPosition().y+ens[ii].enemySize.y/2;
 
       if(sqrt(pow(enemyX-unitX,2)+pow(enemyY-unitY,2))<=range) {
-        return true;
+        isStopped=true;
+        return ens[ii];
       }
     }
-
-    return false;
+    isStopped=false;
+    return EnemyWidget(0,0,0);
+  }
+  bool isAlive(){
+    return health>0?true:false;
   }
 }

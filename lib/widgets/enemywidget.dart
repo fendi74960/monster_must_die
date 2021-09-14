@@ -32,4 +32,8 @@ class EnemyWidget extends Enemy {
         .render(canvas, position: getPosition(), size: enemySize);
   }
 
+  bool isAlive(){
+    return health>0?true:false;
+  }
+
 }

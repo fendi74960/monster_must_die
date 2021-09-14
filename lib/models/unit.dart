@@ -35,7 +35,7 @@ class Unit {
         damage = 1;
         health = 2;
         speed = 0.4;
-        range=20;
+        range=50;
         unitSize = Vector2(40, 40);
       }
       break;
@@ -44,7 +44,7 @@ class Unit {
         damage = 1;
         health = 2;
         speed = 0.4;
-        range=20;
+        range=50;
         unitSize = Vector2(40, 40);
       }
       break;

@@ -132,18 +132,29 @@ class GameLoader extends BaseGame {
     }
     for(int i = 0; i < listUnit.length; i++)
     {
-      listUnit[i].isStopped=listUnit[i].checkInRangeEnnemie(listEnemy) ;
-      listUnit[i].updateMovUnit(dt,-listUnit[i].speed);
-
-
+      EnemyWidget target=EnemyWidget(0,0,0);
+      if(listUnit[i].isAlive()) {
+        target = listUnit[i].checkInRangeEnnemie(listEnemy);
+        //Si isStopped changer etat alors actualiser animation avec le type ?
+        if(!listUnit[i].isStopped) {
+          listUnit[i].updateMovUnit(dt, -listUnit[i].speed);
+        }
+        else{
+          listUnit[i].attaque(dt,target);
+        }
+      }
+      else {
+        listUnit.removeAt(i);
+      }
     }
 
     for(int i = 0; i < listEnemy.length; i++)
     {
-      listEnemy[i].updateMovEnemy(dt,listEnemy[i].speed);
-      if(listEnemy[i].getPosition().y>size.y){
-        playerData.lives-=1;
-        /*listEnemy[i].setPosition(Vector2(0,0));
+      if(listEnemy[i].isAlive()) {
+        listEnemy[i].updateMovEnemy(dt, listEnemy[i].speed);
+        if (listEnemy[i].getPosition().y > size.y) {
+          playerData.lives -= 1;
+          /*listEnemy[i].setPosition(Vector2(0,0));
         listEnemy[i].enemyAnimation = SpriteAnimation.fromFrameData(
             images.fromCache('heheboy.png'),
             SpriteAnimationData.sequenced(
@@ -151,6 +162,10 @@ class GameLoader extends BaseGame {
               textureSize: Vector2(944, 804),
               stepTime: 0.2,
             ));*/
+          listEnemy.removeAt(i);
+        }
+      }
+      else {
         listEnemy.removeAt(i);
       }
     }
