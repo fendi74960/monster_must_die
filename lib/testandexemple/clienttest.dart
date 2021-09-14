@@ -8,23 +8,31 @@ import 'package:monster_must_die/games/gamesetting.dart';
 import 'package:monster_must_die/widgets/enemywidget.dart';
 import 'package:monster_must_die/main.dart';
 
+import 'package:socket_io_client/socket_io_client.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 
 void main() {
 
-  /*
-  // Dart client
-  IO.Socket socket = IO.io('http://localhost:3000');
-  socket.onConnect((_) {
+  IO.Socket socket = IO.io('http://localhost:3000',
+      OptionBuilder()
+          .setTransports(['websocket']) // for Flutter or Dart VM
+          .setExtraHeaders({'foo': 'bar'}) // optional
+          .build());
+  socket.emit('msg', 'test');
+  socket.on('connection', (_) {
+    print('connection');
+    socket.emit('msg', 'test');
+  });
+  socket.on('connect', (_) {
     print('connect');
     socket.emit('msg', 'test');
   });
   socket.on('event', (data) => print(data));
-  socket.onDisconnect((_) => print('disconnect'));
+  socket.on('disconnect', (_) => print('disconnect'));
   socket.on('fromServer', (_) => print(_));
-  */
 
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////
   final myGame = ClientTest();
   runApp(
     GameWidget(
@@ -44,7 +52,7 @@ class ClientTest extends GameSetting with TapDetector { //Don't forget the TapDe
   @override
   Future<void> onLoad() async {
 
-    super.onLoad();
+    await super.onLoad();
 
     unpressedButton = await loadSprite(
       'buttons.png',
