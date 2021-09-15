@@ -35,10 +35,18 @@ class UnitWidget extends Unit  {
 
 
   //Flame functions to call in the main
-  void updateMovUnit(double dt,double speed) {
+  void updateMovUnit(double dt,double speed,EnemyWidget target) {
     unitAnimation.update(dt);
-    setPosition(Vector2(getPosition().x,getPosition().y+speed));
-    //else mov towards ennemies
+    double vectorX=target.getPosition().x-getPosition().x;
+    double vectorY=target.getPosition().y-getPosition().y;
+
+    double length=sqrt(vectorX*vectorX+vectorY*vectorY);
+
+    double newVectorX=vectorX/length;
+    double newVectorY=vectorY/length;
+    
+    setPosition(Vector2(getPosition().x+newVectorX*speed,getPosition().y+newVectorY*speed));
+
   }
 
   void attaque(double dt,EnemyWidget target) {
@@ -60,17 +68,31 @@ class UnitWidget extends Unit  {
   EnemyWidget checkInRangeEnnemie(List<EnemyWidget> ens){
     double enemyX,enemyY;
     double unitX=getPosition().x+unitSize.x/2,unitY=getPosition().y+unitSize.y/2;
+
+    EnemyWidget plusProche=EnemyWidget(0, 0, 0);
+    double proximite=9999999;
+    double tempProxi=0;
+
     for(int ii=0;ii<ens.length;ii++){
       enemyX=ens[ii].getPosition().x+ens[ii].enemySize.x/2;
       enemyY=ens[ii].getPosition().y+ens[ii].enemySize.y/2;
 
-      if(sqrt(pow(enemyX-unitX,2)+pow(enemyY-unitY,2))<=range) {
+      tempProxi=sqrt(pow(enemyX-unitX,2)+pow(enemyY-unitY,2));
+
+      if(tempProxi<=range) {
         isStopped=true;
         return ens[ii];
       }
+      else{
+        if(tempProxi<proximite) {
+          plusProche=ens[ii];
+          proximite=tempProxi;
+        }
+      }
+
     }
     isStopped=false;
-    return EnemyWidget(0,0,0);
+    return plusProche;
   }
   bool isAlive(){
     return health>0?true:false;

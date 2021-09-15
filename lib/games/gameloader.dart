@@ -137,7 +137,8 @@ class GameLoader extends BaseGame {
         target = listUnit[i].checkInRangeEnnemie(listEnemy);
         //Si isStopped changer etat alors actualiser animation avec le type ?
         if(!listUnit[i].isStopped) {
-          listUnit[i].updateMovUnit(dt, -listUnit[i].speed);
+          //Move TOWARDS nearest ennemy
+          listUnit[i].updateMovUnit(dt, listUnit[i].speed,target);
         }
         else{
           listUnit[i].attaque(dt,target);
