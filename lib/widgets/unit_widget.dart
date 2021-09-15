@@ -65,11 +65,11 @@ class UnitWidget extends Unit  {
     return UnitWidget(x, y, type,images);
   }
 
-  EnemyWidget checkInRangeEnnemie(List<EnemyWidget> ens){
+  EnemyWidget checkInRangeEnnemie(List<EnemyWidget> ens,Images images){
     double enemyX,enemyY;
     double unitX=getPosition().x+unitSize.x/2,unitY=getPosition().y+unitSize.y/2;
 
-    EnemyWidget plusProche=EnemyWidget(0, 0, 0);
+    EnemyWidget plusProche=EnemyWidget(0, 0, 0,images);
     double proximite=9999999;
     double tempProxi=0;
 

@@ -17,6 +17,8 @@ class GameLoader extends BaseGame {
     'CavArcher.png',
     'Lance.png',
     'Mage.png',
+    'lifebar.png',
+    'fe.png',
   ];
   // A constant speed, represented in logical pixels per second
   static const int squareSpeed = 400;
@@ -61,35 +63,9 @@ class GameLoader extends BaseGame {
     listUnit = List.empty(growable: true);
     listEnemy = List.empty(growable: true);
     for(int i = 0; i < 50 ; i++){
-      listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 2));
+      listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 2,images));
     }
 
-    for(int i = 0; i < listEnemy.length; i++)
-    {
-      switch(listEnemy[i].type) {
-        case 1: {
-          listEnemy[i].enemyAnimation = await loadSpriteAnimation(
-              'heheboy.png',
-              SpriteAnimationData.sequenced(
-                amount: 3,
-                textureSize: Vector2(944, 804),
-                stepTime: 0.2,
-              ));
-        }
-        break;
-
-        default: {
-          listEnemy[i].enemyAnimation = await loadSpriteAnimation(
-              'fe.png',
-              SpriteAnimationData.sequenced(
-                amount: 26,
-                textureSize: Vector2(40, 40),
-                stepTime: 0.1,
-              ));
-        }
-        break;
-      }
-    }
   }
 
 
@@ -132,9 +108,9 @@ class GameLoader extends BaseGame {
     }
     for(int i = 0; i < listUnit.length; i++)
     {
-      EnemyWidget target=EnemyWidget(0,0,0);
+      EnemyWidget target=EnemyWidget(0,0,0,images);
       if(listUnit[i].isAlive()) {
-        target = listUnit[i].checkInRangeEnnemie(listEnemy);
+        target = listUnit[i].checkInRangeEnnemie(listEnemy,images);
         //Si isStopped changer etat alors actualiser animation avec le type ?
         if(!listUnit[i].isStopped) {
           //Move TOWARDS nearest ennemy

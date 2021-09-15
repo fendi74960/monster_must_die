@@ -10,6 +10,7 @@ class Enemy {
   late double damage;
   late Vector2 enemySize;
   late double health;
+  late double maxHealth;
   late double speed;
   late int type;
 
@@ -32,7 +33,8 @@ class Enemy {
     switch(type) {
       case 1: {
         damage = 1;
-        health = 2;
+        health = 100;
+        maxHealth = 100;
         speed = 0.1;
         enemySize = Vector2(60, 60);
       }
@@ -40,7 +42,8 @@ class Enemy {
 
       default: {
         damage = 1;
-        health = 2;
+        health = 100;
+        maxHealth = 100;
         speed = 0.1;
         enemySize = Vector2(40, 40);
       }
