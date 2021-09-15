@@ -5,9 +5,10 @@ import 'package:socket_io/socket_io.dart';
 
 void main(List<String> arguments) async {
   var io = Server();
+  var sockets = [];
 
-  io.on('connection', (client) async {
-    print('connected');
+  io.on('connection', (socket) async {
+    print('A player is connected');
 
     var myLocalIp = "";
     RegExp regExp = new RegExp(r"^192\.168\.1\..");
@@ -25,39 +26,41 @@ void main(List<String> arguments) async {
     for (int i = 10; i < myLocalIp.length; i++) {
       val += myLocalIp[i];
     }
-    client.emit('fromServer', val); //On envoie la fin de l'ip local
+    socket.emit('fromServer', val);
+
+    socket.join('room1');
+    sockets.add(socket);
 
     //Event:
-    client.on('msg', (data) {
+    socket.on('msg', (data) {
       print('data from default => $data');
-      client.emit('fromServer', "ok");
+      socket.emit('fromServer', "ok");
     });
-    client.on('toother', (data) {
-      io.clients((cl) {
-        if (client != cl) {
-          cl.emit('fromServer', "ok");
+    socket.on('toother', (data) {
+      print('toother');
+      for (int i = 0; i < sockets.length; i++) {
+        if (socket != sockets[i]) {
+          print('--- only : 1 ---');
+          sockets[i].emit('create', data);
         }
-      });
+      }
     });
-    client.on('toall', (data) {
-      io.clients((cl) {
-        cl.emit('fromServer', "ok");
-      });
+    socket.on('toall', (data) {
+      print('toall');
+      for (int i = 0; i < sockets.length; i++) {
+        print('--- 1 ---');
+        sockets[i].emit('create', data);
+      }
+      //io.to("room1").emit('create', data); //to retry
     });
   });
+
+  io.on('disconnect', (socket) async {
+    sockets.remove(socket);
+  });
+
   io.listen(3000);
 }
-
-//Web socket exemple :
-/*
-  var nsp = io.of('/some');
-  nsp.on('connection', (client) {
-    client.on('msg', (data) {
-      print('data from /some => $data');
-      client.emit('fromServer', "ok 2");
-    });
-  });
-*/
 
 //Run with : dart run
 

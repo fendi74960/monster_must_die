@@ -7,6 +7,7 @@ import 'package:flame/components.dart';
 import 'package:monster_must_die/games/gamesetting.dart';
 import 'package:monster_must_die/widgets/enemywidget.dart';
 import 'package:monster_must_die/main.dart';
+import 'package:monster_must_die/widgets/unit_widget.dart';
 
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
@@ -35,7 +36,7 @@ class ClientTest extends GameSetting with TapDetector { //Don't forget the TapDe
     bool ipFound = false;
     int i = 2;
 
-    //On fait des requetes pour connaitre l'ip du serveur en local
+    //Faire fct
     while(i <= 255 && ipFound == false)
     {
       socket = IO.io('http://192.168.1.' + i.toString() + ':3000',
@@ -46,14 +47,20 @@ class ClientTest extends GameSetting with TapDetector { //Don't forget the TapDe
 
       //socket.emit('msg', 'test');
       socket.on('fromServer', (msg) {
-        print('server reponse :' + msg);
-        print(i);
         ipFound = true;
         socket = IO.io('http://192.168.1.' + msg+ ':3000',
             OptionBuilder()
                 .setTransports(['websocket']) // for Flutter or Dart VM
                 .setExtraHeaders({'foo': 'bar'}) // optional
                 .build());
+        print("connected to 192.168.1." + msg);
+      });
+      socket.on('create', (msg) {
+        print('create');
+        for(int i = 0; i < int.parse(msg); i++)
+        {
+          listUnit.add(UnitWidget.unitWidgetSpawn(size.x/2,size.y-40,0,images));
+        }
       });
       i++;
     }
@@ -102,7 +109,7 @@ class ClientTest extends GameSetting with TapDetector { //Don't forget the TapDe
     if(buttonArea.contains(event.eventPosition.game.toOffset()) && isPressed == false)
     {
       print("envoie");
-      socket.emit('msg', 'test');
+      socket.emit('toall', '1');
     }
     isPressed = buttonArea.contains(event.eventPosition.game.toOffset());
   }
