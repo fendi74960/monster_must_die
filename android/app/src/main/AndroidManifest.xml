@@ -1,5 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.monster_must_die">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
    <application
         android:label="monster_must_die"
         android:icon="@mipmap/ic_launcher">

@@ -13,26 +13,6 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 
 void main() {
-
-  IO.Socket socket = IO.io('http://localhost:3000',
-      OptionBuilder()
-          .setTransports(['websocket']) // for Flutter or Dart VM
-          .setExtraHeaders({'foo': 'bar'}) // optional
-          .build());
-  socket.emit('msg', 'test');
-  socket.on('connection', (_) {
-    print('connection');
-    socket.emit('msg', 'test');
-  });
-  socket.on('connect', (_) {
-    print('connect');
-    socket.emit('msg', 'test');
-  });
-  socket.on('event', (data) => print(data));
-  socket.on('disconnect', (_) => print('disconnect'));
-  socket.on('fromServer', (_) => print(_));
-
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////////
   final myGame = ClientTest();
   runApp(
     GameWidget(
@@ -48,9 +28,42 @@ class ClientTest extends GameSetting with TapDetector { //Don't forget the TapDe
   final buttonPosition = Vector2(0, 0);
   final buttonSize = Vector2(120, 30);
   bool isPressed = false;
+  late IO.Socket socket;
+
+  void createSocket() {
+
+    bool ipFound = false;
+    int i = 2;
+
+    //On fait des requetes pour connaitre l'ip du serveur en local
+    while(i <= 255 && ipFound == false)
+    {
+      socket = IO.io('http://192.168.1.' + i.toString() + ':3000',
+          OptionBuilder()
+              .setTransports(['websocket']) // for Flutter or Dart VM
+              .setExtraHeaders({'foo': 'bar'}) // optional
+              .build());
+
+      //socket.emit('msg', 'test');
+      socket.on('fromServer', (msg) {
+        print('server reponse :' + msg);
+        print(i);
+        ipFound = true;
+        socket = IO.io('http://192.168.1.' + msg+ ':3000',
+            OptionBuilder()
+                .setTransports(['websocket']) // for Flutter or Dart VM
+                .setExtraHeaders({'foo': 'bar'}) // optional
+                .build());
+      });
+      i++;
+    }
+  }
 
   @override
   Future<void> onLoad() async {
+
+    //create socket
+    createSocket();
 
     await super.onLoad();
 
@@ -79,10 +92,6 @@ class ClientTest extends GameSetting with TapDetector { //Don't forget the TapDe
   @override
   void update(double dt) {
     super.update(dt);
-
-    if (isPressed) {
-      print("click !");
-    }
   }
 
   @override
@@ -90,6 +99,11 @@ class ClientTest extends GameSetting with TapDetector { //Don't forget the TapDe
 
     final buttonArea = buttonPosition & buttonSize;
 
+    if(buttonArea.contains(event.eventPosition.game.toOffset()) && isPressed == false)
+    {
+      print("envoie");
+      socket.emit('msg', 'test');
+    }
     isPressed = buttonArea.contains(event.eventPosition.game.toOffset());
   }
 

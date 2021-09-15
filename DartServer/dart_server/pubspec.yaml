@@ -1,17 +1,17 @@
-name: cli
-description: A sample command-line application.
+name: main
+description: 
 version: 1.0.0
-# homepage: https://www.example.com
 
 environment:
   sdk: '>=2.15.0-42.0.dev <3.0.0'
-
-
-# dependencies:
-#   path: ^1.8.0
 
 dev_dependencies:
   lints: ^1.0.0
   test: ^1.16.0
   socket_io: ^1.0.1
+  
+dependencies: 
+  socket_io: ^1.0.1
 
+#dart pub get
+#flutter pub add plugin
