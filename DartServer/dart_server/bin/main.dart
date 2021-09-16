@@ -47,11 +47,7 @@ void main(List<String> arguments) async {
     });
     socket.on('toall', (data) {
       print('toall');
-      for (int i = 0; i < sockets.length; i++) {
-        print('--- 1 ---');
-        sockets[i].emit('create', data);
-      }
-      //io.to("room1").emit('create', data); //to retry
+      io.to("room1").emit('create', data); //to retry
     });
   });
 
