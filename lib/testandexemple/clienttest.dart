@@ -4,6 +4,7 @@ import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/game.dart';
 import 'package:flame/components.dart';
+import 'package:monster_must_die/controller/wavecontroller.dart';
 import 'package:monster_must_die/games/gamesetting.dart';
 import 'package:monster_must_die/widgets/enemywidget.dart';
 import 'package:monster_must_die/main.dart';
@@ -45,7 +46,6 @@ class ClientTest extends GameSetting with TapDetector { //Don't forget the TapDe
               .setExtraHeaders({'foo': 'bar'}) // optional
               .build());
 
-      //socket.emit('msg', 'test');
       socket.on('fromServer', (msg) {
         ipFound = true;
         socket = IO.io('http://192.168.1.' + msg+ ':3000',
@@ -54,6 +54,7 @@ class ClientTest extends GameSetting with TapDetector { //Don't forget the TapDe
                 .setExtraHeaders({'foo': 'bar'}) // optional
                 .build());
         print("connected to 192.168.1." + msg);
+        socket.emit('ready', 'true');
       });
       socket.on('create', (msg) {
         print('create');
@@ -61,6 +62,10 @@ class ClientTest extends GameSetting with TapDetector { //Don't forget the TapDe
         {
           listUnit.add(UnitWidget.unitWidgetSpawn(size.x/2,size.y-40,0,images));
         }
+      });
+      socket.on('wave', (wave) {
+        print('wave nb: ' + wave.toString());
+        WaveController.newWave(wave, listEnemy, 20, size.x - 20, 20, size.y - 20, images);
       });
       i++;
     }
@@ -109,7 +114,8 @@ class ClientTest extends GameSetting with TapDetector { //Don't forget the TapDe
     if(buttonArea.contains(event.eventPosition.game.toOffset()) && isPressed == false)
     {
       print("envoie");
-      socket.emit('toall', '1');
+      socket.emit('ready', 'true');
+      //socket.emit('toall', '1');
       //socket.emit('toother', '1');
     }
     isPressed = buttonArea.contains(event.eventPosition.game.toOffset());

@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:socket_io/socket_io.dart';
 
 void sendLocalIp(socket) async {
   //Used if the client don't know the local IP of the server
@@ -7,7 +6,7 @@ void sendLocalIp(socket) async {
   //Then the server send him the end of the server local IP
 
   var myLocalIp = "";
-  RegExp regExp = new RegExp(r"^192\.168\.1\..");
+  RegExp regExp = RegExp(r"^192\.168\.1\..");
 
   for (var interface in await NetworkInterface.list()) {
     for (var addr in interface.addresses) {
@@ -25,11 +24,12 @@ void sendLocalIp(socket) async {
   socket.emit('fromServer', val);
 }
 
-void createEvents(io, sockets, socket, readys, currentWave) async {
+void createEvents(io, sockets, socket, readys, int currentWave) async {
   //Create all the events used for the server
 
   toOtherEvent(sockets, socket);
   toAllEvent(io, socket);
+  readyEvent(io, socket, readys, currentWave);
 }
 
 void toOtherEvent(sockets, socket) async {
@@ -53,52 +53,32 @@ void toAllEvent(io, socket) async {
 
   socket.on('toall', (data) {
     print('toall');
-    io.to("room1").emit('create', data);
+    io.to("room").emit('create', data);
   });
 }
 
-void readyEvent(socket, readys) async {
+void readyEvent(io, socket, readys, int currentWave) async {
   //Set one player as ready
   // to lauch a wave or other things
 
   socket.on('ready', (data) {
     print('One player is ready');
     readys.add(true);
+
+    if (checkReady(readys)) {
+      print("Create a new wave");
+      currentWave++;
+      io.to("room").emit('wave', currentWave);
+      readys.clear();
+    }
   });
 }
 
 bool checkReady(readys) {
-  //mettre wave++ quand appelé
+  //Check if the two players are ready
+
   if (readys.length >= 2) {
     return true;
   }
   return false;
-}
-
-void startWave(io, currentWave) async {
-  switch (currentWave) {
-    case 1:
-      {
-        io.to("room1").emit('create', 30);
-      }
-      break;
-
-    case 2:
-      {
-        io.to("room1").emit('create', 40);
-      }
-      break;
-
-    case 3:
-      {
-        io.to("room1").emit('create', 50);
-      }
-      break;
-
-    default:
-      {
-        io.to("room1").emit('create', 30);
-      }
-      break;
-  }
 }

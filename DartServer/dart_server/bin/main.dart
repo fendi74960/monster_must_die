@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:main/functions.dart';
 import 'package:socket_io/socket_io.dart';
 
@@ -7,21 +5,16 @@ void main(List<String> arguments) async {
   var io = Server();
   var sockets = [];
   var readys = [];
-  var currentWave = 0;
+  int currentWave = 0;
 
   io.on('connection', (socket) async {
     print('A player is connected');
-    socket.join('room1');
+    socket.join('room');
     sockets.add(socket);
 
     sendLocalIp(socket);
 
     createEvents(io, sockets, socket, readys, currentWave);
-
-    socket.on('msg', (data) {
-      print('data from default => $data');
-      socket.emit('fromServer', "ok");
-    });
   });
 
   io.on('disconnect', (socket) async {
