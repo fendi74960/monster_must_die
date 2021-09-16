@@ -109,8 +109,8 @@ class ClientTest extends GameSetting with TapDetector { //Don't forget the TapDe
     if(buttonArea.contains(event.eventPosition.game.toOffset()) && isPressed == false)
     {
       print("envoie");
-      //socket.emit('toall', '1');
-      socket.emit('toother', '1');
+      socket.emit('toall', '1');
+      //socket.emit('toother', '1');
     }
     isPressed = buttonArea.contains(event.eventPosition.game.toOffset());
   }
