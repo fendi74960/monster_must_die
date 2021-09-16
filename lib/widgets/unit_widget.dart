@@ -24,8 +24,8 @@ class UnitWidget extends Unit  {
         unitAnimation=SpriteAnimation.fromFrameData(
             images.fromCache('heheboy.png'),
             SpriteAnimationData.sequenced(
-              amount: 3,
-              textureSize: Vector2(944, 804),
+              amount: 28,
+              textureSize: Vector2(738, 708),
               stepTime: 0.2,
             ));
       }
