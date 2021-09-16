@@ -12,9 +12,11 @@ import 'package:monster_must_die/widgets/enemywidget.dart';
 class UnitWidget extends Unit  {
 
   late SpriteAnimation unitAnimation;
+  bool etatChanger=false;
+  late Images images;
 
   //Constructors
-  UnitWidget(double x, double y, int type,Images images) : super(x, y, type) {
+  UnitWidget(double x, double y, int type,this.images) : super(x, y, type) {
     switch(type) {
 
 
@@ -65,7 +67,7 @@ class UnitWidget extends Unit  {
     return UnitWidget(x, y, type,images);
   }
 
-  EnemyWidget checkInRangeEnnemie(List<EnemyWidget> ens,Images images){
+  EnemyWidget checkInRangeEnnemie(List<EnemyWidget> ens ){
     double enemyX,enemyY;
     double unitX=getPosition().x+unitSize.x/2,unitY=getPosition().y+unitSize.y/2;
 
@@ -96,5 +98,33 @@ class UnitWidget extends Unit  {
   }
   bool isAlive(){
     return health>0?true:false;
+  }
+  void actualisationAnim(int modificateurType){
+    if(etatChanger) {
+      type += modificateurType;
+
+      switch (type) {
+        case 0:
+          unitAnimation=SpriteAnimation.fromFrameData(
+              images.fromCache('heheboy.png'),
+              SpriteAnimationData.sequenced(
+                amount: 3,
+                textureSize: Vector2(944, 804),
+                stepTime: 0.2,
+              ));
+          break;
+        case 1:
+          unitAnimation = SpriteAnimation.fromFrameData(
+              images.fromCache('fe.png'),
+              SpriteAnimationData.sequenced(
+                amount: 26,
+                textureSize: Vector2(40, 40),
+                stepTime: 0.1,
+              ));
+          break;
+        default:
+          break;
+      }
+    }
   }
 }

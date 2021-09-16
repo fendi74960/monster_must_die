@@ -46,6 +46,7 @@ class GameLoader extends BaseGame {
   late List<EnemyWidget> listEnemy;
 
   late List<UnitWidget> listUnit;
+  late bool tempAStopper;
 
   @override
   Future<void> onLoad() async {
@@ -110,14 +111,25 @@ class GameLoader extends BaseGame {
     {
       EnemyWidget target=EnemyWidget(0,0,0,images);
       if(listUnit[i].isAlive()) {
-        target = listUnit[i].checkInRangeEnnemie(listEnemy,images);
-        //Si isStopped changer etat alors actualiser animation avec le type ?
+        tempAStopper=listUnit[i].isStopped;
+
+        target = listUnit[i].checkInRangeEnnemie(listEnemy);
+
+        if(tempAStopper==listUnit[i].isStopped){
+          listUnit[i].etatChanger=false;
+        }
+        else{
+          listUnit[i].etatChanger=true;
+        }
+
         if(!listUnit[i].isStopped) {
           //Move TOWARDS nearest ennemy
           listUnit[i].updateMovUnit(dt, listUnit[i].speed,target);
+          listUnit[i].actualisationAnim(-1);
         }
         else{
           listUnit[i].attaque(dt,target);
+          listUnit[i].actualisationAnim(1);
         }
       }
       else {
@@ -131,14 +143,6 @@ class GameLoader extends BaseGame {
         listEnemy[i].updateMovEnemy(dt, listEnemy[i].speed);
         if (listEnemy[i].getPosition().y > size.y) {
           playerData.lives -= 1;
-          /*listEnemy[i].setPosition(Vector2(0,0));
-        listEnemy[i].enemyAnimation = SpriteAnimation.fromFrameData(
-            images.fromCache('heheboy.png'),
-            SpriteAnimationData.sequenced(
-              amount: 3,
-              textureSize: Vector2(944, 804),
-              stepTime: 0.2,
-            ));*/
           listEnemy.removeAt(i);
         }
       }

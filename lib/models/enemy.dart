@@ -13,6 +13,7 @@ class Enemy {
   late double maxHealth;
   late double speed;
   late int type;
+  //late Images images;
 
 
   //I made a getter and setter, because we are using vector2 but I prefer double x and y :)

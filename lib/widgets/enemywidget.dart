@@ -11,9 +11,11 @@ class EnemyWidget extends Enemy {
 
   late SpriteAnimation enemyAnimation;
   late Sprite lifebar;
+  late Images images;
+
 
   //Constructors
-  EnemyWidget(double x, double y, int type,Images images) : super(x, y, type){
+  EnemyWidget(double x, double y, int type,this.images) : super(x, y, type){
 
     switch(type) {
       case 1: {
