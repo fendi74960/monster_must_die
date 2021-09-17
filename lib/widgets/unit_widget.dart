@@ -24,9 +24,9 @@ class UnitWidget extends Unit  {
         unitAnimation=SpriteAnimation.fromFrameData(
             images.fromCache('heheboy.png'),
             SpriteAnimationData.sequenced(
-              amount: 28,
-              textureSize: Vector2(738, 708),
-              stepTime: 0.2,
+              amount: 19,
+              textureSize: Vector2(700, 660),
+              stepTime: 0.1,
             ));
       }
       break;
@@ -108,9 +108,9 @@ class UnitWidget extends Unit  {
           unitAnimation=SpriteAnimation.fromFrameData(
               images.fromCache('heheboy.png'),
               SpriteAnimationData.sequenced(
-                amount: 28,
-                textureSize: Vector2(738, 708),
-                stepTime: 0.2,
+                amount: 19,
+                textureSize: Vector2(700, 660),
+                stepTime: 0.1,
               ));
           break;
         case 1:
