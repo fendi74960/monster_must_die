@@ -19,6 +19,7 @@ class GameLoader extends BaseGame {
     'Mage.png',
     'lifebar.png',
     'fe.png',
+    'Lance_attaque_anim.png',
   ];
   // A constant speed, represented in logical pixels per second
   static const int squareSpeed = 400;
