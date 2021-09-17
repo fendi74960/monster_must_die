@@ -115,10 +115,10 @@ class UnitWidget extends Unit  {
           break;
         case 1:
           unitAnimation = SpriteAnimation.fromFrameData(
-              images.fromCache('fe.png'),
+              images.fromCache('Lance_attaque_anim.png'),
               SpriteAnimationData.sequenced(
-                amount: 26,
-                textureSize: Vector2(40, 40),
+                amount: 25,
+                textureSize: Vector2(115, 64),
                 stepTime: 0.1,
               ));
           break;
