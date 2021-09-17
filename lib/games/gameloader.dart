@@ -1,11 +1,11 @@
+import 'package:flame/components.dart';
+import 'package:flame/game.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
-import 'package:flame/game.dart';
-import 'package:flame/flame.dart';
 import 'package:monster_must_die/widgets/enemywidget.dart';
 import 'package:monster_must_die/widgets/unit_widget.dart';
+
 import '../models/player_data.dart';
-import 'package:flame/components.dart';
 
 
 class GameLoader extends BaseGame {
@@ -63,7 +63,7 @@ class GameLoader extends BaseGame {
 
     listUnit = List.empty(growable: true);
     listEnemy = List.empty(growable: true);
-    for(int i = 0; i < 50 ; i++){
+    for(int i = 0; i < 20 ; i++){
       listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 2,images));
     }
 

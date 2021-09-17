@@ -37,10 +37,9 @@ void toOtherEvent(sockets, socket) async {
   // want to send unit to the other client
 
   socket.on('toother', (data) {
-    print('toother');
+    print('Receive toother');
     for (int i = 0; i < sockets.length; i++) {
       if (socket != sockets[i]) {
-        print('--- only : 1 ---');
         sockets[i].emit('create', data);
       }
     }
@@ -52,7 +51,7 @@ void toAllEvent(io, socket) async {
   // want to send unit to all the clients
 
   socket.on('toall', (data) {
-    print('toall');
+    print('Receive toall');
     io.to("room").emit('create', data);
   });
 }

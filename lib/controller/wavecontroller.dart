@@ -14,8 +14,8 @@ class WaveController {
       */
 
       default: {
-        for(int i = 0; i < wave*10; i++){
-          listEnemy.add(EnemyWidget.enemyWidgetRandom(minX, maxX, minY, maxY, 2, images));
+        for(int i = 0; i < wave.toDouble()*10; i++){
+          listEnemy.add(EnemyWidget.enemyWidgetRandom(minX, maxX, minY, maxY, 2.toInt(), images));
         }
       }
       break;
