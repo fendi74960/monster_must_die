@@ -14,6 +14,8 @@ class UnitWidget extends Unit  {
   late SpriteAnimation unitAnimation;
   bool etatChanger=false;
   late Images images;
+  bool isStopped=false;
+  late Sprite lifebar;
 
   //Constructors
   UnitWidget(double x, double y, int type,this.images) : super(x, y, type) {
@@ -32,7 +34,7 @@ class UnitWidget extends Unit  {
       break;
     }
 
-
+    lifebar=Sprite(images.fromCache('lifebar.png'));
   }
 
 
@@ -61,6 +63,7 @@ class UnitWidget extends Unit  {
     unitAnimation
         .getSprite()
         .render(canvas, position: getPosition(), size: unitSize);
+    lifebar.render(canvas, position: Vector2(getPosition().x,getPosition().y-10), size: Vector2((unitSize.x*health)/maxHealth,10));
   }
 
   static UnitWidget unitWidgetSpawn(double x, double y, int type,Images images){

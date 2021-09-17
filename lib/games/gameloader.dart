@@ -18,6 +18,7 @@ class GameLoader extends BaseGame {
     'Lance.png',
     'Mage.png',
     'lifebar.png',
+    'lifebarRouge.png',
     'fe.png',
     'Lance_attaque_anim.png',
   ];
@@ -65,7 +66,7 @@ class GameLoader extends BaseGame {
     listUnit = List.empty(growable: true);
     listEnemy = List.empty(growable: true);
     for(int i = 0; i < 20 ; i++){
-      listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 2,images));
+      listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 0,images));
     }
 
   }
@@ -108,6 +109,7 @@ class GameLoader extends BaseGame {
       squareDirection = 1;
       playerData.waves-=1;
     }
+    //LOGIQUE POUR UNIT ALLIER
     for(int i = 0; i < listUnit.length; i++)
     {
       EnemyWidget target=EnemyWidget(0,0,0,images);
@@ -137,11 +139,31 @@ class GameLoader extends BaseGame {
         listUnit.removeAt(i);
       }
     }
-
+    //LOGIQUE POUR ENEMIES
     for(int i = 0; i < listEnemy.length; i++)
     {
+      UnitWidget target=UnitWidget(0,0,0,images);
       if(listEnemy[i].isAlive()) {
-        listEnemy[i].updateMovEnemy(dt, listEnemy[i].speed);
+        tempAStopper=listEnemy[i].isStopped;
+        target = listEnemy[i].checkInRangeUnit(listUnit,size);
+
+        if(tempAStopper==listEnemy[i].isStopped){
+          listEnemy[i].etatChanger=false;
+        }
+        else{
+          listEnemy[i].etatChanger=true;
+        }
+
+        if(!listEnemy[i].isStopped) {
+          //Move TOWARDS nearest ennemy
+          listEnemy[i].updateMovEnemie(dt, listEnemy[i].speed,target);
+          listEnemy[i].actualisationAnim(-1);
+        }
+        else{
+          listEnemy[i].attaque(dt,target);
+          listEnemy[i].actualisationAnim(1);
+        }
+
         if (listEnemy[i].getPosition().y > size.y) {
           playerData.lives -= 1;
           listEnemy.removeAt(i);

@@ -10,10 +10,11 @@ class Unit {
   late double damage;
   late Vector2 unitSize;
   late double health;
+  late double maxHealth;
   late double speed;
   late int type;
   late double range;
-  bool isStopped=false;
+
 
   //I made a getter and setter, because we are using vector2 but I prefer double x and y :)
   Vector2 getPosition() {
@@ -33,7 +34,8 @@ class Unit {
     switch(type) {
       case 1: {
         damage = 1;
-        health = 2;
+        health = 100;
+        maxHealth=100;
         speed = 0.4;
         range=50;
         unitSize = Vector2(40, 40);
@@ -42,7 +44,8 @@ class Unit {
 
       default: {
         damage = 1;
-        health = 2;
+        health = 100;
+        maxHealth=100;
         speed = 0.4;
         range=50;
         unitSize = Vector2(40, 40);

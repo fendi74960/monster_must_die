@@ -13,6 +13,7 @@ class Enemy {
   late double maxHealth;
   late double speed;
   late int type;
+  late double range;
   //late Images images;
 
 
@@ -38,6 +39,7 @@ class Enemy {
         maxHealth = 100;
         speed = 0.1;
         enemySize = Vector2(60, 60);
+        range=50;
       }
       break;
 
@@ -46,6 +48,7 @@ class Enemy {
         health = 100;
         maxHealth = 100;
         speed = 0.1;
+        range=50;
         enemySize = Vector2(40, 40);
       }
       break;
