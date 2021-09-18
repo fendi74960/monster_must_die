@@ -14,3 +14,6 @@ dependencies:
 
 #If you can't run the server or install a new package,
 # do : dart pub get
+
+#You can generate a doc : dartdoc
+#https://dart.dev/tools/dartdoc
