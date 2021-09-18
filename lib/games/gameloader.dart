@@ -65,12 +65,14 @@ class GameLoader extends BaseGame {
 
     listUnit = List.empty(growable: true);
     listEnemy = List.empty(growable: true);
+
+
+  }
+  void startGame(){
     for(int i = 0; i < 20 ; i++){
       listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 0,images));
     }
-
   }
-
 
   @override
   void render(Canvas canvas) {

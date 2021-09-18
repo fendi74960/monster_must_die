@@ -1,5 +1,6 @@
 import 'games/gamesetting.dart';
 import 'widgets/hud.dart';
+import 'widgets/main_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/game.dart';
 
@@ -31,9 +32,10 @@ class MyGameApp extends StatelessWidget {
           // Register all the overlays that will be used by this game.
           overlayBuilderMap: {
             Hud.id: (_, GameSetting gameRef) => Hud(gameRef),
+            MainMenu.id:(_,GameSetting gameRef) => MainMenu(gameRef),
           },
           // By default MainMenu overlay will be active.
-          initialActiveOverlays: [Hud.id],
+          initialActiveOverlays: [MainMenu.id],
           game: myGame,
         ),
       ),
