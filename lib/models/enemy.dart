@@ -5,15 +5,23 @@ import 'package:flame/components.dart';
 class Enemy {
 
   //late modifier can be used while declaring a non-nullable variable that’s initialized after its declaration.
+  //Position
   late double _x;
   late double _y;
+
+  //Stats
   late double damage;
-  late Vector2 enemySize;
   late double health;
   late double maxHealth;
   late double speed;
-  late int type;
   late double range;
+
+  //Taille
+  late Vector2 enemySize;
+
+  //Autres
+  late int type;
+
   //late Images images;
 
 
