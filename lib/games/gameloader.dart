@@ -28,6 +28,14 @@ class GameLoader extends BaseGame {
     'Enemy/dog/attack.png',
     'Enemy/cyclop/attack.png',
     'Enemy/archer/attack.png',
+    'Unit/archer/attack.png',
+    'Unit/balista/attack.png',
+    'Unit/berserker/attack.png',
+    'Unit/cavalrer/attack.png',
+    'Unit/dragon/attack.png',
+    'Unit/marshall/attack.png',
+    'Unit/spear/attack.png',
+    'Unit/wizard/attack.png',
   ];
   // A constant speed, represented in logical pixels per second
   static const int squareSpeed = 400;
@@ -79,12 +87,16 @@ class GameLoader extends BaseGame {
     for(int i = 0; i < 20 ; i++){
       listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 0,images));
     }
+    //TODO y supprimer plus tard
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 2,images));
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 4,images));
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 6,images));
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 8,images));
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 10,images));
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 12,images));
+
+    listUnit.add(UnitWidget.unitWidgetSpawn(size.x/2 , size.y - 40, 14, images));
+
   }
 
   @override

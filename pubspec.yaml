@@ -40,6 +40,14 @@ flutter:
     - assets/images/Enemy/gargoyle/
     - assets/images/Enemy/ghost/
     - assets/images/Enemy/zombie/
+    - assets/images/Unit/archer/
+    - assets/images/Unit/balista/
+    - assets/images/Unit/berserker/
+    - assets/images/Unit/cavalrer/
+    - assets/images/Unit/dragon/
+    - assets/images/Unit/marshall/
+    - assets/images/Unit/spear/
+    - assets/images/Unit/wizard/
 
   uses-material-design: true
 

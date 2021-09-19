@@ -43,13 +43,92 @@ class Unit {
     _y = y;
     type = pType;
     switch(type) {
+    //0-1 : archer
+      case 0:
       case 1: {
         damage = 1;
-        health = 100;
-        maxHealth=100;
+        health = 1000;
+        maxHealth = 1000;
         speed = 0.4;
+        unitSize = Vector2(60, 60);
         range=50;
-        unitSize = Vector2(40, 40);
+      }
+      break;
+    //2-3 : balista
+      case 2:
+      case 3: {
+        damage = 1;
+        health = 1000;
+        maxHealth = 1000;
+        speed = 0.4;
+        unitSize = Vector2(60, 60);
+        range=50;
+      }
+      break;
+    //4-5 : berserker
+      case 4:
+      case 5: {
+        damage = 1;
+        health = 1000;
+        maxHealth = 1000;
+        speed = 0.4;
+        unitSize = Vector2(60, 60);
+        range=50;
+      }
+      break;
+    //6-7 : cavalier
+      case 6:
+      case 7: {
+        damage = 1;
+        health = 1000;
+        maxHealth = 1000;
+        speed = 0.4;
+        unitSize = Vector2(60, 60);
+        range=50;
+      }
+      break;
+    //8-9 : dragon
+      case 8:
+      case 9: {
+        damage = 1;
+        health = 1000;
+        maxHealth = 1000;
+        speed = 0.4;
+        unitSize = Vector2(60, 60);
+        range=50;
+      }
+      break;
+    //10-11 : marshall
+      case 10:
+      case 11: {
+        damage = 1;
+        health = 1000;
+        maxHealth = 1000;
+        speed = 0.4;
+        unitSize = Vector2(60, 60);
+        range=50;
+      }
+      break;
+    //12-13 : spear
+      case 12:
+      case 13: {
+        damage = 1;
+        health = 1000;
+        maxHealth = 1000;
+        speed = 0.4;
+        unitSize = Vector2(60, 60);
+        range=50;
+      }
+      break;
+    //14-15 : wizard
+      case 14:
+      case 15: {
+        damage = 1;
+        health = 1000;
+        maxHealth = 1000;
+        speed = 0.4;
+        unitSize = Vector2(60, 60);
+        range=50;
       }
       break;
 
