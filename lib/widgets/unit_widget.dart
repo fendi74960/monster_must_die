@@ -45,10 +45,14 @@ class UnitWidget extends Unit  {
     double vectorY=target.getPosition().y-getPosition().y;
 
     double length=sqrt(vectorX*vectorX+vectorY*vectorY);
+    double newVectorX = 0;
+    double newVectorY = 0;
+    if(length!=0) {
+       newVectorX = vectorX / length;
+       newVectorY = vectorY / length;
+    }
 
-    double newVectorX=vectorX/length;
-    double newVectorY=vectorY/length;
-    
+
     setPosition(Vector2(getPosition().x+newVectorX*speed,getPosition().y+newVectorY*speed));
 
   }
@@ -71,30 +75,39 @@ class UnitWidget extends Unit  {
   }
 
   EnemyWidget checkInRangeEnnemie(List<EnemyWidget> ens ){
+    bool canHit=true;
     double enemyX,enemyY;
     double unitX=getPosition().x+unitSize.x/2,unitY=getPosition().y+unitSize.y/2;
 
-    EnemyWidget plusProche=EnemyWidget(0, 0, 0,images);
+    EnemyWidget plusProche=EnemyWidget(getPosition().x, getPosition().y, 0,images);
     double proximite=9999999;
     double tempProxi=0;
 
-    for(int ii=0;ii<ens.length;ii++){
-      enemyX=ens[ii].getPosition().x+ens[ii].enemySize.x/2;
-      enemyY=ens[ii].getPosition().y+ens[ii].enemySize.y/2;
-
-      tempProxi=sqrt(pow(enemyX-unitX,2)+pow(enemyY-unitY,2));
-
-      if(tempProxi<=range) {
-        isStopped=true;
-        return ens[ii];
+    for(int ii=0;ii<ens.length;ii++) {
+      //Check si ennemie=arien et qu'on peut taper
+      if((ens[ii].type == 4 || ens[ii].type == 5) && type > 3) {
+        canHit=false;
       }
-      else{
-        if(tempProxi<proximite) {
-          plusProche=ens[ii];
-          proximite=tempProxi;
+      else {
+        canHit=true;
+      }
+      if (canHit) {
+        enemyX = ens[ii].getPosition().x + ens[ii].enemySize.x / 2;
+        enemyY = ens[ii].getPosition().y + ens[ii].enemySize.y / 2;
+
+        tempProxi = sqrt(pow(enemyX - unitX, 2) + pow(enemyY - unitY, 2));
+
+        if (tempProxi <= range) {
+          isStopped = true;
+          return ens[ii];
+        }
+        else {
+          if (tempProxi < proximite) {
+            plusProche = ens[ii];
+            proximite = tempProxi;
+          }
         }
       }
-
     }
     isStopped=false;
     return plusProche;
@@ -107,7 +120,7 @@ class UnitWidget extends Unit  {
       type += modificateurType;
 
       switch (type) {
-        case 0:
+        case 4:
           unitAnimation=SpriteAnimation.fromFrameData(
               images.fromCache('heheboy.png'),
               SpriteAnimationData.sequenced(
@@ -116,7 +129,7 @@ class UnitWidget extends Unit  {
                 stepTime: 0.1,
               ));
           break;
-        case 1:
+        case 5:
           unitAnimation = SpriteAnimation.fromFrameData(
               images.fromCache('Lance_attaque_anim.png'),
               SpriteAnimationData.sequenced(

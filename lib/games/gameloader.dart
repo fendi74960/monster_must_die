@@ -72,6 +72,7 @@ class GameLoader extends BaseGame {
     for(int i = 0; i < 20 ; i++){
       listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 0,images));
     }
+    listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 4,images));
   }
 
   @override
@@ -116,25 +117,27 @@ class GameLoader extends BaseGame {
     {
       EnemyWidget target=EnemyWidget(0,0,0,images);
       if(listUnit[i].isAlive()) {
-        tempAStopper=listUnit[i].isStopped;
+        if (listEnemy.isNotEmpty) {
+          tempAStopper = listUnit[i].isStopped;
 
-        target = listUnit[i].checkInRangeEnnemie(listEnemy);
+          target = listUnit[i].checkInRangeEnnemie(listEnemy);
 
-        if(tempAStopper==listUnit[i].isStopped){
-          listUnit[i].etatChanger=false;
-        }
-        else{
-          listUnit[i].etatChanger=true;
-        }
+          if (tempAStopper == listUnit[i].isStopped) {
+            listUnit[i].etatChanger = false;
+          }
+          else {
+            listUnit[i].etatChanger = true;
+          }
 
-        if(!listUnit[i].isStopped) {
-          //Move TOWARDS nearest ennemy
-          listUnit[i].updateMovUnit(dt, listUnit[i].speed,target);
-          listUnit[i].actualisationAnim(-1);
-        }
-        else{
-          listUnit[i].attaque(dt,target);
-          listUnit[i].actualisationAnim(1);
+          if (!listUnit[i].isStopped) {
+            //Move TOWARDS nearest ennemy
+            listUnit[i].updateMovUnit(dt, listUnit[i].speed, target);
+            listUnit[i].actualisationAnim(-1);
+          }
+          else {
+            listUnit[i].attaque(dt, target);
+            listUnit[i].actualisationAnim(1);
+          }
         }
       }
       else {

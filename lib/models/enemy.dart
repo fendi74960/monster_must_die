@@ -21,8 +21,15 @@ class Enemy {
 
   //Autres
   late int type;
-
-  //late Images images;
+  //Vu que je sais pas faire les enum et que sa a l'air chiant a faire
+  //TYPE
+  //0-1 : Zombie cac
+  //2-3 : ghost
+  //4-5 : gargoyle
+  //6-7 : eye
+  //8-9 : doggo
+  //10-11 : cyclop
+  //12-13 : archer
 
 
   //I made a getter and setter, because we are using vector2 but I prefer double x and y :)
