@@ -54,10 +54,10 @@ class Unit {
       break;
 
       default: {
-        damage = 10;
+        damage = 1;
         health = 100;
         maxHealth=100;
-        speed = 5;
+        speed = 0.5;
         range=50;
         unitSize = Vector2(40, 40);
       }

@@ -32,5 +32,14 @@ dev_dependencies:
 flutter:
   assets:
     - assets/images/
+    - assets/images/Enemy/
+    - assets/images/Enemy/archer/
+    - assets/images/Enemy/cyclop/
+    - assets/images/Enemy/dog/
+    - assets/images/Enemy/eye/
+    - assets/images/Enemy/gargoyle/
+    - assets/images/Enemy/ghost/
+    - assets/images/Enemy/zombie/
+
   uses-material-design: true
 

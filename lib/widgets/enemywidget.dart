@@ -19,17 +19,77 @@ class EnemyWidget extends Enemy {
 
   //Constructors
   EnemyWidget(double x, double y, int type,this.images) : super(x, y, type){
-
+    //TODO  changer par celle de move
     switch(type) {
-      case 0: {
-        enemyAnimation = SpriteAnimation.fromFrameData(
-            images.fromCache('heheboy.png'),
-            SpriteAnimationData.sequenced(
-              amount: 19,
-              textureSize: Vector2(700, 660),
-              stepTime: 0.1,
-            ));
-      }
+    //0-1 : archer
+      case 0:
+      case 1: enemyAnimation = SpriteAnimation.fromFrameData(
+        images.fromCache('fe.png'),
+        SpriteAnimationData.sequenced(
+          amount: 26,
+          textureSize: Vector2(40, 40),
+          stepTime: 0.1,
+        ));
+      break;
+    //2-3 : cyclop
+      case 2:
+      case 3: enemyAnimation = SpriteAnimation.fromFrameData(
+        images.fromCache('fe.png'),
+        SpriteAnimationData.sequenced(
+          amount: 26,
+          textureSize: Vector2(40, 40),
+          stepTime: 0.1,
+        ));
+      break;
+    //4-5 : dog
+      case 4:
+      case 5: enemyAnimation = SpriteAnimation.fromFrameData(
+        images.fromCache('fe.png'),
+        SpriteAnimationData.sequenced(
+          amount: 26,
+          textureSize: Vector2(40, 40),
+          stepTime: 0.1,
+        ));
+      break;
+    //6-7 : eye
+      case 6:
+      case 7: enemyAnimation = SpriteAnimation.fromFrameData(
+        images.fromCache('Enemy/eye/moving.png'),
+        SpriteAnimationData.sequenced(
+          amount: 4,
+          textureSize: Vector2(32, 32),
+          stepTime: 0.1,
+        ));
+      break;
+    //8-9 : gargoyle
+      case 8:
+      case 9: enemyAnimation = SpriteAnimation.fromFrameData(
+        images.fromCache('fe.png'),
+        SpriteAnimationData.sequenced(
+          amount: 26,
+          textureSize: Vector2(40, 40),
+          stepTime: 0.1,
+        ));
+      break;
+    //10-11 : ghost
+      case 10:
+      case 11: enemyAnimation = SpriteAnimation.fromFrameData(
+        images.fromCache('Enemy/ghost/moving.png'),
+        SpriteAnimationData.sequenced(
+          amount: 20,
+          textureSize: Vector2(70, 80),
+          stepTime: 0.1,
+        ));
+      break;
+    //12-13 : zombie
+      case 12:
+      case 13: enemyAnimation = SpriteAnimation.fromFrameData(
+        images.fromCache('fe.png'),
+        SpriteAnimationData.sequenced(
+          amount: 26,
+          textureSize: Vector2(40, 40),
+          stepTime: 0.1,
+        ));
       break;
 
       default: {
@@ -124,6 +184,7 @@ class EnemyWidget extends Enemy {
       type += modificateurType;
 
       switch (type) {
+      //0-1 : archer
         case 0:
           enemyAnimation=SpriteAnimation.fromFrameData(
               images.fromCache('heheboy.png'),
@@ -133,15 +194,122 @@ class EnemyWidget extends Enemy {
                 stepTime: 0.1,
               ));
           break;
-        case 1:
-          enemyAnimation = SpriteAnimation.fromFrameData(
-              images.fromCache('fe.png'),
+        case 1: enemyAnimation = SpriteAnimation.fromFrameData(
+            images.fromCache('Enemy/archer/attack.png'),
+            SpriteAnimationData.sequenced(
+              amount: 20,
+              textureSize: Vector2(48, 48),
+              stepTime: 0.1,
+            ));
+        break;
+      //2-3 : cyclop
+        case 2:
+          enemyAnimation=SpriteAnimation.fromFrameData(
+              images.fromCache('heheboy.png'),
               SpriteAnimationData.sequenced(
-                amount: 26,
-                textureSize: Vector2(40, 40),
+                amount: 19,
+                textureSize: Vector2(700, 660),
                 stepTime: 0.1,
               ));
           break;
+        case 3: enemyAnimation = SpriteAnimation.fromFrameData(
+            images.fromCache('Enemy/cyclop/attack.png'),
+            SpriteAnimationData.sequenced(
+              amount: 23,
+              textureSize: Vector2(130, 100),
+              stepTime: 0.1,
+            ));
+        break;
+      //4-5 : dog
+        case 4:
+          enemyAnimation=SpriteAnimation.fromFrameData(
+              images.fromCache('heheboy.png'),
+              SpriteAnimationData.sequenced(
+                amount: 19,
+                textureSize: Vector2(700, 660),
+                stepTime: 0.1,
+              ));
+          break;
+        case 5: enemyAnimation = SpriteAnimation.fromFrameData(
+            images.fromCache('Enemy/dog/attack.png'),
+            SpriteAnimationData.sequenced(
+              amount: 15,
+              textureSize: Vector2(100, 80),
+              stepTime: 0.1,
+            ));
+        break;
+      //6-7 : eye
+        case 6:
+          enemyAnimation=SpriteAnimation.fromFrameData(
+              images.fromCache('Enemy/eye/moving.png'),
+              SpriteAnimationData.sequenced(
+                amount: 4,
+                textureSize: Vector2(32, 32),
+                stepTime: 0.1,
+              ));
+          break;
+        case 7: enemyAnimation = SpriteAnimation.fromFrameData(
+            images.fromCache('fe.png'),
+            SpriteAnimationData.sequenced(
+              amount: 26,
+              textureSize: Vector2(40, 40),
+              stepTime: 0.1,
+            ));
+        break;
+      //8-9 : gargoyle
+        case 8:
+          enemyAnimation=SpriteAnimation.fromFrameData(
+              images.fromCache('heheboy.png'),
+              SpriteAnimationData.sequenced(
+                amount: 19,
+                textureSize: Vector2(700, 660),
+                stepTime: 0.1,
+              ));
+          break;
+        case 9: enemyAnimation = SpriteAnimation.fromFrameData(
+            images.fromCache('Enemy/gargoyle/attack.png'),
+            SpriteAnimationData.sequenced(
+              amount: 15,
+              textureSize: Vector2(120, 115),
+              stepTime: 0.1,
+            ));
+        break;
+      //10-11 : ghost
+        case 10:
+          enemyAnimation=SpriteAnimation.fromFrameData(
+              images.fromCache('Enemy/ghost/moving.png'),
+              SpriteAnimationData.sequenced(
+                amount: 20,
+                textureSize: Vector2(70, 80),
+                stepTime: 0.1,
+              ));
+          break;
+        case 11: enemyAnimation = SpriteAnimation.fromFrameData(
+            images.fromCache('fe.png'),
+            SpriteAnimationData.sequenced(
+              amount: 26,
+              textureSize: Vector2(40, 40),
+              stepTime: 0.1,
+            ));
+        break;
+      //12-13 : zombie
+        case 12:
+          enemyAnimation=SpriteAnimation.fromFrameData(
+              images.fromCache('heheboy.png'),
+              SpriteAnimationData.sequenced(
+                amount: 19,
+                textureSize: Vector2(700, 660),
+                stepTime: 0.1,
+              ));
+          break;
+        case 13: enemyAnimation = SpriteAnimation.fromFrameData(
+            images.fromCache('Enemy/zombie/attack.png'),
+            SpriteAnimationData.sequenced(
+              amount: 43,
+              textureSize: Vector2(90, 65),
+              stepTime: 0.1,
+            ));
+        break;
         default:
           break;
       }

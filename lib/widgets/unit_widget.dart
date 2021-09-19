@@ -85,7 +85,7 @@ class UnitWidget extends Unit  {
 
     for(int ii=0;ii<ens.length;ii++) {
       //Check si ennemie=arien et qu'on peut taper
-      if((ens[ii].type == 4 || ens[ii].type == 5) && type > 3) {
+      if((ens[ii].type == 8 || ens[ii].type == 9) && type > 3) {
         canHit=false;
       }
       else {
