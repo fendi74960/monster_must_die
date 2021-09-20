@@ -7,7 +7,7 @@ import 'package:monster_must_die/widgets/unit_widget.dart';
 
 import '../games/gamenetwork.dart';
 
-class GameButton extends GameNetwork with TapDetector {
+class GameButtons extends GameNetwork with TapDetector {
   //readyButton
   late Sprite readyPressedButton;
   late Sprite readyUnpressedButton;
@@ -27,23 +27,23 @@ class GameButton extends GameNetwork with TapDetector {
     await super.onLoad();
 
     readyUnpressedButton = await loadSprite(
-      'buttons.png',
+      'ready-buttons.png',
       srcPosition: Vector2.zero(),
       srcSize: Vector2(60, 20),
     );
     readyPressedButton = await loadSprite(
-      'buttons.png',
+      'ready-buttons.png',
       srcPosition: Vector2(0, 20),
       srcSize: Vector2(60, 20),
     );
 
     allyUnpressedButton = await loadSprite(
-      'buttons.png',
+      'send-buttons.png',
       srcPosition: Vector2.zero(),
       srcSize: Vector2(60, 20),
     );
     allyPressedButton = await loadSprite(
-      'buttons.png',
+      'send-buttons.png',
       srcPosition: Vector2(0, 20),
       srcSize: Vector2(60, 20),
     );

@@ -2,9 +2,9 @@ import 'dart:ui';
 
 import 'package:flame/flame.dart';
 
-import '../games/gamebutton.dart';
+import '../games/gamebuttons.dart';
 
-class GameSetting extends GameButton {
+class GameSetting extends GameButtons {
 
   @override
   Color backgroundColor() => const Color(0xFF222222);
