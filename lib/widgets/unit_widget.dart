@@ -23,84 +23,91 @@ class UnitWidget extends Unit  {
       type-=1;
     }
     switch(type) {
-    //TODO  changer par celle de move
     //0-1 : archer
       case 0:
       case 1: unitAnimation = SpriteAnimation.fromFrameData(
-          images.fromCache('fe.png'),
+          images.fromCache('Unit/archer/moving.png'),
           SpriteAnimationData.sequenced(
-            amount: 26,
-            textureSize: Vector2(40, 40),
+            amount: 4,
+            amountPerRow: 1,
+            textureSize: Vector2(32, 30),
             stepTime: 0.1,
           ));
       break;
     //2-3 : balista
       case 2:
       case 3: unitAnimation = SpriteAnimation.fromFrameData(
-          images.fromCache('fe.png'),
+          images.fromCache('Unit/balista/moving.png'),
           SpriteAnimationData.sequenced(
-            amount: 26,
-            textureSize: Vector2(40, 40),
+            amount: 4,
+            amountPerRow: 1,
+            textureSize: Vector2(32, 30),
             stepTime: 0.1,
           ));
       break;
     //4-5 : berserker
       case 4:
       case 5: unitAnimation = SpriteAnimation.fromFrameData(
-          images.fromCache('fe.png'),
+          images.fromCache('Unit/berserker/moving.png'),
           SpriteAnimationData.sequenced(
-            amount: 26,
-            textureSize: Vector2(40, 40),
+            amount: 4,
+            amountPerRow: 1,
+            textureSize: Vector2(32, 32),
             stepTime: 0.1,
           ));
       break;
     //6-7 : cavalier
       case 6:
       case 7: unitAnimation = SpriteAnimation.fromFrameData(
-          images.fromCache('fe.png'),
+          images.fromCache('Unit/cavalrer/moving.png'),
           SpriteAnimationData.sequenced(
-            amount: 26,
-            textureSize: Vector2(40, 40),
+            amount: 4,
+            amountPerRow: 1,
+            textureSize: Vector2(32, 32),
             stepTime: 0.1,
           ));
       break;
     //8-9 : dragon
       case 8:
       case 9: unitAnimation = SpriteAnimation.fromFrameData(
-          images.fromCache('fe.png'),
+          images.fromCache('Unit/dragon/moving.png'),
           SpriteAnimationData.sequenced(
-            amount: 26,
-            textureSize: Vector2(40, 40),
+            amount: 4,
+            amountPerRow: 1,
+            textureSize: Vector2(32, 32),
             stepTime: 0.1,
           ));
       break;
     //10-11 : marshall
       case 10:
       case 11: unitAnimation = SpriteAnimation.fromFrameData(
-          images.fromCache('fe.png'),
+          images.fromCache('Unit/marshall/moving.png'),
           SpriteAnimationData.sequenced(
-            amount: 26,
-            textureSize: Vector2(40, 40),
+            amount: 4,
+            amountPerRow: 1,
+            textureSize: Vector2(32, 30),
             stepTime: 0.1,
           ));
       break;
     //12-13 : spear
       case 12:
       case 13: unitAnimation = SpriteAnimation.fromFrameData(
-          images.fromCache('fe.png'),
+          images.fromCache('Unit/spear/moving.png'),
           SpriteAnimationData.sequenced(
-            amount: 26,
-            textureSize: Vector2(40, 40),
+            amount: 4,
+            amountPerRow: 1,
+            textureSize: Vector2(32, 30),
             stepTime: 0.1,
           ));
       break;
       //14-15 : wizard
       case 14:
       case 15: unitAnimation = SpriteAnimation.fromFrameData(
-          images.fromCache('fe.png'),
+          images.fromCache('Unit/wizard/moving.png'),
           SpriteAnimationData.sequenced(
-            amount: 26,
-            textureSize: Vector2(40, 40),
+            amount: 4,
+            amountPerRow: 1,
+            textureSize: Vector2(32, 30),
             stepTime: 0.1,
           ));
       break;
@@ -203,14 +210,14 @@ class UnitWidget extends Unit  {
       type += modificateurType;
 
       switch (type) {
-      //TODO  rajouter celle de move
       //0-1 : archer
         case 0:
           unitAnimation=SpriteAnimation.fromFrameData(
-              images.fromCache('heheboy.png'),
+              images.fromCache('Unit/archer/moving.png'),
               SpriteAnimationData.sequenced(
-                amount: 19,
-                textureSize: Vector2(700, 660),
+                amount: 4,
+                amountPerRow: 1,
+                textureSize: Vector2(32, 30),
                 stepTime: 0.1,
               ));
           break;
@@ -225,10 +232,11 @@ class UnitWidget extends Unit  {
       //2-3 : balista
         case 2:
           unitAnimation=SpriteAnimation.fromFrameData(
-              images.fromCache('heheboy.png'),
+              images.fromCache('Unit/balista/moving.png'),
               SpriteAnimationData.sequenced(
-                amount: 19,
-                textureSize: Vector2(700, 660),
+                amount: 4,
+                amountPerRow: 1,
+                textureSize: Vector2(32, 30),
                 stepTime: 0.1,
               ));
           break;
@@ -243,14 +251,16 @@ class UnitWidget extends Unit  {
       //4-5 : berserker
         case 4:
           unitAnimation=SpriteAnimation.fromFrameData(
-              images.fromCache('heheboy.png'),
+              images.fromCache('Unit/berserker/moving.png'),
               SpriteAnimationData.sequenced(
-                amount: 19,
-                textureSize: Vector2(700, 660),
+                amount: 4,
+                amountPerRow: 1,
+                textureSize: Vector2(32, 32),
                 stepTime: 0.1,
               ));
           break;
-        case 5: unitAnimation = SpriteAnimation.fromFrameData(
+        case 5:
+          unitAnimation = SpriteAnimation.fromFrameData(
             images.fromCache('Unit/berserker/attack.png'),
             SpriteAnimationData.sequenced(
               amount: 12,
@@ -261,14 +271,16 @@ class UnitWidget extends Unit  {
       //6-7 : cavalier
         case 6:
           unitAnimation=SpriteAnimation.fromFrameData(
-              images.fromCache('heheboy.png'),
+              images.fromCache('Unit/cavalrer/moving.png'),
               SpriteAnimationData.sequenced(
-                amount: 19,
-                textureSize: Vector2(700, 660),
+                amount: 4,
+                amountPerRow: 1,
+                textureSize: Vector2(32, 32),
                 stepTime: 0.1,
               ));
           break;
-        case 7: unitAnimation = SpriteAnimation.fromFrameData(
+        case 7:
+          unitAnimation = SpriteAnimation.fromFrameData(
             images.fromCache('Unit/cavalrer/attack.png'),
             SpriteAnimationData.sequenced(
               amount: 21,
@@ -279,14 +291,16 @@ class UnitWidget extends Unit  {
       //8-9 : dragon
         case 8:
           unitAnimation=SpriteAnimation.fromFrameData(
-              images.fromCache('heheboy.png'),
+              images.fromCache('Unit/dragon/moving.png'),
               SpriteAnimationData.sequenced(
-                amount: 19,
-                textureSize: Vector2(700, 660),
+                amount: 4,
+                amountPerRow: 1,
+                textureSize: Vector2(32, 32),
                 stepTime: 0.1,
               ));
           break;
-        case 9: unitAnimation = SpriteAnimation.fromFrameData(
+        case 9:
+          unitAnimation = SpriteAnimation.fromFrameData(
             images.fromCache('Unit/dragon/attack.png'),
             SpriteAnimationData.sequenced(
               amount: 20,
@@ -297,10 +311,11 @@ class UnitWidget extends Unit  {
       //10-11 : marshall
         case 10:
           unitAnimation=SpriteAnimation.fromFrameData(
-              images.fromCache('heheboy.png'),
+              images.fromCache('Unit/marshall/moving.png'),
               SpriteAnimationData.sequenced(
-                amount: 19,
-                textureSize: Vector2(700, 660),
+                amount: 4,
+                amountPerRow: 1,
+                textureSize: Vector2(32, 30),
                 stepTime: 0.1,
               ));
           break;
@@ -315,14 +330,16 @@ class UnitWidget extends Unit  {
       //12-13 : spear
         case 12:
           unitAnimation=SpriteAnimation.fromFrameData(
-              images.fromCache('heheboy.png'),
+              images.fromCache('Unit/spear/moving.png'),
               SpriteAnimationData.sequenced(
-                amount: 19,
-                textureSize: Vector2(700, 660),
+                amount: 4,
+                amountPerRow: 1,
+                textureSize: Vector2(32, 30),
                 stepTime: 0.1,
               ));
           break;
-        case 13: unitAnimation = SpriteAnimation.fromFrameData(
+        case 13:
+          unitAnimation = SpriteAnimation.fromFrameData(
             images.fromCache('Unit/spear/attack.png'),
             SpriteAnimationData.sequenced(
               amount: 26,
@@ -333,14 +350,16 @@ class UnitWidget extends Unit  {
       //14-15 : wizard
         case 14:
           unitAnimation=SpriteAnimation.fromFrameData(
-              images.fromCache('heheboy.png'),
+              images.fromCache('Unit/wizard/moving.png'),
               SpriteAnimationData.sequenced(
-                amount: 19,
-                textureSize: Vector2(700, 660),
+                amount: 4,
+                amountPerRow: 1,
+                textureSize: Vector2(32, 30),
                 stepTime: 0.1,
               ));
           break;
-        case 15: unitAnimation = SpriteAnimation.fromFrameData(
+        case 15:
+          unitAnimation = SpriteAnimation.fromFrameData(
             images.fromCache('Unit/wizard/attack.png'),
             SpriteAnimationData.sequenced(
               amount: 19,

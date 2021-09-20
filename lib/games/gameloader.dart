@@ -36,6 +36,19 @@ class GameLoader extends BaseGame {
     'Unit/marshall/attack.png',
     'Unit/spear/attack.png',
     'Unit/wizard/attack.png',
+    'Enemy/zombie/moving.png',
+    'Enemy/gargoyle/moving.png',
+    'Enemy/dog/moving.png',
+    'Enemy/cyclop/moving.png',
+    'Enemy/archer/moving.png',
+    'Unit/archer/moving.png',
+    'Unit/balista/moving.png',
+    'Unit/berserker/moving.png',
+    'Unit/cavalrer/moving.png',
+    'Unit/dragon/moving.png',
+    'Unit/marshall/moving.png',
+    'Unit/spear/moving.png',
+    'Unit/wizard/moving.png',
   ];
   // A constant speed, represented in logical pixels per second
   static const int squareSpeed = 400;
@@ -95,7 +108,7 @@ class GameLoader extends BaseGame {
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 10,images));
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 12,images));
 
-    listUnit.add(UnitWidget.unitWidgetSpawn(size.x/2 , size.y - 40, 14, images));
+    listUnit.add(UnitWidget.unitWidgetSpawn(size.x/2 , size.y - 40, 12, images));
 
   }
 
