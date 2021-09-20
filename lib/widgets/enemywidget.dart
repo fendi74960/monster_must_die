@@ -19,6 +19,9 @@ class EnemyWidget extends Enemy {
 
   //Constructors
   EnemyWidget(double x, double y, int type,this.images) : super(x, y, type){
+    if(type.isOdd){
+      type-=1;
+    }
     //TODO  changer par celle de move
     switch(type) {
     //0-1 : archer
@@ -57,6 +60,7 @@ class EnemyWidget extends Enemy {
         images.fromCache('Enemy/eye/moving.png'),
         SpriteAnimationData.sequenced(
           amount: 4,
+          amountPerRow: 1,
           textureSize: Vector2(32, 32),
           stepTime: 0.1,
         ));
@@ -244,6 +248,7 @@ class EnemyWidget extends Enemy {
               images.fromCache('Enemy/eye/moving.png'),
               SpriteAnimationData.sequenced(
                 amount: 4,
+                amountPerRow: 1,
                 textureSize: Vector2(32, 32),
                 stepTime: 0.1,
               ));

@@ -19,6 +19,9 @@ class UnitWidget extends Unit  {
 
   //Constructors
   UnitWidget(double x, double y, int type,this.images) : super(x, y, type) {
+    if(type.isOdd){
+      type-=1;
+    }
     switch(type) {
     //TODO  changer par celle de move
     //0-1 : archer
