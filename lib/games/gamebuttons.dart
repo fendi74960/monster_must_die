@@ -8,24 +8,43 @@ import 'package:monster_must_die/widgets/unit_widget.dart';
 import '../games/gamenetwork.dart';
 
 class GameButtons extends GameNetwork with TapDetector {
-  //readyButton
+  //ready button
   late Sprite readyPressedButton;
   late Sprite readyUnpressedButton;
   final readyPosition = Vector2(0, 0);
   bool readyPressed = false;
 
-  //allyButton
+  //ally button
   late Sprite allyPressedButton;
   late Sprite allyUnpressedButton;
   final allyPosition = Vector2(0, 40);
   bool allyPressed = false;
 
+  //first unit button
+  late Sprite firstButton;
+  late Sprite firstButtonSelected;
+  late Vector2 firstButtonPosition;
+
+  late Sprite secondButton;
+  late Sprite secondButtonSelected;
+  late Vector2 secondButtonPosition;
+
+  late Sprite thirdButton;
+  late Sprite thirdButtonSelected;
+  late Vector2 thirdButtonPosition;
+
+  late Sprite fourthButton;
+  late Sprite fourthButtonSelected;
+  late Vector2 fourthButtonPosition;
+
   final buttonsSize = Vector2(120, 30);
+  final buttonsUnitSize = Vector2(60, 60);
 
   @override
   Future<void> onLoad() async {
     await super.onLoad();
 
+    //Ready and send buttons
     readyUnpressedButton = await loadSprite(
       'ready-buttons.png',
       srcPosition: Vector2.zero(),
@@ -47,6 +66,53 @@ class GameButtons extends GameNetwork with TapDetector {
       srcPosition: Vector2(0, 20),
       srcSize: Vector2(60, 20),
     );
+
+    //Unit buttons
+    firstButton = await loadSprite(
+      'Unit/archer/button.png',
+      srcPosition: Vector2.zero(),
+      srcSize: Vector2(40, 40),
+    );
+    secondButton = await loadSprite(
+      'Unit/balista/button.png',
+      srcPosition: Vector2.zero(),
+      srcSize: Vector2(70, 70),
+    );
+    thirdButton = await loadSprite(
+      'Unit/berserker/button.png',
+      srcPosition: Vector2.zero(),
+      srcSize: Vector2(60, 60),
+    );
+    fourthButton = await loadSprite(
+      'Unit/cavalrer/button.png',
+      srcPosition: Vector2.zero(),
+      srcSize: Vector2(70, 70),
+    );
+    firstButtonSelected = await loadSprite(
+      'Unit/archer/buttonselected.png',
+      srcPosition: Vector2.zero(),
+      srcSize: Vector2(40, 40),
+    );
+    secondButtonSelected = await loadSprite(
+      'Unit/balista/buttonselected.png',
+      srcPosition: Vector2.zero(),
+      srcSize: Vector2(70, 70),
+    );
+    thirdButtonSelected = await loadSprite(
+      'Unit/berserker/buttonselected.png',
+      srcPosition: Vector2.zero(),
+      srcSize: Vector2(60, 60),
+    );
+    fourthButtonSelected = await loadSprite(
+      'Unit/cavalrer/buttonselected.png',
+      srcPosition: Vector2.zero(),
+      srcSize: Vector2(70, 70),
+    );
+
+    firstButtonPosition = Vector2(size.x-buttonsUnitSize.x,0);
+    secondButtonPosition = Vector2(size.x-buttonsUnitSize.x,buttonsUnitSize.y);
+    thirdButtonPosition = Vector2(size.x-buttonsUnitSize.x,buttonsUnitSize.y*2);
+    fourthButtonPosition = Vector2(size.x-buttonsUnitSize.x,buttonsUnitSize.y*3);
   }
 
   @override
@@ -58,6 +124,11 @@ class GameButtons extends GameNetwork with TapDetector {
 
     button = allyPressed ? allyPressedButton : allyUnpressedButton;
     button.render(canvas, position: allyPosition, size: buttonsSize);
+
+    firstButton.render(canvas,position:firstButtonPosition, size: buttonsUnitSize);
+    secondButton.render(canvas,position:secondButtonPosition, size: buttonsUnitSize);
+    thirdButton.render(canvas,position:thirdButtonPosition, size: buttonsUnitSize);
+    fourthButton.render(canvas,position:fourthButtonPosition, size: buttonsUnitSize);
   }
 
   @override
@@ -69,18 +140,26 @@ class GameButtons extends GameNetwork with TapDetector {
 
   @override
   void onTapDown(TapDownInfo event) {
-    // On tap down we need to check if the event ocurred on the
-    // button area. There are several ways of doing it, for this
-    // tutorial we do that by transforming ours position and size
-    // vectors into a dart:ui Rect by using the `&` operator, and
-    // with that rect we can use its `contains` method which checks
-    // if a point (Offset) is inside that rect
+
     if (this.overlays.isActive(Hud.id)) {
-      var buttonArea = Vector2(size.x - unitButtonSize.x, 0) & unitButtonSize;
+      var buttonArea = firstButtonPosition & buttonsUnitSize;
       if (buttonArea.contains(event.eventPosition.game.toOffset())) {
-        listUnit.add(
-            UnitWidget.unitWidgetSpawn(size.x / 2, size.y - 40, 4, images));
-            //listUnit.add(UnitWidget.unitWidgetSpawn(event.eventPosition.game.x, event.eventPosition.game.y, 4, images));
+        listUnit.add(UnitWidget.unitWidgetSpawn(size.x / 2, size.y - 40, 0, images));
+      }
+
+      buttonArea = secondButtonPosition & buttonsUnitSize;
+      if (buttonArea.contains(event.eventPosition.game.toOffset())) {
+        listUnit.add(UnitWidget.unitWidgetSpawn(size.x / 2, size.y - 40, 2, images));
+      }
+
+      buttonArea = thirdButtonPosition & buttonsUnitSize;
+      if (buttonArea.contains(event.eventPosition.game.toOffset())) {
+        listUnit.add(UnitWidget.unitWidgetSpawn(size.x / 2, size.y - 40, 4, images));
+      }
+
+      buttonArea = fourthButtonPosition & buttonsUnitSize;
+      if (buttonArea.contains(event.eventPosition.game.toOffset())) {
+        listUnit.add(UnitWidget.unitWidgetSpawn(size.x / 2, size.y - 40, 6, images));
       }
 
       buttonArea = readyPosition & buttonsSize;
