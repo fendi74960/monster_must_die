@@ -171,7 +171,7 @@ class EnemyWidget extends Enemy {
 
     UnitWidget plusProche=UnitWidget(size.x/2, size.y+100, 0,images);
     double proximite=9999999;
-    double tempProxi=0;
+    double tempProxi=9999999;
     if(![6,7,10,11].contains(type)) {
       for (int ii = 0; ii < uns.length; ii++) {
         unitX = uns[ii].getPosition().x + uns[ii].unitSize.x / 2;
@@ -179,17 +179,15 @@ class EnemyWidget extends Enemy {
 
         tempProxi = sqrt(pow(unitX - enemyX, 2) + pow(unitY - enemyY, 2));
 
-        if (tempProxi <= range) {
-          isStopped = true;
-          return uns[ii];
-        }
-        else {
-          if (tempProxi < proximite) {
+        if (tempProxi < proximite) {
             plusProche = uns[ii];
             proximite = tempProxi;
-          }
         }
       }
+    }
+    if (proximite <= range) {
+      isStopped = true;
+      return plusProche;
     }
     isStopped=false;
     return plusProche;

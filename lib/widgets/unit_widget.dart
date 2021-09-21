@@ -171,7 +171,7 @@ class UnitWidget extends Unit  {
 
     EnemyWidget plusProche=EnemyWidget(getPosition().x, getPosition().y, 0,images);
     double proximite=9999999;
-    double tempProxi=0;
+    double tempProxi=9999999;
 
     for(int ii=0;ii<ens.length;ii++) {
       //Check si ennemie=arien et qu'on peut taper
@@ -191,21 +191,21 @@ class UnitWidget extends Unit  {
 
         tempProxi = sqrt(pow(enemyX - unitX, 2) + pow(enemyY - unitY, 2));
 
-        if (tempProxi <= range) {
-          isStopped = true;
-          return ens[ii];
-        }
-        else {
-          if (tempProxi < proximite) {
-            plusProche = ens[ii];
-            proximite = tempProxi;
-          }
+        if (tempProxi < proximite) {
+          plusProche = ens[ii];
+          proximite = tempProxi;
         }
       }
+    }
+    if (proximite <= range) {
+      isStopped = true;
+      return plusProche;
     }
     isStopped=false;
     return plusProche;
   }
+
+
   bool isAlive(){
     return health>0?true:false;
   }
@@ -371,27 +371,6 @@ class UnitWidget extends Unit  {
               stepTime: 0.1,
             ));
         break;
-
-
-        /*
-        case 4:
-          unitAnimation=SpriteAnimation.fromFrameData(
-              images.fromCache('heheboy.png'),
-              SpriteAnimationData.sequenced(
-                amount: 19,
-                textureSize: Vector2(700, 660),
-                stepTime: 0.1,
-              ));
-          break;
-        case 5:
-          unitAnimation = SpriteAnimation.fromFrameData(
-              images.fromCache('Lance_attaque_anim.png'),
-              SpriteAnimationData.sequenced(
-                amount: 25,
-                textureSize: Vector2(115, 64),
-                stepTime: 0.1,
-              ));
-          break;*/
         default:
           break;
       }
