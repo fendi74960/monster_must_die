@@ -87,7 +87,7 @@ class Enemy {
         damage = 1;
         health = 100;
         maxHealth = 100;
-        speed = 0.1;
+        speed = 0.3;
         enemySize = Vector2(60, 60);
         range=50;
       }
@@ -109,7 +109,7 @@ class Enemy {
         damage = 1;
         health = 100;
         maxHealth = 100;
-        speed = 0.1;
+        speed = 0.3;
         enemySize = Vector2(60, 60);
         range=50;
       }

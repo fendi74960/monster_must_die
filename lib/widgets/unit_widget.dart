@@ -178,6 +178,10 @@ class UnitWidget extends Unit  {
       if((ens[ii].type == 8 || ens[ii].type == 9) && type > 3) {
         canHit=false;
       }
+      //mage peut taper ghost
+      else if((ens[ii].type == 10 || ens[ii].type == 11) && (type != 14 || type != 15)){
+        canHit=false;
+      }
       else {
         canHit=true;
       }

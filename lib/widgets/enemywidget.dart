@@ -172,24 +172,24 @@ class EnemyWidget extends Enemy {
     UnitWidget plusProche=UnitWidget(size.x/2, size.y+100, 0,images);
     double proximite=9999999;
     double tempProxi=0;
+    if(![6,7,10,11].contains(type)) {
+      for (int ii = 0; ii < uns.length; ii++) {
+        unitX = uns[ii].getPosition().x + uns[ii].unitSize.x / 2;
+        unitY = uns[ii].getPosition().y + uns[ii].unitSize.y / 2;
 
-    for(int ii=0;ii<uns.length;ii++){
-      unitX=uns[ii].getPosition().x+uns[ii].unitSize.x/2;
-      unitY=uns[ii].getPosition().y+uns[ii].unitSize.y/2;
+        tempProxi = sqrt(pow(unitX - enemyX, 2) + pow(unitY - enemyY, 2));
 
-      tempProxi=sqrt(pow(unitX-enemyX,2)+pow(unitY-enemyY,2));
-
-      if(tempProxi<=range) {
-        isStopped=true;
-        return uns[ii];
-      }
-      else{
-        if(tempProxi<proximite) {
-          plusProche=uns[ii];
-          proximite=tempProxi;
+        if (tempProxi <= range) {
+          isStopped = true;
+          return uns[ii];
+        }
+        else {
+          if (tempProxi < proximite) {
+            plusProche = uns[ii];
+            proximite = tempProxi;
+          }
         }
       }
-
     }
     isStopped=false;
     return plusProche;
