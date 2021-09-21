@@ -37,6 +37,8 @@ class GameButtons extends GameNetwork with TapDetector {
   late Sprite fourthButtonSelected;
   late Vector2 fourthButtonPosition;
 
+  int selectedUnit = 0;
+
   final buttonsSize = Vector2(120, 30);
   final buttonsUnitSize = Vector2(60, 60);
 
@@ -125,10 +127,29 @@ class GameButtons extends GameNetwork with TapDetector {
     button = allyPressed ? allyPressedButton : allyUnpressedButton;
     button.render(canvas, position: allyPosition, size: buttonsSize);
 
-    firstButton.render(canvas,position:firstButtonPosition, size: buttonsUnitSize);
-    secondButton.render(canvas,position:secondButtonPosition, size: buttonsUnitSize);
-    thirdButton.render(canvas,position:thirdButtonPosition, size: buttonsUnitSize);
-    fourthButton.render(canvas,position:fourthButtonPosition, size: buttonsUnitSize);
+    if(selectedUnit == 0) {
+      firstButtonSelected.render(canvas,position:firstButtonPosition, size: buttonsUnitSize);
+    } else {
+      firstButton.render(canvas,position:firstButtonPosition, size: buttonsUnitSize);
+    }
+
+    if(selectedUnit == 2) {
+      secondButtonSelected.render(canvas,position:secondButtonPosition, size: buttonsUnitSize);
+    } else {
+      secondButton.render(canvas,position:secondButtonPosition, size: buttonsUnitSize);
+    }
+
+    if(selectedUnit == 4) {
+      thirdButtonSelected.render(canvas,position:thirdButtonPosition, size: buttonsUnitSize);
+    } else {
+      thirdButton.render(canvas,position:thirdButtonPosition, size: buttonsUnitSize);
+    }
+
+    if(selectedUnit == 6) {
+      fourthButtonSelected.render(canvas,position:fourthButtonPosition, size: buttonsUnitSize);
+    } else {
+      fourthButton.render(canvas,position:fourthButtonPosition, size: buttonsUnitSize);
+    }
   }
 
   @override
@@ -144,21 +165,25 @@ class GameButtons extends GameNetwork with TapDetector {
     if (this.overlays.isActive(Hud.id)) {
       var buttonArea = firstButtonPosition & buttonsUnitSize;
       if (buttonArea.contains(event.eventPosition.game.toOffset())) {
+        selectedUnit = 0;
         listUnit.add(UnitWidget.unitWidgetSpawn(size.x / 2, size.y - 40, 0, images));
       }
 
       buttonArea = secondButtonPosition & buttonsUnitSize;
       if (buttonArea.contains(event.eventPosition.game.toOffset())) {
+        selectedUnit = 2;
         listUnit.add(UnitWidget.unitWidgetSpawn(size.x / 2, size.y - 40, 2, images));
       }
 
       buttonArea = thirdButtonPosition & buttonsUnitSize;
       if (buttonArea.contains(event.eventPosition.game.toOffset())) {
+        selectedUnit = 4;
         listUnit.add(UnitWidget.unitWidgetSpawn(size.x / 2, size.y - 40, 4, images));
       }
 
       buttonArea = fourthButtonPosition & buttonsUnitSize;
       if (buttonArea.contains(event.eventPosition.game.toOffset())) {
+        selectedUnit = 6;
         listUnit.add(UnitWidget.unitWidgetSpawn(size.x / 2, size.y - 40, 6, images));
       }
 
