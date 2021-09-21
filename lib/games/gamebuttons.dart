@@ -166,25 +166,30 @@ class GameButtons extends GameNetwork with TapDetector {
       var buttonArea = firstButtonPosition & buttonsUnitSize;
       if (buttonArea.contains(event.eventPosition.game.toOffset())) {
         selectedUnit = 0;
-        listUnit.add(UnitWidget.unitWidgetSpawn(size.x / 2, size.y - 40, 0, images));
+        //listUnit.add(UnitWidget.unitWidgetSpawn(size.x / 2, size.y - 40, 0, images));
       }
+
 
       buttonArea = secondButtonPosition & buttonsUnitSize;
       if (buttonArea.contains(event.eventPosition.game.toOffset())) {
         selectedUnit = 2;
-        listUnit.add(UnitWidget.unitWidgetSpawn(size.x / 2, size.y - 40, 2, images));
+        //listUnit.add(UnitWidget.unitWidgetSpawn(size.x / 2, size.y - 40, 2, images));
       }
 
       buttonArea = thirdButtonPosition & buttonsUnitSize;
       if (buttonArea.contains(event.eventPosition.game.toOffset())) {
         selectedUnit = 4;
-        listUnit.add(UnitWidget.unitWidgetSpawn(size.x / 2, size.y - 40, 4, images));
+        //listUnit.add(UnitWidget.unitWidgetSpawn(size.x / 2, size.y - 40, 4, images));
       }
 
       buttonArea = fourthButtonPosition & buttonsUnitSize;
       if (buttonArea.contains(event.eventPosition.game.toOffset())) {
         selectedUnit = 6;
-        listUnit.add(UnitWidget.unitWidgetSpawn(size.x / 2, size.y - 40, 6, images));
+        //listUnit.add(UnitWidget.unitWidgetSpawn(size.x / 2, size.y - 40, 6, images));
+      }
+
+      if(event.eventPosition.game.x<size.x-buttonsSize.x  && event.eventPosition.game.y>size.y/2) {
+        listUnit.add(UnitWidget.unitWidgetSpawn(event.eventPosition.game.x-30, event.eventPosition.game.y-30, selectedUnit, images));
       }
 
       buttonArea = readyPosition & buttonsSize;
