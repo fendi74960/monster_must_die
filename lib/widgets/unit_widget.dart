@@ -21,7 +21,7 @@ class UnitWidget extends Unit  {
 
   ///Constructors : prend position [x] [y] et un [type]
   ///de plus [images] pour pouvoir prendre les images depuis le cache directement
-  UnitWidget(double x, double y, int type,this.images) : super(x, y, type) {
+  UnitWidget(double x, double y, int type,this.images) : super(x, y, type,images) {
     //Reduit le type de -1 s'il est impair pour start forcement sur une animation de mouvement
     if(type.isOdd){
       type-=1;
@@ -136,6 +136,9 @@ class UnitWidget extends Unit  {
   ///puis on fait un calculer vectorielle pour pouvoir se diriger vers une [target] avec une certaine [speed]
   void updateMovUnit(double dt,double speed,EnemyWidget target) {
     unitAnimation.update(dt);
+    playing=true;
+    super.update(dt);
+
     double vectorX=target.getPosition().x-getPosition().x;
     double vectorY=target.getPosition().y-getPosition().y;
 
@@ -147,7 +150,7 @@ class UnitWidget extends Unit  {
        newVectorX = vectorX / length;
        newVectorY = vectorY / length;
     }
-
+    position=Vector2(getPosition().x+newVectorX*speed,getPosition().y+newVectorY*speed);
     setPosition(Vector2(getPosition().x+newVectorX*speed,getPosition().y+newVectorY*speed));
   }
 
@@ -161,9 +164,18 @@ class UnitWidget extends Unit  {
 
   ///Fonction appeller pour pouvoir faire apparaitre l'unit a la bonne position ainsi que sa barre de pv dans le [canvas]
   void renderUnit(Canvas canvas) {
-    unitAnimation
+    if(health==maxHealth) {
+      flipHorizontally();
+    }
+    canvas.save();
+
+    super.render(canvas);
+    //animation?.getSprite().render(canvas,position: getPosition(),size:unitSize);
+
+    /*unitAnimation
         .getSprite()
-        .render(canvas, position: getPosition(), size: unitSize);
+        .render(canvas, position: getPosition(), size: unitSize);*/
+    canvas.restore();
     lifebar.render(canvas, position: Vector2(getPosition().x,getPosition().y-10), size: Vector2((unitSize.x*health)/maxHealth,10));
   }
 

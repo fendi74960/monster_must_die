@@ -85,6 +85,7 @@ class GameLoader extends FlameGame {
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 12,images));
 
     listUnit.add(UnitWidget.unitWidgetSpawn(size.x/2 , size.y - 40, 12, images));
+    add(listUnit[0]);
 
   }
 
@@ -106,7 +107,7 @@ class GameLoader extends FlameGame {
   ///Executer chaque frame pour update certaines action dont les mouvements avec un [dt]
   @override
   void update(double dt) {
-
+    //super.update(dt);
     //LOGIQUE POUR UNIT ALLIER
     for(int i = 0; i < listUnit.length; i++)
     {

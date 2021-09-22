@@ -1,8 +1,9 @@
 import 'dart:math';
+import 'package:flame/assets.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame/components.dart';
 
-class Unit {
+class Unit  extends SpriteAnimationComponent{
 
   //Position
   late double _x;
@@ -43,9 +44,13 @@ class Unit {
     _x = vector2.x;
     _y = vector2.y;
   }
-
   ///Constructors : prend position [x] [y] et un [type]
-  Unit(double x, double y, int pType){
+  Unit(double x, double y, int pType,Images images):super.fromFrameData(images.fromCache('Unit/archer/moving.png'), SpriteAnimationData.sequenced(
+    amount: 4,
+    amountPerRow: 1,
+    textureSize: Vector2(32, 30),
+    stepTime: 0.1,
+  ),position: Vector2(x,y),playing: true,size: Vector2(60,60)){
     _x = x;
     _y = y;
     type = pType;
