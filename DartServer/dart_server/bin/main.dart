@@ -13,7 +13,6 @@ void main(List<String> arguments) async {
     sockets.add(socket);
 
     sendLocalIp(socket);
-    setUnit(socket, readys);                      //peut etre await, check !!!!!!!!!!!!!!
     createEvents(io, sockets, socket, readys, currentWave);
   });
 
