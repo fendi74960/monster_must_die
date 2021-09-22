@@ -1,6 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
-import 'package:flame/gestures.dart';
+import 'package:flame/input.dart';
 import 'package:flutter/material.dart';
 import 'package:monster_must_die/controller/wavecontroller.dart';
 import 'package:monster_must_die/games/gamesetting.dart';

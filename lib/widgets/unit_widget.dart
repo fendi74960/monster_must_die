@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:flame/assets.dart';
 import 'package:flame/components.dart';
-import 'package:flame/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/game.dart';
 import 'package:monster_must_die/models/unit.dart';

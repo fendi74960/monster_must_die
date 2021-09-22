@@ -8,7 +8,7 @@ import 'package:monster_must_die/widgets/unit_widget.dart';
 import '../models/player_data.dart';
 
 
-class GameLoader extends BaseGame {
+class GameLoader extends FlameGame {
   //Permet de mettre en cache les images plus tard
   static const _imageAssets = [
     'heheboy.png',
