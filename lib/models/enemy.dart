@@ -21,6 +21,7 @@ class Enemy {
 
   //Autres
   late int type;
+
   //Vu que je sais pas faire les enum et que sa a l'air chiant a faire
   //TYPE
   //0-1 : archer
@@ -32,21 +33,22 @@ class Enemy {
   //12-13 : zombie
 
 
-  //I made a getter and setter, because we are using vector2 but I prefer double x and y :)
+  ///get la position en tant que vecteur2
   Vector2 getPosition() {
     return Vector2(_x, _y);
   }
-
+  ///set la position avec un [vector2]
   void setPosition(Vector2 vector2) {
     _x = vector2.x;
     _y = vector2.y;
   }
 
-  //Constructors
+  ///Constructors : prend position [x] [y] et un [type]
   Enemy(double x, double y, int pType){
     _x = x;
     _y = y;
     type = pType;
+    //switch sur le type pour ses stats
     switch(type) {
       //0-1 : archer
       case 0:

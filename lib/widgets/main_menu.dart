@@ -15,6 +15,7 @@ class MainMenu extends StatelessWidget {
 
   const MainMenu(this.gameRef, {Key? key}) : super(key: key);
 
+  ///Cree le main menu avec differents widgets
   @override
   Widget build(BuildContext context) {
     return Center(

@@ -11,14 +11,19 @@ import 'package:monster_must_die/widgets/enemywidget.dart';
 
 class UnitWidget extends Unit  {
 
+  //Lier a l'animation
   late SpriteAnimation unitAnimation;
   bool etatChanger=false;
-  late Images images;
   bool isStopped=false;
   late Sprite lifebar;
 
-  //Constructors
+  late Images images;
+
+
+  ///Constructors : prend position [x] [y] et un [type]
+  ///de plus [images] pour pouvoir prendre les images depuis le cache directement
   UnitWidget(double x, double y, int type,this.images) : super(x, y, type) {
+    //Reduit le type de -1 s'il est impair pour start forcement sur une animation de mouvement
     if(type.isOdd){
       type-=1;
     }
@@ -128,7 +133,8 @@ class UnitWidget extends Unit  {
   }
 
 
-  //Flame functions to call in the main
+  ///Avec le [dt] : deltaTime, on update l'animation sur la next frame
+  ///puis on fait un calculer vectorielle pour pouvoir se diriger vers une [target] avec une certaine [speed]
   void updateMovUnit(double dt,double speed,EnemyWidget target) {
     unitAnimation.update(dt);
     double vectorX=target.getPosition().x-getPosition().x;
@@ -137,22 +143,24 @@ class UnitWidget extends Unit  {
     double length=sqrt(vectorX*vectorX+vectorY*vectorY);
     double newVectorX = 0;
     double newVectorY = 0;
+    //Si pas d'ennemie ducoup target = soi meme
     if(length!=0) {
        newVectorX = vectorX / length;
        newVectorY = vectorY / length;
     }
 
-
     setPosition(Vector2(getPosition().x+newVectorX*speed,getPosition().y+newVectorY*speed));
-
   }
 
+  ///Avec le [dt] : deltaTime, on update l'animation sur la next frame
+  ///On attaque la [target] avec sa stats de degats
   void attaque(double dt,EnemyWidget target) {
     unitAnimation.update(dt);
     target.health-=damage;
 
   }
 
+  ///Fonction appeller pour pouvoir faire apparaitre l'unit a la bonne position ainsi que sa barre de pv dans le [canvas]
   void renderUnit(Canvas canvas) {
     unitAnimation
         .getSprite()
@@ -160,13 +168,21 @@ class UnitWidget extends Unit  {
     lifebar.render(canvas, position: Vector2(getPosition().x,getPosition().y-10), size: Vector2((unitSize.x*health)/maxHealth,10));
   }
 
+  ///Creer une unit avec une position à la pos [x] et [y]
+  ///Accessible statiquement
   static UnitWidget unitWidgetSpawn(double x, double y, int type,Images images){
     return UnitWidget(x, y, type,images);
   }
 
+  ///Prends [ens] qui est la liste de tous les ennemies vivantes actuellement
+  ///Le but de cette fonction est de regarder chaque unit et prend la plus proche puis
+  ///regarder si l'ennemie est dans sa range
+  ///Si oui alors renvoie l'ennemie le plus proche pour l'attaque
+  ///sinon renvoie soit l'ennemie le plus proche mais pas a portee d'attaque
   EnemyWidget checkInRangeEnnemie(List<EnemyWidget> ens ){
     bool canHit=true;
     double enemyX,enemyY;
+    //get sa position au centre du sprite
     double unitX=getPosition().x+unitSize.x/2,unitY=getPosition().y+unitSize.y/2;
 
     EnemyWidget plusProche=EnemyWidget(getPosition().x, getPosition().y, 0,images);
@@ -186,6 +202,7 @@ class UnitWidget extends Unit  {
         canHit=true;
       }
       if (canHit) {
+        //get la position au centre du sprit de l'ennemie
         enemyX = ens[ii].getPosition().x + ens[ii].enemySize.x / 2;
         enemyY = ens[ii].getPosition().y + ens[ii].enemySize.y / 2;
 
@@ -205,10 +222,13 @@ class UnitWidget extends Unit  {
     return plusProche;
   }
 
-
+  ///Dit si les PV sont > 0
   bool isAlive(){
     return health>0?true:false;
   }
+
+  ///Permet d'actualiser l'animation en changeant son type grace a [modificateurType] qui est  1 ou -1
+  ///Passe entre moving<->attacking
   void actualisationAnim(int modificateurType){
     if(etatChanger) {
       type += modificateurType;

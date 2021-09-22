@@ -4,16 +4,22 @@ import 'package:flame/components.dart';
 
 class Unit {
 
-  //Stats
+  //Position
   late double _x;
   late double _y;
+
+  //Stats
   late double damage;
-  late Vector2 unitSize;
   late double health;
   late double maxHealth;
   late double speed;
-  late int type;
   late double range;
+
+  //Taille
+  late Vector2 unitSize;
+
+  //Autres
+  late int type;
 
   //Vu que je sais pas faire les enum et que sa a l'air chiant a faire
   //TYPE
@@ -27,17 +33,18 @@ class Unit {
   //14-15 : wizard
 
 
-  //I made a getter and setter, because we are using vector2 but I prefer double x and y :)
+  ///get la position en tant que vecteur2
   Vector2 getPosition() {
     return Vector2(_x, _y);
   }
 
+  ///set la position avec un [vector2]
   void setPosition(Vector2 vector2) {
     _x = vector2.x;
     _y = vector2.y;
   }
 
-  //Constructors
+  ///Constructors : prend position [x] [y] et un [type]
   Unit(double x, double y, int pType){
     _x = x;
     _y = y;

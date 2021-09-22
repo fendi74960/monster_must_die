@@ -9,6 +9,7 @@ import '../models/player_data.dart';
 
 
 class GameLoader extends BaseGame {
+  //Permet de mettre en cache les images plus tard
   static const _imageAssets = [
     'heheboy.png',
     'Archer.png',
@@ -50,20 +51,17 @@ class GameLoader extends BaseGame {
     'Unit/spear/moving.png',
     'Unit/wizard/moving.png',
   ];
-  // A constant speed, represented in logical pixels per second
-  static const int squareSpeed = 400;
+
 
   late PlayerData playerData;
 
-  // BasicPalette is a help class from Flame, which provides default, pre-built instances
-  // of Paint that can be used by your game
-  static final squarePaint = BasicPalette.white.paint;
-
+  //Listes des unit/ennemie qui vont apparaitre
   late List<EnemyWidget> listEnemy;
-
   late List<UnitWidget> listUnit;
+  //boolean temp pour voir si unit/ennemy ne bouge plus
   late bool tempAStopper;
 
+  ///Charger plusieurs element au debut du jeu
   @override
   Future<void> onLoad() async {
     await images.loadAll(_imageAssets);
@@ -72,6 +70,8 @@ class GameLoader extends BaseGame {
     listUnit = List.empty(growable: true);
     listEnemy = List.empty(growable: true);
   }
+
+  ///Lance le jeu en creant pour l'instant des ennemies random
   void startGame(){
     for(int i = 0; i < 20 ; i++){
       listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 0,images));
@@ -88,6 +88,7 @@ class GameLoader extends BaseGame {
 
   }
 
+  ///Execute chaque frame pour render les differents choses sur le [canvas]
   @override
   void render(Canvas canvas) {
 
@@ -102,6 +103,7 @@ class GameLoader extends BaseGame {
     }
   }
 
+  ///Executer chaque frame pour update certaines action dont les mouvements avec un [dt]
   @override
   void update(double dt) {
 
@@ -171,27 +173,6 @@ class GameLoader extends BaseGame {
         listEnemy.removeAt(i);
       }
     }
-
-
-    //HIERARCHIE EN COMMENTAIRES DES FUTURS FONCTIONS COTE ENNEMIES
-    //check si en vie
-
-    //check si un unit from unitList a porte
-      //ATTENTION METTRE UN BOOLEAN SI PAS BESOIN DE RECHANGER ANIMATION
-      //Si non alors change animation to avance
-      //Si oui alors change animation puis attaque
-
-    //HIERARCHIE EN COMMENTAIRES DES FUTURS FONCTIONS COTE Unit
-    //check si en vie
-
-    //check si un unit from unitList a porte
-      //ATTENTION METTRE UN BOOLEAN SI PAS BESOIN DE RECHANGER ANIMATION
-      //Si non alors change animation to avance VERS ennemie plus proche
-      //Si oui alors change animation puis attaque
-
-    //HIERARCHIE EN COMMENTAIRES DES FUTURS FONCTIONS de la suite
-    //Check nb ennemie si 0 faire l'etape de pause
-    //si >0 rien faire
   }
 
 

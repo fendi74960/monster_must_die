@@ -5,9 +5,6 @@ import '../games/gameloader.dart';
 import '../models/player_data.dart';
 
 
-// This represents the head up display in game.
-// It consists of, current score, high score,
-// a pause button and number of remaining lives.
 class Hud extends StatelessWidget {
 
   // An unique identified for this overlay.
@@ -18,8 +15,9 @@ class Hud extends StatelessWidget {
 
   const Hud(this.gameRef, {Key? key}) : super(key: key);
 
-  static const List<String> suggestions = ['hello', 'world'];
-
+  ///Build l'hud du jeu
+  ///Il est build avec ChangeNotifierProvider qui permet à certaines valeur de changer automatiquement si elles sont changer ailleurs et notifier
+  ///le build ici consiste a une colonne avec une ligne situé tout en bas avec des textes
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
