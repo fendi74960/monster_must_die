@@ -1,9 +1,9 @@
 import 'dart:io';
 
 void sendLocalIp(socket) async {
-  //Used if the client don't know the local IP of the server
-  //He send a request on every ip
-  //Then the server send him the end of the server local IP
+  ///Used if the client don't know the local IP of the server
+  ///He send a request on every ip
+  ///Then the server send him the end of the server local IP
 
   var myLocalIp = "";
   RegExp regExp = RegExp(r"^192\.168\.1\..");
@@ -24,8 +24,19 @@ void sendLocalIp(socket) async {
   socket.emit('fromServer', val);
 }
 
+void setUnit(socket, readys) async {
+  ///The first player will have few units,
+  /// and the other the other units
+
+  if(readys.length == 0) {
+      socket.emit('unit', 0);
+    } else {
+      socket.emit('unit', 1);
+    }
+}
+
 void createEvents(io, sockets, socket, readys, int currentWave) async {
-  //Create all the events used for the server
+  ///Create all the events used for the server
 
   toOtherEvent(sockets, socket);
   toAllEvent(io, socket);
@@ -33,8 +44,8 @@ void createEvents(io, sockets, socket, readys, int currentWave) async {
 }
 
 void toOtherEvent(sockets, socket) async {
-  //We call this event if one of the client
-  // want to send unit to the other client
+  ///We call this event if one of the client
+  /// want to send unit to the other client
 
   socket.on('toother', (data) {
     print('Receive toother');
@@ -47,8 +58,8 @@ void toOtherEvent(sockets, socket) async {
 }
 
 void toAllEvent(io, socket) async {
-  //We call this event if one of the client
-  // want to send unit to all the clients
+  ///We call this event if one of the client
+  /// want to send unit to all the clients
 
   socket.on('toall', (data) {
     print('Receive toall');
@@ -57,8 +68,8 @@ void toAllEvent(io, socket) async {
 }
 
 void readyEvent(io, socket, readys, int currentWave) async {
-  //Set one player as ready
-  // to lauch a wave or other things
+  ///Set one player as ready
+  /// to lauch a wave or other things
 
   socket.on('ready', (data) {
     print('One player is ready');
@@ -74,7 +85,7 @@ void readyEvent(io, socket, readys, int currentWave) async {
 }
 
 bool checkReady(readys) {
-  //Check if the two players are ready
+  ///Check if the two players are ready
 
   if (readys.length >= 2) {
     return true;

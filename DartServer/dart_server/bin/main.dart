@@ -13,7 +13,7 @@ void main(List<String> arguments) async {
     sockets.add(socket);
 
     sendLocalIp(socket);
-
+    setUnit(socket, readys);                      //peut etre await, check !!!!!!!!!!!!!!
     createEvents(io, sockets, socket, readys, currentWave);
   });
 
@@ -25,25 +25,3 @@ void main(List<String> arguments) async {
 }
 
 //Run with : dart run
-
-/* old main
-void main(List<String> arguments) {
-  var io = new Server();
-  var nsp = io.of('/some');
-  nsp.on('connection', (client) {
-    print('connection /some');
-    client.on('msg', (data) {
-      print('data from /some => $data');
-      client.emit('fromServer', "ok 2");
-    });
-  });
-  io.on('connection', (client) {
-    print('connection default namespace');
-    client.on('msg', (data) {
-      print('data from default => $data');
-      client.emit('fromServer', "ok");
-    });
-  });
-  io.listen(3000);
-}
-*/
