@@ -9,7 +9,7 @@ import 'package:monster_must_die/widgets/unit_widget.dart';
 class EnemyWidget extends Enemy {
 
   //Lié à l'animation/render
-  late SpriteAnimation enemyAnimation;
+  //late SpriteAnimation enemyAnimation;
   late Sprite lifebar;
   bool etatChanger=false;
   bool isStopped=false;
@@ -29,7 +29,7 @@ class EnemyWidget extends Enemy {
     //0-1 : archer
       case 0:
       case 1:
-        enemyAnimation = SpriteAnimation.fromFrameData(
+        animation = SpriteAnimation.fromFrameData(
         images.fromCache('Enemy/archer/moving.png'),
         SpriteAnimationData.sequenced(
           amount: 4,
@@ -41,7 +41,7 @@ class EnemyWidget extends Enemy {
     //2-3 : cyclop
       case 2:
       case 3:
-        enemyAnimation = SpriteAnimation.fromFrameData(
+        animation = SpriteAnimation.fromFrameData(
         images.fromCache('Enemy/cyclop/moving.png'),
         SpriteAnimationData.sequenced(
           amount: 4,
@@ -53,7 +53,7 @@ class EnemyWidget extends Enemy {
     //4-5 : dog
       case 4:
       case 5:
-        enemyAnimation = SpriteAnimation.fromFrameData(
+        animation = SpriteAnimation.fromFrameData(
         images.fromCache('Enemy/dog/moving.png'),
         SpriteAnimationData.sequenced(
           amount: 4,
@@ -65,7 +65,7 @@ class EnemyWidget extends Enemy {
     //6-7 : eye
       case 6:
       case 7:
-        enemyAnimation = SpriteAnimation.fromFrameData(
+        animation = SpriteAnimation.fromFrameData(
         images.fromCache('Enemy/eye/moving.png'),
         SpriteAnimationData.sequenced(
           amount: 4,
@@ -77,7 +77,7 @@ class EnemyWidget extends Enemy {
     //8-9 : gargoyle
       case 8:
       case 9:
-        enemyAnimation = SpriteAnimation.fromFrameData(
+        animation = SpriteAnimation.fromFrameData(
         images.fromCache('Enemy/gargoyle/moving.png'),
         SpriteAnimationData.sequenced(
           amount: 4,
@@ -89,7 +89,7 @@ class EnemyWidget extends Enemy {
     //10-11 : ghost
       case 10:
       case 11:
-        enemyAnimation = SpriteAnimation.fromFrameData(
+        animation = SpriteAnimation.fromFrameData(
         images.fromCache('Enemy/ghost/moving.png'),
         SpriteAnimationData.sequenced(
           amount: 20,
@@ -100,7 +100,7 @@ class EnemyWidget extends Enemy {
     //12-13 : zombie
       case 12:
       case 13:
-        enemyAnimation = SpriteAnimation.fromFrameData(
+        animation = SpriteAnimation.fromFrameData(
         images.fromCache('Enemy/zombie/moving.png'),
         SpriteAnimationData.sequenced(
           amount: 4,
@@ -111,7 +111,7 @@ class EnemyWidget extends Enemy {
       break;
 
       default: {
-        enemyAnimation = SpriteAnimation.fromFrameData(
+        animation = SpriteAnimation.fromFrameData(
             images.fromCache('fe.png'),
             SpriteAnimationData.sequenced(
               amount: 26,
@@ -140,10 +140,13 @@ class EnemyWidget extends Enemy {
 
   ///Fonction appeller pour pouvoir faire apparaitre l'ennemie a la bonne position ainsi que sa barre de pv dans le [canvas]
   void renderEnemy(Canvas canvas) {
-    enemyAnimation
+    canvas.save();
+    super.render(canvas);
+    canvas.restore();
+    /*animation
         .getSprite()
-        .render(canvas, position: getPosition(), size: enemySize);
-    lifebar.render(canvas, position: Vector2(getPosition().x,getPosition().y-10), size: Vector2((enemySize.x*health)/maxHealth,10));
+        .render(canvas, position: position, size: size);*/
+    lifebar.render(canvas, position: Vector2(position.x,position.y-10), size: Vector2((size.x*health)/maxHealth,10));
   }
 
   ///Dit si les PV sont > 0
@@ -154,23 +157,23 @@ class EnemyWidget extends Enemy {
   ///Avec le [dt] : deltaTime, on update l'animation sur la next frame
   ///puis on fait un calculer vectorielle pour pouvoir se diriger vers une [target] avec une certaine [speed]
   void updateMovEnemie(double dt,double speed,UnitWidget target) {
-    enemyAnimation.update(dt);
-    double vectorX=target.position.x-getPosition().x;
-    double vectorY=target.position.y-getPosition().y;
+    animation?.update(dt);
+    double vectorX=target.position.x-position.x;
+    double vectorY=target.position.y-position.y;
 
     double length=sqrt(vectorX*vectorX+vectorY*vectorY);
 
     double newVectorX=vectorX/length;
     double newVectorY=vectorY/length;
 
-    setPosition(Vector2(getPosition().x+newVectorX*speed,getPosition().y+newVectorY*speed));
+    position=Vector2(position.x+newVectorX*speed,position.y+newVectorY*speed);
 
   }
 
   ///Avec le [dt] : deltaTime, on update l'animation sur la next frame
   ///On attaque la [target] avec sa stats de degats
   void attaque(double dt,UnitWidget target) {
-    enemyAnimation.update(dt);
+    animation?.update(dt);
     target.health-=damage;
 
   }
@@ -184,7 +187,7 @@ class EnemyWidget extends Enemy {
   UnitWidget checkInRangeUnit(List<UnitWidget> uns ,Vector2 size){
     double unitX,unitY;
     //get sa position au centre du sprite
-    double enemyX=getPosition().x+enemySize.x/2,enemyY=getPosition().y+enemySize.y/2;
+    double enemyX=position.x+this.size.x/2,enemyY=position.y+this.size.y/2;
 
     UnitWidget plusProche=UnitWidget(size.x/2, size.y+100, 0,images);
     double proximite=9999999;
@@ -222,7 +225,7 @@ class EnemyWidget extends Enemy {
       switch (type) {
       //0-1 : archer
         case 0:
-          enemyAnimation=SpriteAnimation.fromFrameData(
+          animation=SpriteAnimation.fromFrameData(
               images.fromCache('Enemy/archer/moving.png'),
               SpriteAnimationData.sequenced(
                 amount: 4,
@@ -232,7 +235,7 @@ class EnemyWidget extends Enemy {
               ));
           break;
         case 1:
-          enemyAnimation = SpriteAnimation.fromFrameData(
+          animation = SpriteAnimation.fromFrameData(
             images.fromCache('Enemy/archer/attack.png'),
             SpriteAnimationData.sequenced(
               amount: 20,
@@ -242,7 +245,7 @@ class EnemyWidget extends Enemy {
         break;
       //2-3 : cyclop
         case 2:
-          enemyAnimation=SpriteAnimation.fromFrameData(
+          animation=SpriteAnimation.fromFrameData(
               images.fromCache('Enemy/archer/moving.png'),
               SpriteAnimationData.sequenced(
                 amount: 4,
@@ -251,7 +254,7 @@ class EnemyWidget extends Enemy {
                 stepTime: 0.1,
               ));
           break;
-        case 3: enemyAnimation = SpriteAnimation.fromFrameData(
+        case 3: animation = SpriteAnimation.fromFrameData(
             images.fromCache('Enemy/cyclop/attack.png'),
             SpriteAnimationData.sequenced(
               amount: 23,
@@ -261,7 +264,7 @@ class EnemyWidget extends Enemy {
         break;
       //4-5 : dog
         case 4:
-          enemyAnimation=SpriteAnimation.fromFrameData(
+          animation=SpriteAnimation.fromFrameData(
               images.fromCache('Enemy/dog/moving.png'),
               SpriteAnimationData.sequenced(
                 amount: 4,
@@ -270,7 +273,7 @@ class EnemyWidget extends Enemy {
                 stepTime: 0.1,
               ));
           break;
-        case 5: enemyAnimation = SpriteAnimation.fromFrameData(
+        case 5: animation = SpriteAnimation.fromFrameData(
             images.fromCache('Enemy/dog/attack.png'),
             SpriteAnimationData.sequenced(
               amount: 15,
@@ -280,7 +283,7 @@ class EnemyWidget extends Enemy {
         break;
       //6-7 : eye
         case 6:
-          enemyAnimation=SpriteAnimation.fromFrameData(
+          animation=SpriteAnimation.fromFrameData(
               images.fromCache('Enemy/eye/moving.png'),
               SpriteAnimationData.sequenced(
                 amount: 4,
@@ -293,7 +296,7 @@ class EnemyWidget extends Enemy {
         break;
       //8-9 : gargoyle
         case 8:
-          enemyAnimation=SpriteAnimation.fromFrameData(
+          animation=SpriteAnimation.fromFrameData(
               images.fromCache('Enemy/gargoyle/moving.png'),
               SpriteAnimationData.sequenced(
                 amount: 4,
@@ -302,7 +305,7 @@ class EnemyWidget extends Enemy {
                 stepTime: 0.1,
               ));
           break;
-        case 9: enemyAnimation = SpriteAnimation.fromFrameData(
+        case 9: animation = SpriteAnimation.fromFrameData(
             images.fromCache('Enemy/gargoyle/attack.png'),
             SpriteAnimationData.sequenced(
               amount: 15,
@@ -312,7 +315,7 @@ class EnemyWidget extends Enemy {
         break;
       //10-11 : ghost
         case 10:
-          enemyAnimation=SpriteAnimation.fromFrameData(
+          animation=SpriteAnimation.fromFrameData(
               images.fromCache('Enemy/ghost/moving.png'),
               SpriteAnimationData.sequenced(
                 amount: 20,
@@ -324,7 +327,7 @@ class EnemyWidget extends Enemy {
         break;
       //12-13 : zombie
         case 12:
-          enemyAnimation=SpriteAnimation.fromFrameData(
+          animation=SpriteAnimation.fromFrameData(
               images.fromCache('Enemy/zombie/moving.png'),
               SpriteAnimationData.sequenced(
                 amount: 4,
@@ -333,7 +336,7 @@ class EnemyWidget extends Enemy {
                 stepTime: 0.1,
               ));
           break;
-        case 13: enemyAnimation = SpriteAnimation.fromFrameData(
+        case 13: animation = SpriteAnimation.fromFrameData(
             images.fromCache('Enemy/zombie/attack.png'),
             SpriteAnimationData.sequenced(
               amount: 43,

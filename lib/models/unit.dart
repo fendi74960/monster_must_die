@@ -3,7 +3,7 @@ import 'package:flame/assets.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame/components.dart';
 
-class Unit  extends SpriteAnimationComponent{
+class Unit extends SpriteAnimationComponent{
 
 
   //Stats
@@ -28,7 +28,7 @@ class Unit  extends SpriteAnimationComponent{
   //14-15 : wizard
 
   ///Constructors : prend position [x] [y] et un [type]
-  Unit(double x, double y, int pType,Images images):super(position: Vector2(x,y),playing: true){
+  Unit(double x, double y, int pType,Images images):super(position: Vector2(x,y)){
     type = pType;
     switch(type) {
     //0-1 : archer
@@ -38,7 +38,7 @@ class Unit  extends SpriteAnimationComponent{
         health = 1000;
         maxHealth = 1000;
         speed = 0.4;
-        super.size = Vector2(60, 60);
+        size = Vector2(60, 60);
         range=50;
       }
       break;
@@ -49,7 +49,7 @@ class Unit  extends SpriteAnimationComponent{
         health = 1000;
         maxHealth = 1000;
         speed = 0.4;
-        super.size = Vector2(60, 60);
+        size = Vector2(60, 60);
         range=50;
       }
       break;
@@ -60,7 +60,7 @@ class Unit  extends SpriteAnimationComponent{
         health = 1000;
         maxHealth = 1000;
         speed = 0.4;
-        super.size = Vector2(60, 60);
+        size = Vector2(60, 60);
         range=50;
       }
       break;
@@ -71,7 +71,7 @@ class Unit  extends SpriteAnimationComponent{
         health = 1000;
         maxHealth = 1000;
         speed = 0.4;
-        super.size = Vector2(60, 60);
+        size = Vector2(60, 60);
         range=50;
       }
       break;
@@ -82,7 +82,7 @@ class Unit  extends SpriteAnimationComponent{
         health = 1000;
         maxHealth = 1000;
         speed = 0.4;
-        super.size = Vector2(60, 60);
+        size = Vector2(60, 60);
         range=50;
       }
       break;
@@ -93,7 +93,7 @@ class Unit  extends SpriteAnimationComponent{
         health = 1000;
         maxHealth = 1000;
         speed = 0.4;
-        super.size = Vector2(60, 60);
+        size = Vector2(60, 60);
         range=50;
       }
       break;
@@ -104,7 +104,7 @@ class Unit  extends SpriteAnimationComponent{
         health = 1000;
         maxHealth = 1000;
         speed = 0.4;
-        super.size = Vector2(60, 60);
+        size = Vector2(60, 60);
         range=50;
       }
       break;
@@ -115,18 +115,18 @@ class Unit  extends SpriteAnimationComponent{
         health = 1000;
         maxHealth = 1000;
         speed = 0.4;
-        super.size = Vector2(60, 60);
+        size = Vector2(60, 60);
         range=50;
       }
       break;
 
       default: {
         damage = 1;
-        health = 100;
+        health = 1;
         maxHealth=100;
         speed = 0.5;
         range=50;
-        super.size = Vector2(40, 40);
+        size = Vector2(40, 40);
       }
       break;
     }

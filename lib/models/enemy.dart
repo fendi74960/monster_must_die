@@ -1,13 +1,15 @@
 import 'dart:math';
-
+import 'package:flame/assets.dart';
+import 'package:flame/extensions.dart';
 import 'package:flame/components.dart';
 
-class Enemy {
+class Enemy extends SpriteAnimationComponent {
 
   //late modifier can be used while declaring a non-nullable variable that’s initialized after its declaration.
   //Position
+  /*
   late double _x;
-  late double _y;
+  late double _y;*/
 
   //Stats
   late double damage;
@@ -17,7 +19,7 @@ class Enemy {
   late double range;
 
   //Taille
-  late Vector2 enemySize;
+  //late Vector2 size;
 
   //Autres
   late int type;
@@ -33,7 +35,7 @@ class Enemy {
   //12-13 : zombie
 
 
-  ///get la position en tant que vecteur2
+  /*///get la position en tant que vecteur2
   Vector2 getPosition() {
     return Vector2(_x, _y);
   }
@@ -41,12 +43,12 @@ class Enemy {
   void setPosition(Vector2 vector2) {
     _x = vector2.x;
     _y = vector2.y;
-  }
+  }*/
 
   ///Constructors : prend position [x] [y] et un [type]
-  Enemy(double x, double y, int pType){
-    _x = x;
-    _y = y;
+  Enemy(double x, double y, int pType):super(position: Vector2(x,y)){
+    /*_x = x;
+    _y = y;*/
     type = pType;
     //switch sur le type pour ses stats
     switch(type) {
@@ -56,8 +58,8 @@ class Enemy {
         damage = 1;
         health = 100;
         maxHealth = 100;
-        speed = 0.1;
-        enemySize = Vector2(60, 60);
+        speed = 0.3;
+        size = Vector2(60, 60);
         range=50;
       }
       break;
@@ -68,7 +70,7 @@ class Enemy {
         health = 100;
         maxHealth = 100;
         speed = 0.1;
-        enemySize = Vector2(60, 60);
+        size = Vector2(60, 60);
         range=50;
       }
       break;
@@ -79,7 +81,7 @@ class Enemy {
         health = 100;
         maxHealth = 100;
         speed = 0.1;
-        enemySize = Vector2(60, 60);
+        size = Vector2(60, 60);
         range=50;
       }
       break;
@@ -90,7 +92,7 @@ class Enemy {
         health = 100;
         maxHealth = 100;
         speed = 0.3;
-        enemySize = Vector2(60, 60);
+        size = Vector2(60, 60);
         range=50;
       }
       break;
@@ -101,7 +103,7 @@ class Enemy {
         health = 100;
         maxHealth = 100;
         speed = 0.1;
-        enemySize = Vector2(60, 60);
+        size = Vector2(60, 60);
         range=50;
       }
       break;
@@ -112,7 +114,7 @@ class Enemy {
         health = 100;
         maxHealth = 100;
         speed = 0.3;
-        enemySize = Vector2(60, 60);
+        size = Vector2(60, 60);
         range=50;
       }
       break;
@@ -123,7 +125,7 @@ class Enemy {
         health = 100;
         maxHealth = 100;
         speed = 0.1;
-        enemySize = Vector2(60, 60);
+        size = Vector2(60, 60);
         range=50;
       }
       break;
@@ -134,7 +136,7 @@ class Enemy {
         maxHealth = 100;
         speed = 0.1;
         range=50;
-        enemySize = Vector2(40, 40);
+        size = Vector2(40, 40);
       }
       break;
     }

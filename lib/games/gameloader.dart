@@ -107,7 +107,6 @@ class GameLoader extends FlameGame {
   ///Executer chaque frame pour update certaines action dont les mouvements avec un [dt]
   @override
   void update(double dt) {
-    //super.update(dt);
     //LOGIQUE POUR UNIT ALLIER
     for(int i = 0; i < listUnit.length; i++)
     {
@@ -147,7 +146,6 @@ class GameLoader extends FlameGame {
       if(listEnemy[i].isAlive()) {
         tempAStopper=listEnemy[i].isStopped;
         target = listEnemy[i].checkInRangeUnit(listUnit,size);
-
         if(tempAStopper==listEnemy[i].isStopped){
           listEnemy[i].etatChanger=false;
         }
@@ -165,7 +163,7 @@ class GameLoader extends FlameGame {
           listEnemy[i].actualisationAnim(1);
         }
 
-        if (listEnemy[i].getPosition().y > size.y) {
+        if (listEnemy[i].position.y > size.y) {
           playerData.lives -= 1;
           listEnemy.removeAt(i);
         }
