@@ -9,6 +9,10 @@ class GameNetwork extends GameLoader {
 
   late IO.Socket socket;
 
+  //Create here for the unit event
+  int playerType = 0;
+
+
   void createSocket() {
     //We can choose here if we connect directly to an IP adress
     //socketFromIP("192.168.1.105");
@@ -38,6 +42,7 @@ class GameNetwork extends GameLoader {
                 .setExtraHeaders({'foo': 'bar'}) // optional
                 .build());
         print("connected to 192.168.1." + msg);
+        unitEvent(socket);
         socket.emit('ready', 'true');
       });
       createEvent(socket);
@@ -60,10 +65,12 @@ class GameNetwork extends GameLoader {
               .setExtraHeaders({'foo': 'bar'}) // optional
               .build());
       print("connected");
+      unitEvent(socket);
       socket.emit('ready', 'true');
     });
     createEvent(socket);
     waveEvent(socket);
+    //unitEvent(socket);
   }
 
   void createEvent(IO.Socket socket) {
@@ -80,6 +87,16 @@ class GameNetwork extends GameLoader {
     socket.on('wave', (wave) {
       print('wave number: ' + wave.toString());
       WaveController.newWave(wave.round(), listEnemy, 20.toDouble(), size.x - 20.toDouble(), 20.toDouble(), size.y - 20.toDouble(), images);
+    });
+  }
+
+  void unitEvent(IO.Socket socket) {
+    socket.on('unit', (type) {
+      print('Unit type : ' + type.toString());
+      if(type == 1) {
+        print("dedans");
+        playerType = 1;
+      }
     });
   }
 
