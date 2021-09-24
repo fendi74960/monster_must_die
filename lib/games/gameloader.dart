@@ -85,7 +85,7 @@ class GameLoader extends FlameGame {
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 12,images));
 
     listUnit.add(UnitWidget.unitWidgetSpawn(size.x/2 , size.y - 40, 12, images));
-    add(listUnit[0]);
+
 
   }
 

@@ -155,8 +155,8 @@ class EnemyWidget extends Enemy {
   ///puis on fait un calculer vectorielle pour pouvoir se diriger vers une [target] avec une certaine [speed]
   void updateMovEnemie(double dt,double speed,UnitWidget target) {
     enemyAnimation.update(dt);
-    double vectorX=target.getPosition().x-getPosition().x;
-    double vectorY=target.getPosition().y-getPosition().y;
+    double vectorX=target.position.x-getPosition().x;
+    double vectorY=target.position.y-getPosition().y;
 
     double length=sqrt(vectorX*vectorX+vectorY*vectorY);
 
@@ -193,8 +193,8 @@ class EnemyWidget extends Enemy {
     if(![6,7,10,11].contains(type)) {
       for (int ii = 0; ii < uns.length; ii++) {
         //get la position au centre du sprite de l'unit
-        unitX = uns[ii].getPosition().x + uns[ii].unitSize.x / 2;
-        unitY = uns[ii].getPosition().y + uns[ii].unitSize.y / 2;
+        unitX = uns[ii].position.x + uns[ii].size.x / 2;
+        unitY = uns[ii].position.y + uns[ii].size.y / 2;
 
         //Calcul de la distance
         tempProxi = sqrt(pow(unitX - enemyX, 2) + pow(unitY - enemyY, 2));

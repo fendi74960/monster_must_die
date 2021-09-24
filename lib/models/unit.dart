@@ -5,9 +5,6 @@ import 'package:flame/components.dart';
 
 class Unit  extends SpriteAnimationComponent{
 
-  //Position
-  late double _x;
-  late double _y;
 
   //Stats
   late double damage;
@@ -15,9 +12,6 @@ class Unit  extends SpriteAnimationComponent{
   late double maxHealth;
   late double speed;
   late double range;
-
-  //Taille
-  late Vector2 unitSize;
 
   //Autres
   late int type;
@@ -33,26 +27,8 @@ class Unit  extends SpriteAnimationComponent{
   //12-13 : spear
   //14-15 : wizard
 
-
-  ///get la position en tant que vecteur2
-  Vector2 getPosition() {
-    return Vector2(_x, _y);
-  }
-
-  ///set la position avec un [vector2]
-  void setPosition(Vector2 vector2) {
-    _x = vector2.x;
-    _y = vector2.y;
-  }
   ///Constructors : prend position [x] [y] et un [type]
-  Unit(double x, double y, int pType,Images images):super.fromFrameData(images.fromCache('Unit/archer/moving.png'), SpriteAnimationData.sequenced(
-    amount: 4,
-    amountPerRow: 1,
-    textureSize: Vector2(32, 30),
-    stepTime: 0.1,
-  ),position: Vector2(x,y),playing: true,size: Vector2(60,60)){
-    _x = x;
-    _y = y;
+  Unit(double x, double y, int pType,Images images):super(position: Vector2(x,y),playing: true){
     type = pType;
     switch(type) {
     //0-1 : archer
@@ -62,7 +38,7 @@ class Unit  extends SpriteAnimationComponent{
         health = 1000;
         maxHealth = 1000;
         speed = 0.4;
-        unitSize = Vector2(60, 60);
+        super.size = Vector2(60, 60);
         range=50;
       }
       break;
@@ -73,7 +49,7 @@ class Unit  extends SpriteAnimationComponent{
         health = 1000;
         maxHealth = 1000;
         speed = 0.4;
-        unitSize = Vector2(60, 60);
+        super.size = Vector2(60, 60);
         range=50;
       }
       break;
@@ -84,7 +60,7 @@ class Unit  extends SpriteAnimationComponent{
         health = 1000;
         maxHealth = 1000;
         speed = 0.4;
-        unitSize = Vector2(60, 60);
+        super.size = Vector2(60, 60);
         range=50;
       }
       break;
@@ -95,7 +71,7 @@ class Unit  extends SpriteAnimationComponent{
         health = 1000;
         maxHealth = 1000;
         speed = 0.4;
-        unitSize = Vector2(60, 60);
+        super.size = Vector2(60, 60);
         range=50;
       }
       break;
@@ -106,7 +82,7 @@ class Unit  extends SpriteAnimationComponent{
         health = 1000;
         maxHealth = 1000;
         speed = 0.4;
-        unitSize = Vector2(60, 60);
+        super.size = Vector2(60, 60);
         range=50;
       }
       break;
@@ -117,7 +93,7 @@ class Unit  extends SpriteAnimationComponent{
         health = 1000;
         maxHealth = 1000;
         speed = 0.4;
-        unitSize = Vector2(60, 60);
+        super.size = Vector2(60, 60);
         range=50;
       }
       break;
@@ -128,7 +104,7 @@ class Unit  extends SpriteAnimationComponent{
         health = 1000;
         maxHealth = 1000;
         speed = 0.4;
-        unitSize = Vector2(60, 60);
+        super.size = Vector2(60, 60);
         range=50;
       }
       break;
@@ -139,7 +115,7 @@ class Unit  extends SpriteAnimationComponent{
         health = 1000;
         maxHealth = 1000;
         speed = 0.4;
-        unitSize = Vector2(60, 60);
+        super.size = Vector2(60, 60);
         range=50;
       }
       break;
@@ -150,7 +126,7 @@ class Unit  extends SpriteAnimationComponent{
         maxHealth=100;
         speed = 0.5;
         range=50;
-        unitSize = Vector2(40, 40);
+        super.size = Vector2(40, 40);
       }
       break;
     }

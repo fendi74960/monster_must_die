@@ -11,7 +11,7 @@ import 'package:monster_must_die/widgets/enemywidget.dart';
 class UnitWidget extends Unit  {
 
   //Lier a l'animation
-  late SpriteAnimation unitAnimation;
+
   bool etatChanger=false;
   bool isStopped=false;
   late Sprite lifebar;
@@ -29,7 +29,7 @@ class UnitWidget extends Unit  {
     switch(type) {
     //0-1 : archer
       case 0:
-      case 1: unitAnimation = SpriteAnimation.fromFrameData(
+      case 1: animation = SpriteAnimation.fromFrameData(
           images.fromCache('Unit/archer/moving.png'),
           SpriteAnimationData.sequenced(
             amount: 4,
@@ -40,7 +40,7 @@ class UnitWidget extends Unit  {
       break;
     //2-3 : balista
       case 2:
-      case 3: unitAnimation = SpriteAnimation.fromFrameData(
+      case 3: animation = SpriteAnimation.fromFrameData(
           images.fromCache('Unit/balista/moving.png'),
           SpriteAnimationData.sequenced(
             amount: 4,
@@ -51,7 +51,7 @@ class UnitWidget extends Unit  {
       break;
     //4-5 : berserker
       case 4:
-      case 5: unitAnimation = SpriteAnimation.fromFrameData(
+      case 5: animation = SpriteAnimation.fromFrameData(
           images.fromCache('Unit/berserker/moving.png'),
           SpriteAnimationData.sequenced(
             amount: 4,
@@ -62,7 +62,7 @@ class UnitWidget extends Unit  {
       break;
     //6-7 : cavalier
       case 6:
-      case 7: unitAnimation = SpriteAnimation.fromFrameData(
+      case 7: animation = SpriteAnimation.fromFrameData(
           images.fromCache('Unit/cavalrer/moving.png'),
           SpriteAnimationData.sequenced(
             amount: 4,
@@ -73,7 +73,7 @@ class UnitWidget extends Unit  {
       break;
     //8-9 : dragon
       case 8:
-      case 9: unitAnimation = SpriteAnimation.fromFrameData(
+      case 9: animation = SpriteAnimation.fromFrameData(
           images.fromCache('Unit/dragon/moving.png'),
           SpriteAnimationData.sequenced(
             amount: 4,
@@ -84,7 +84,7 @@ class UnitWidget extends Unit  {
       break;
     //10-11 : marshall
       case 10:
-      case 11: unitAnimation = SpriteAnimation.fromFrameData(
+      case 11: animation = SpriteAnimation.fromFrameData(
           images.fromCache('Unit/marshall/moving.png'),
           SpriteAnimationData.sequenced(
             amount: 4,
@@ -95,7 +95,7 @@ class UnitWidget extends Unit  {
       break;
     //12-13 : spear
       case 12:
-      case 13: unitAnimation = SpriteAnimation.fromFrameData(
+      case 13: animation = SpriteAnimation.fromFrameData(
           images.fromCache('Unit/spear/moving.png'),
           SpriteAnimationData.sequenced(
             amount: 4,
@@ -106,7 +106,7 @@ class UnitWidget extends Unit  {
       break;
       //14-15 : wizard
       case 14:
-      case 15: unitAnimation = SpriteAnimation.fromFrameData(
+      case 15: animation = SpriteAnimation.fromFrameData(
           images.fromCache('Unit/wizard/moving.png'),
           SpriteAnimationData.sequenced(
             amount: 4,
@@ -117,7 +117,7 @@ class UnitWidget extends Unit  {
       break;
 
       default: {
-        unitAnimation=SpriteAnimation.fromFrameData(
+        animation=SpriteAnimation.fromFrameData(
             images.fromCache('heheboy.png'),
             SpriteAnimationData.sequenced(
               amount: 19,
@@ -135,12 +135,11 @@ class UnitWidget extends Unit  {
   ///Avec le [dt] : deltaTime, on update l'animation sur la next frame
   ///puis on fait un calculer vectorielle pour pouvoir se diriger vers une [target] avec une certaine [speed]
   void updateMovUnit(double dt,double speed,EnemyWidget target) {
-    unitAnimation.update(dt);
-    playing=true;
-    super.update(dt);
+    animation?.update(dt);
+    //super.update(dt);
 
-    double vectorX=target.getPosition().x-getPosition().x;
-    double vectorY=target.getPosition().y-getPosition().y;
+    double vectorX=target.getPosition().x-position.x;
+    double vectorY=target.getPosition().y-position.y;
 
     double length=sqrt(vectorX*vectorX+vectorY*vectorY);
     double newVectorX = 0;
@@ -150,33 +149,24 @@ class UnitWidget extends Unit  {
        newVectorX = vectorX / length;
        newVectorY = vectorY / length;
     }
-    position=Vector2(getPosition().x+newVectorX*speed,getPosition().y+newVectorY*speed);
-    setPosition(Vector2(getPosition().x+newVectorX*speed,getPosition().y+newVectorY*speed));
+    position=Vector2(position.x+newVectorX*speed,position.y+newVectorY*speed);
+
   }
 
   ///Avec le [dt] : deltaTime, on update l'animation sur la next frame
   ///On attaque la [target] avec sa stats de degats
   void attaque(double dt,EnemyWidget target) {
-    unitAnimation.update(dt);
+    animation?.update(dt);
     target.health-=damage;
 
   }
 
   ///Fonction appeller pour pouvoir faire apparaitre l'unit a la bonne position ainsi que sa barre de pv dans le [canvas]
   void renderUnit(Canvas canvas) {
-    if(health==maxHealth) {
-      flipHorizontally();
-    }
     canvas.save();
-
     super.render(canvas);
-    //animation?.getSprite().render(canvas,position: getPosition(),size:unitSize);
-
-    /*unitAnimation
-        .getSprite()
-        .render(canvas, position: getPosition(), size: unitSize);*/
     canvas.restore();
-    lifebar.render(canvas, position: Vector2(getPosition().x,getPosition().y-10), size: Vector2((unitSize.x*health)/maxHealth,10));
+    lifebar.render(canvas, position: Vector2(position.x,position.y-10), size: Vector2((size.x*health)/maxHealth,10));
   }
 
   ///Creer une unit avec une position à la pos [x] et [y]
@@ -194,9 +184,9 @@ class UnitWidget extends Unit  {
     bool canHit=true;
     double enemyX,enemyY;
     //get sa position au centre du sprite
-    double unitX=getPosition().x+unitSize.x/2,unitY=getPosition().y+unitSize.y/2;
+    double unitX=position.x+size.x/2,unitY=position.y+size.y/2;
 
-    EnemyWidget plusProche=EnemyWidget(getPosition().x, getPosition().y, 0,images);
+    EnemyWidget plusProche=EnemyWidget(position.x, position.y, 0,images);
     double proximite=9999999;
     double tempProxi=9999999;
 
@@ -247,7 +237,7 @@ class UnitWidget extends Unit  {
       switch (type) {
       //0-1 : archer
         case 0:
-          unitAnimation=SpriteAnimation.fromFrameData(
+          animation=SpriteAnimation.fromFrameData(
               images.fromCache('Unit/archer/moving.png'),
               SpriteAnimationData.sequenced(
                 amount: 4,
@@ -256,7 +246,8 @@ class UnitWidget extends Unit  {
                 stepTime: 0.1,
               ));
           break;
-        case 1: unitAnimation = SpriteAnimation.fromFrameData(
+        case 1:
+          animation = SpriteAnimation.fromFrameData(
             images.fromCache('Unit/archer/attack.png'),
             SpriteAnimationData.sequenced(
               amount: 25,
@@ -266,7 +257,7 @@ class UnitWidget extends Unit  {
         break;
       //2-3 : balista
         case 2:
-          unitAnimation=SpriteAnimation.fromFrameData(
+          animation=SpriteAnimation.fromFrameData(
               images.fromCache('Unit/balista/moving.png'),
               SpriteAnimationData.sequenced(
                 amount: 4,
@@ -275,7 +266,8 @@ class UnitWidget extends Unit  {
                 stepTime: 0.1,
               ));
           break;
-        case 3: unitAnimation = SpriteAnimation.fromFrameData(
+        case 3:
+          animation = SpriteAnimation.fromFrameData(
             images.fromCache('Unit/balista/attack.png'),
             SpriteAnimationData.sequenced(
               amount: 10,
@@ -285,7 +277,7 @@ class UnitWidget extends Unit  {
         break;
       //4-5 : berserker
         case 4:
-          unitAnimation=SpriteAnimation.fromFrameData(
+          animation=SpriteAnimation.fromFrameData(
               images.fromCache('Unit/berserker/moving.png'),
               SpriteAnimationData.sequenced(
                 amount: 4,
@@ -295,7 +287,7 @@ class UnitWidget extends Unit  {
               ));
           break;
         case 5:
-          unitAnimation = SpriteAnimation.fromFrameData(
+          animation = SpriteAnimation.fromFrameData(
             images.fromCache('Unit/berserker/attack.png'),
             SpriteAnimationData.sequenced(
               amount: 12,
@@ -305,7 +297,7 @@ class UnitWidget extends Unit  {
         break;
       //6-7 : cavalier
         case 6:
-          unitAnimation=SpriteAnimation.fromFrameData(
+          animation=SpriteAnimation.fromFrameData(
               images.fromCache('Unit/cavalrer/moving.png'),
               SpriteAnimationData.sequenced(
                 amount: 4,
@@ -315,7 +307,7 @@ class UnitWidget extends Unit  {
               ));
           break;
         case 7:
-          unitAnimation = SpriteAnimation.fromFrameData(
+          animation = SpriteAnimation.fromFrameData(
             images.fromCache('Unit/cavalrer/attack.png'),
             SpriteAnimationData.sequenced(
               amount: 21,
@@ -325,7 +317,7 @@ class UnitWidget extends Unit  {
         break;
       //8-9 : dragon
         case 8:
-          unitAnimation=SpriteAnimation.fromFrameData(
+          animation=SpriteAnimation.fromFrameData(
               images.fromCache('Unit/dragon/moving.png'),
               SpriteAnimationData.sequenced(
                 amount: 4,
@@ -335,7 +327,7 @@ class UnitWidget extends Unit  {
               ));
           break;
         case 9:
-          unitAnimation = SpriteAnimation.fromFrameData(
+          animation = SpriteAnimation.fromFrameData(
             images.fromCache('Unit/dragon/attack.png'),
             SpriteAnimationData.sequenced(
               amount: 20,
@@ -345,7 +337,7 @@ class UnitWidget extends Unit  {
         break;
       //10-11 : marshall
         case 10:
-          unitAnimation=SpriteAnimation.fromFrameData(
+          animation=SpriteAnimation.fromFrameData(
               images.fromCache('Unit/marshall/moving.png'),
               SpriteAnimationData.sequenced(
                 amount: 4,
@@ -354,7 +346,8 @@ class UnitWidget extends Unit  {
                 stepTime: 0.1,
               ));
           break;
-        case 11: unitAnimation = SpriteAnimation.fromFrameData(
+        case 11:
+          animation = SpriteAnimation.fromFrameData(
             images.fromCache('Unit/marshall/attack.png'),
             SpriteAnimationData.sequenced(
               amount: 31,
@@ -364,7 +357,7 @@ class UnitWidget extends Unit  {
         break;
       //12-13 : spear
         case 12:
-          unitAnimation=SpriteAnimation.fromFrameData(
+          animation=SpriteAnimation.fromFrameData(
               images.fromCache('Unit/spear/moving.png'),
               SpriteAnimationData.sequenced(
                 amount: 4,
@@ -374,7 +367,7 @@ class UnitWidget extends Unit  {
               ));
           break;
         case 13:
-          unitAnimation = SpriteAnimation.fromFrameData(
+          animation = SpriteAnimation.fromFrameData(
             images.fromCache('Unit/spear/attack.png'),
             SpriteAnimationData.sequenced(
               amount: 26,
@@ -384,7 +377,7 @@ class UnitWidget extends Unit  {
         break;
       //14-15 : wizard
         case 14:
-          unitAnimation=SpriteAnimation.fromFrameData(
+          animation=SpriteAnimation.fromFrameData(
               images.fromCache('Unit/wizard/moving.png'),
               SpriteAnimationData.sequenced(
                 amount: 4,
@@ -394,7 +387,7 @@ class UnitWidget extends Unit  {
               ));
           break;
         case 15:
-          unitAnimation = SpriteAnimation.fromFrameData(
+          animation = SpriteAnimation.fromFrameData(
             images.fromCache('Unit/wizard/attack.png'),
             SpriteAnimationData.sequenced(
               amount: 19,
