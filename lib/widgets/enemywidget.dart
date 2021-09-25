@@ -8,8 +8,6 @@ import 'package:monster_must_die/widgets/unit_widget.dart';
 
 class EnemyWidget extends Enemy {
 
-  //Lié à l'animation/render
-  //late SpriteAnimation enemyAnimation;
   late Sprite lifebar;
   bool etatChanger=false;
   bool isStopped=false;
@@ -143,10 +141,7 @@ class EnemyWidget extends Enemy {
     canvas.save();
     super.render(canvas);
     canvas.restore();
-    /*animation
-        .getSprite()
-        .render(canvas, position: position, size: size);*/
-    lifebar.render(canvas, position: Vector2(position.x,position.y-10), size: Vector2((size.x*health)/maxHealth,10));
+    lifebar.render(canvas, position: Vector2(position.x-size.x/2,position.y-size.y/2-5), size: Vector2((size.x*health)/maxHealth,10));
   }
 
   ///Dit si les PV sont > 0
@@ -173,6 +168,13 @@ class EnemyWidget extends Enemy {
   ///Avec le [dt] : deltaTime, on update l'animation sur la next frame
   ///On attaque la [target] avec sa stats de degats
   void attaque(double dt,UnitWidget target) {
+    if(target.x+range>x+size.x/2 ) {
+      scale.x=-1;
+    }
+    else {
+      scale.x=1;
+    }
+
     animation?.update(dt);
     target.health-=damage;
 
@@ -187,7 +189,7 @@ class EnemyWidget extends Enemy {
   UnitWidget checkInRangeUnit(List<UnitWidget> uns ,Vector2 size){
     double unitX,unitY;
     //get sa position au centre du sprite
-    double enemyX=position.x+this.size.x/2,enemyY=position.y+this.size.y/2;
+    double enemyX=position.x,enemyY=position.y;
 
     UnitWidget plusProche=UnitWidget(size.x/2, size.y+100, 0,images);
     double proximite=9999999;
@@ -196,8 +198,8 @@ class EnemyWidget extends Enemy {
     if(![6,7,10,11].contains(type)) {
       for (int ii = 0; ii < uns.length; ii++) {
         //get la position au centre du sprite de l'unit
-        unitX = uns[ii].position.x + uns[ii].size.x / 2;
-        unitY = uns[ii].position.y + uns[ii].size.y / 2;
+        unitX = uns[ii].position.x ;
+        unitY = uns[ii].position.y ;
 
         //Calcul de la distance
         tempProxi = sqrt(pow(unitX - enemyX, 2) + pow(unitY - enemyY, 2));

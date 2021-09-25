@@ -174,7 +174,7 @@ class UnitWidget extends Unit  {
     canvas.save();
     super.render(canvas);
     canvas.restore();
-    lifebar.render(canvas, position: Vector2(position.x,position.y-10), size: Vector2((size.x*health)/maxHealth,10));
+    lifebar.render(canvas, position: Vector2(position.x-size.x/2,position.y-size.y/2-5), size: Vector2((size.x*health)/maxHealth,10));
   }
 
   ///Creer une unit avec une position à la pos [x] et [y]
@@ -192,7 +192,7 @@ class UnitWidget extends Unit  {
     bool canHit=true;
     double enemyX,enemyY;
     //get sa position au centre du sprite
-    double unitX=position.x+size.x/2,unitY=position.y+size.y/2;
+    double unitX=position.x,unitY=position.y;
 
     EnemyWidget plusProche=EnemyWidget(position.x, position.y, 0,images);
     double proximite=9999999;
@@ -212,8 +212,8 @@ class UnitWidget extends Unit  {
       }
       if (canHit) {
         //get la position au centre du sprit de l'ennemie
-        enemyX = ens[ii].position.x + ens[ii].size.x / 2;
-        enemyY = ens[ii].position.y + ens[ii].size.y / 2;
+        enemyX = ens[ii].position.x ;
+        enemyY = ens[ii].position.y;
 
         tempProxi = sqrt(pow(enemyX - unitX, 2) + pow(enemyY - unitY, 2));
 

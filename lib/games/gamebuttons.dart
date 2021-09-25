@@ -187,7 +187,7 @@ class GameButtons extends GameNetwork with TapDetector {
       }
 
       if(event.eventPosition.game.x<size.x-buttonsUnitSize.x  && event.eventPosition.game.y>size.y/2) {
-        listUnit.add(UnitWidget.unitWidgetSpawn(event.eventPosition.game.x-30, event.eventPosition.game.y-30, selectedUnit, images));
+        listUnit.add(UnitWidget.unitWidgetSpawn(event.eventPosition.game.x, event.eventPosition.game.y, selectedUnit, images));
       }
 
       buttonArea = readyPosition & buttonsSize;

@@ -5,11 +5,6 @@ import 'package:flame/components.dart';
 
 class Enemy extends SpriteAnimationComponent {
 
-  //late modifier can be used while declaring a non-nullable variable that’s initialized after its declaration.
-  //Position
-  /*
-  late double _x;
-  late double _y;*/
 
   //Stats
   late double damage;
@@ -18,8 +13,6 @@ class Enemy extends SpriteAnimationComponent {
   late double speed;
   late double range;
 
-  //Taille
-  //late Vector2 size;
 
   //Autres
   late int type;
@@ -35,21 +28,11 @@ class Enemy extends SpriteAnimationComponent {
   //12-13 : zombie
 
 
-  /*///get la position en tant que vecteur2
-  Vector2 getPosition() {
-    return Vector2(_x, _y);
-  }
-  ///set la position avec un [vector2]
-  void setPosition(Vector2 vector2) {
-    _x = vector2.x;
-    _y = vector2.y;
-  }*/
 
   ///Constructors : prend position [x] [y] et un [type]
   Enemy(double x, double y, int pType):super(position: Vector2(x,y)){
-    /*_x = x;
-    _y = y;*/
     type = pType;
+    anchor=Anchor.center;
     //switch sur le type pour ses stats
     switch(type) {
       //0-1 : archer

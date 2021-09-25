@@ -30,6 +30,7 @@ class Unit extends SpriteAnimationComponent{
   ///Constructors : prend position [x] [y] et un [type]
   Unit(double x, double y, int pType,Images images):super(position: Vector2(x,y)){
     type = pType;
+    anchor=Anchor.center;
     switch(type) {
     //0-1 : archer
       case 0:
