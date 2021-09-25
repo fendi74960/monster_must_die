@@ -105,7 +105,7 @@ class GameNetwork extends GameLoader {
     await super.onLoad();
 
     //create the socket
-    createSocket();           //maybe call it in the main or gamesetting
+    //createSocket();           //maybe call it in the main or gamesetting
   }
 
   @override

@@ -1,3 +1,5 @@
+import 'package:monster_must_die/widgets/networkmenu.dart';
+
 import 'games/gamesetting.dart';
 import 'widgets/hud.dart';
 import 'widgets/main_menu.dart';
@@ -33,6 +35,7 @@ class MyGameApp extends StatelessWidget {
           overlayBuilderMap: {
             Hud.id: (_, GameSetting gameRef) => Hud(gameRef),
             MainMenu.id:(_,GameSetting gameRef) => MainMenu(gameRef),
+            NetworkMenu.id:(_,GameSetting gameRef) => NetworkMenu(gameRef),
           },
           // By default MainMenu overlay will be active.
           initialActiveOverlays: [MainMenu.id],

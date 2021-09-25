@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:monster_must_die/games/gamesetting.dart';
+import 'package:monster_must_die/widgets/networkmenu.dart';
 
 import '/widgets/hud.dart';
 import '/games/gameloader.dart';
@@ -11,7 +13,7 @@ class MainMenu extends StatelessWidget {
   static const id = 'MainMenu';
 
   // Reference to parent game.
-  final GameLoader gameRef;
+  final GameSetting gameRef;
 
   const MainMenu(this.gameRef, {Key? key}) : super(key: key);
 
@@ -42,9 +44,8 @@ class MainMenu extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      gameRef.startGame();
                       gameRef.overlays.remove(MainMenu.id);
-                      gameRef.overlays.add(Hud.id);
+                      gameRef.overlays.add(NetworkMenu.id);
                     },
                     child: Text(
                       'Play',

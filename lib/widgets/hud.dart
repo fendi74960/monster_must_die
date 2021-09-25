@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:monster_must_die/games/gamesetting.dart';
 import 'package:provider/provider.dart';
 
 import '../games/gameloader.dart';
@@ -11,7 +12,7 @@ class Hud extends StatelessWidget {
   static const id = 'Hud';
 
   // Reference to parent game.
-  final GameLoader gameRef;
+  final GameSetting gameRef;
 
   const Hud(this.gameRef, {Key? key}) : super(key: key);
 

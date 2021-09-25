@@ -1,0 +1,11 @@
+
+Yo !
+
+Serveur:
+    clients pas avec meme unités
+
+Client:
+    création de vrai vague
+    equilibrage
+    tracking (ex utilisé xAPI)
+
