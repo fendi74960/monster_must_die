@@ -2,9 +2,6 @@
 Yo !
 
 Serveur:
-    Alexis commente ton code ! (coté flutter)
-    ajouté +- là ou on entre l'ip
-    envoyé l'unité selectionné de l'autre coté
     ecran de chargement + attente autre joueur
     trouver le moyen d'attendre qu'on est connecté (check avec variable bool)
 

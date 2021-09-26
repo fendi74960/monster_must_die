@@ -9,19 +9,11 @@ class GameNetwork extends GameLoader {
 
   late IO.Socket socket;
 
-  //Create here for the unit event
   int playerType = 0;
 
-
-  void createSocket() {
-    //We can choose here if we connect directly to an IP adress
-    //socketFromIP("192.168.1.105");
-
-    //Or if the server is in the local network
-    // we found the IP
-    unknowLocalIP();
-  }
-
+  ///If the server is on local network and we don't want to write the IP
+  /// it try all the adress, then the server send the right number
+  /// and it add few events to the socket
   void unknowLocalIP() {
     bool ipFound = false;
     int i = 2;
@@ -51,6 +43,8 @@ class GameNetwork extends GameLoader {
     }
   }
 
+  ///If we know the IP of the server,
+  /// we connect directly to it and create few events
   void socketFromIP(String adress) {
     socket = IO.io('http://' + adress + ':3000',
         IO.OptionBuilder()
@@ -73,7 +67,8 @@ class GameNetwork extends GameLoader {
   }
 
 
-  ///
+  ///If the server send a 'create' event,
+  /// then we add the good number and type of units
   /// msg.id type of enemy
   /// msg.nb number of enemy
   void createEvent(IO.Socket socket) {
@@ -86,6 +81,8 @@ class GameNetwork extends GameLoader {
     });
   }
 
+  ///If the server send a 'wave' event,
+  /// it launch the wave of enemy !
   void waveEvent(IO.Socket socket) {
     socket.on('wave', (wave) {
       print('wave number: ' + wave.toString());
@@ -93,11 +90,11 @@ class GameNetwork extends GameLoader {
     });
   }
 
+  ///If the server send a 'unit' event,
+  /// it change the unit of the player
   void unitEvent(IO.Socket socket) {
     socket.on('unit', (type) {
-      print('Type received (event) : ' + type.toString());
       if(type == 1) {
-        print("dedans");
         playerType = 1;
       }
       socket.emit('ready', 'true');
@@ -107,9 +104,6 @@ class GameNetwork extends GameLoader {
   @override
   Future<void> onLoad() async {
     await super.onLoad();
-
-    //create the socket
-    //createSocket();           //maybe call it in the main or gamesetting
   }
 
   @override
@@ -121,5 +115,4 @@ class GameNetwork extends GameLoader {
   void update(double dt) {
     super.update(dt);
   }
-
 }

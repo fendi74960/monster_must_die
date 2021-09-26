@@ -1,10 +1,9 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:monster_must_die/games/gamesetting.dart';
 import 'hud.dart';
-
 import 'package:numberpicker/numberpicker.dart';
+
 
 class NetworkMenu extends StatefulWidget {
   // An unique identified for this overlay.
@@ -22,16 +21,8 @@ class NetworkMenu extends StatefulWidget {
 // Define a corresponding State class.
 // This class holds data related to the Form.
 class _NetworkMenu extends State<NetworkMenu> {
-  // Create a text controller and use it to retrieve the current value
-  // of the TextField.
-  final myController = TextEditingController();
 
   GameSetting gameRef;
-
-  _NetworkMenu(this.gameRef);
-
-  String str = "";
-
   int _currentValue = 3;
 
   IPField field1 = IPField(192);
@@ -39,25 +30,7 @@ class _NetworkMenu extends State<NetworkMenu> {
   IPField field3 = IPField(1);
   IPField field4 = IPField(105);
 
-  @override
-  void initState() {
-    super.initState();
-
-    // Start listening to changes.
-    myController.addListener(_printLatestValue);
-  }
-
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is removed from the widget tree.
-    // This also removes the _printLatestValue listener.
-    myController.dispose();
-    super.dispose();
-  }
-
-  void _printLatestValue() {
-    print('Second text field: ${myController.text}');
-  }
+  _NetworkMenu(this.gameRef);
 
   @override
   Widget build(BuildContext context) {
@@ -114,6 +87,7 @@ class _NetworkMenu extends State<NetworkMenu> {
                                   ),
                                 ),
                               ]),
+                              SizedBox(height: 32),
                               Row(children: [
                                 Text(
                                   'If the server is on local network',
@@ -146,6 +120,7 @@ class _NetworkMenu extends State<NetworkMenu> {
   }
 }
 
+///This is the widget where we select one number of the IP adress
 class IPField extends StatefulWidget {
   late int val;
 
@@ -168,6 +143,28 @@ class IPFieldState extends State<IPField> {
           minValue: 0,
           maxValue: 255,
           onChanged: (value) => setState(() => widget.val = value),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              icon: Icon(Icons.remove),
+              color: Colors.white,
+              onPressed: () => setState(() {
+                final newValue = widget.val - 1;
+                widget.val = newValue.clamp(0, 255);
+              }),
+            ),
+            Text(widget.val.toString(), style: TextStyle(color: Colors.white)),
+            IconButton(
+              icon: Icon(Icons.add),
+              color: Colors.white,
+              onPressed: () => setState(() {
+                final newValue = widget.val + 1;
+                widget.val = newValue.clamp(0, 255);
+              }),
+            ),
+          ],
         ),
       ],
     );

@@ -125,12 +125,14 @@ class GameButtons extends GameNetwork with TapDetector {
   void render(Canvas canvas) {
     super.render(canvas);
 
+    //check if the button is pressed and it change the sprite if yes
     var button = readyPressed ? readyPressedButton : readyUnpressedButton;
     button.render(canvas, position: readyPosition, size: buttonsSize);
 
     button = allyPressed ? allyPressedButton : allyUnpressedButton;
     button.render(canvas, position: allyPosition, size: buttonsSize);
 
+    //check if the unit is selected and it change the sprite if yes
     if(selectedUnit == firstButtonUnitType) {
       firstButtonSelected.render(canvas,position:firstButtonPosition, size: buttonsUnitSize);
     } else {
@@ -159,13 +161,12 @@ class GameButtons extends GameNetwork with TapDetector {
   @override
   void update(double dt) {
     super.update(dt);
-
-    //todo
   }
 
   @override
   void onTapDown(TapDownInfo event) {
 
+    //check if the unit is selected and it change the selectedUnit if yes
     if (this.overlays.isActive(Hud.id)) {
       var buttonArea = firstButtonPosition & buttonsUnitSize;
       if (buttonArea.contains(event.eventPosition.game.toOffset())) {
@@ -184,10 +185,12 @@ class GameButtons extends GameNetwork with TapDetector {
         selectedUnit = fourthButtonUnitType;
       }
 
+      //add unit when we tap on the screen (at the bottom half of the screen)
       if(event.eventPosition.game.x<size.x-buttonsUnitSize.x  && event.eventPosition.game.y>size.y/2) {
         listUnit.add(UnitWidget.unitWidgetSpawn(event.eventPosition.game.x, event.eventPosition.game.y, selectedUnit, images));
       }
 
+      //emit to the server a command (ready or toother)
       buttonArea = readyPosition & buttonsSize;
       if (buttonArea.contains(event.eventPosition.game.toOffset()) &&
           readyPressed == false) {
@@ -218,9 +221,9 @@ class GameButtons extends GameNetwork with TapDetector {
     allyPressed = false;
   }
 
+  ///Set the unit of the player (there's 2 possibility)
   void setUnitType() async {
-    print("Dedans Button Set unit type : " + playerType.toString());
-    //this.images.fromCache(fileName); //faire avec ça ?
+
     if(playerType == 1) {
       firstButton = await loadSprite(
         'Unit/dragon/button.png',
