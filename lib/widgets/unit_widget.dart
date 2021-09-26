@@ -3,6 +3,7 @@ import 'package:flame/assets.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/game.dart';
+import 'package:monster_must_die/models/player_data.dart';
 import 'package:monster_must_die/models/unit.dart';
 import 'package:monster_must_die/widgets/enemywidget.dart';
 
@@ -21,7 +22,7 @@ class UnitWidget extends Unit  {
 
   ///Constructors : prend position [x] [y] et un [type]
   ///de plus [images] pour pouvoir prendre les images depuis le cache directement
-  UnitWidget(double x, double y, int type,this.images) : super(x, y, type,images) {
+  UnitWidget(double x, double y, int type,this.images,PlayerData? data,int playerType) : super(x, y, type,images) {
     //Reduit le type de -1 s'il est impair pour start forcement sur une animation de mouvement
     if(type.isOdd){
       type-=1;
@@ -30,6 +31,9 @@ class UnitWidget extends Unit  {
     //0-1 : archer
       case 0:
       case 1:
+        if (playerType==0){
+          data?.pointsPerso-=15;
+        }
         animation = SpriteAnimation.fromFrameData(
           images.fromCache('Unit/archer/moving.png'),
           SpriteAnimationData.sequenced(
@@ -42,6 +46,9 @@ class UnitWidget extends Unit  {
     //2-3 : balista
       case 2:
       case 3:
+      if (playerType==0){
+        data?.pointsPerso-=20;
+      }
         animation = SpriteAnimation.fromFrameData(
           images.fromCache('Unit/balista/moving.png'),
           SpriteAnimationData.sequenced(
@@ -54,6 +61,9 @@ class UnitWidget extends Unit  {
     //4-5 : berserker
       case 4:
       case 5:
+      if (playerType==0){
+        data?.pointsPerso-=30;
+      }
         animation = SpriteAnimation.fromFrameData(
           images.fromCache('Unit/berserker/moving.png'),
           SpriteAnimationData.sequenced(
@@ -66,6 +76,9 @@ class UnitWidget extends Unit  {
     //6-7 : cavalier
       case 6:
       case 7:
+      if (playerType==0){
+        data?.pointsPerso-=15;
+      }
         animation = SpriteAnimation.fromFrameData(
           images.fromCache('Unit/cavalrer/moving.png'),
           SpriteAnimationData.sequenced(
@@ -78,6 +91,9 @@ class UnitWidget extends Unit  {
     //8-9 : dragon
       case 8:
       case 9:
+      if (playerType==1){
+        data?.pointsPerso-=15;
+      }
         animation = SpriteAnimation.fromFrameData(
           images.fromCache('Unit/dragon/moving.png'),
           SpriteAnimationData.sequenced(
@@ -90,6 +106,9 @@ class UnitWidget extends Unit  {
     //10-11 : marshall
       case 10:
       case 11:
+      if (playerType==1){
+        data?.pointsPerso-=30;
+      }
         animation = SpriteAnimation.fromFrameData(
           images.fromCache('Unit/marshall/moving.png'),
           SpriteAnimationData.sequenced(
@@ -102,6 +121,9 @@ class UnitWidget extends Unit  {
     //12-13 : spear
       case 12:
       case 13:
+      if (playerType==1){
+        data?.pointsPerso-=10;
+      }
         animation = SpriteAnimation.fromFrameData(
           images.fromCache('Unit/spear/moving.png'),
           SpriteAnimationData.sequenced(
@@ -114,6 +136,9 @@ class UnitWidget extends Unit  {
       //14-15 : wizard
       case 14:
       case 15:
+      if (playerType==1){
+        data?.pointsPerso-=40;
+      }
         animation = SpriteAnimation.fromFrameData(
           images.fromCache('Unit/wizard/moving.png'),
           SpriteAnimationData.sequenced(
@@ -186,8 +211,8 @@ class UnitWidget extends Unit  {
 
   ///Creer une unit avec une position à la pos [x] et [y]
   ///Accessible statiquement
-  static UnitWidget unitWidgetSpawn(double x, double y, int type,Images images){
-    return UnitWidget(x, y, type,images);
+  static UnitWidget unitWidgetSpawn(double x, double y, int type,Images images,PlayerData? data,int playerType){
+    return UnitWidget(x, y, type,images,data,playerType);
   }
 
   ///Prends [ens] qui est la liste de tous les ennemies vivantes actuellement

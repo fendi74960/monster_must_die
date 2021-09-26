@@ -76,7 +76,7 @@ class GameNetwork extends GameLoader {
       print('create enemies');
       for(int i = 0; i < int.parse(msg['nb']); i++)
       {
-        listUnit.add(UnitWidget.unitWidgetSpawn(size.x/2,size.y-40,int.parse(msg['id']),images));
+        listUnit.add(UnitWidget.unitWidgetSpawn(size.x/2,size.y-40,int.parse(msg['id']),images,null,playerType));
       }
     });
   }

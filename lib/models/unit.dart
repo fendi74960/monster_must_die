@@ -95,7 +95,7 @@ class Unit extends SpriteAnimationComponent{
     //12-13 : spear
       case 12:
       case 13: {
-        damage = 2;
+        damage = 1.2;
         health = 100;
         speed = 0.4;
         size = Vector2(60, 60);

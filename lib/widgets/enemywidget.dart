@@ -191,7 +191,7 @@ class EnemyWidget extends Enemy {
     //get sa position au centre du sprite
     double enemyX=position.x,enemyY=position.y;
 
-    UnitWidget plusProche=UnitWidget(size.x/2, size.y+100, 0,images);
+    UnitWidget plusProche=UnitWidget(size.x/2, size.y+100, 0,images,null,0);
     double proximite=9999999;
     double tempProxi=9999999;
     //Si de type eye ou ghost alors ignore les units
@@ -351,5 +351,4 @@ class EnemyWidget extends Enemy {
       }
     }
   }
-
 }

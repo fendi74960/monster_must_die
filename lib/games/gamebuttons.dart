@@ -187,7 +187,9 @@ class GameButtons extends GameNetwork with TapDetector {
 
       //add unit when we tap on the screen (at the bottom half of the screen)
       if(event.eventPosition.game.x<size.x-buttonsUnitSize.x  && event.eventPosition.game.y>size.y/2) {
-        listUnit.add(UnitWidget.unitWidgetSpawn(event.eventPosition.game.x, event.eventPosition.game.y, selectedUnit, images));
+        if(playerData.pointsPerso>0) {
+          listUnit.add(UnitWidget.unitWidgetSpawn(event.eventPosition.game.x, event.eventPosition.game.y, selectedUnit, images,playerData,playerType));
+        }
       }
 
       //emit to the server a command (ready or toother)

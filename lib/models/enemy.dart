@@ -48,8 +48,8 @@ class Enemy extends SpriteAnimationComponent {
       //2-3 : cyclop
       case 2:
       case 3: {
-        damage = 20;
-        health = 5000;
+        damage = 100;
+        health = 3000;
         speed = 0.1;
         size = Vector2(60, 60);
         range=10;
@@ -99,7 +99,7 @@ class Enemy extends SpriteAnimationComponent {
       case 12:
       case 13: {
         damage = 1;
-        health = 1000;
+        health = 500;
         speed = 0.3;
         size = Vector2(60, 60);
         range=40;

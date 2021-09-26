@@ -66,7 +66,6 @@ class GameLoader extends FlameGame {
   Future<void> onLoad() async {
     await images.loadAll(_imageAssets);
     playerData=PlayerData();
-
     listUnit = List.empty(growable: true);
     listEnemy = List.empty(growable: true);
   }
@@ -84,7 +83,6 @@ class GameLoader extends FlameGame {
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 10,images));
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 12,images));
 
-    listUnit.add(UnitWidget.unitWidgetSpawn(size.x/2 , size.y - 40, 12, images));
 
 
   }
@@ -142,7 +140,7 @@ class GameLoader extends FlameGame {
     //LOGIQUE POUR ENEMIES
     for(int i = 0; i < listEnemy.length; i++)
     {
-      UnitWidget target=UnitWidget(0,0,0,images);
+      UnitWidget target=UnitWidget(0,0,0,images,null,0);
       if(listEnemy[i].isAlive()) {
         tempAStopper=listEnemy[i].isStopped;
         target = listEnemy[i].checkInRangeUnit(listUnit,size);
