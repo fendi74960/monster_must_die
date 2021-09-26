@@ -1,17 +1,14 @@
 
-Yo !
+ecran de chargement + attente autre joueur
+trouver le moyen d'attendre qu'on est connecté (check avec variable bool)
 
-Serveur:
-    toast quand recoit
-    toast demande
-    toast wave
-    envoie par paquet toute les x second
-    ecran de chargement + attente autre joueur
-    trouver le moyen d'attendre qu'on est connecté (check avec variable bool)
-
-Client:
-    création de vrai vague
-    equilibrage - a peu pres fait
-    ajouter la perte des points coop
-    tracking (ex utilisé xAPI)
+envoie par paquet toute les x second
+toast quand recoit
+toast demande
+toast wave
+création de vrai vague
+equilibrage - a peu pres fait
+ajouter la perte des points coop
+tracking (ex utilisé xAPI)
+    -> dire avec quoi l'unité est tué ? pour savoir si le joueur est plus solo ou demande de l'aide ? et aussi pour équilibrer
 
