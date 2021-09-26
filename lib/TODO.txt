@@ -2,8 +2,10 @@
 Yo !
 
 Serveur:
+    Alexis commente ton code ! (coté flutter)
+    envoyé l'unité selectionné de l'autre coté
     ecran de chargement + attente autre joueur
-    clients pas avec meme unités
+    trouver le moyen d'attendre qu'on est connecté (check avec variable bool)
 
 Client:
     création de vrai vague
