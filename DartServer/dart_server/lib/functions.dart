@@ -24,9 +24,10 @@ void sendLocalIp(socket) async {
   socket.emit('fromServer', val);
 }
 
-void createEvents(io, sockets, socket, readys, int currentWave) async {
+void createEvents(io, sockets, socket, players, readys, currentWave) async {
   ///Create all the events used for the server
 
+  waitEvent(io, socket, readys, players);
   toOtherEvent(sockets, socket);
   toAllEvent(io, socket);
   readyEvent(io, socket, readys, currentWave);
@@ -63,9 +64,6 @@ void readyEvent(io, socket, readys, int currentWave) async {
   socket.on('ready', (data) {
     print('One player is ready');
     readys.add(true);
-    if (currentWave == 0) {
-      setUnit(socket, readys);
-    }
 
     if (checkReady(readys)) {
       print("Create a new wave");
@@ -76,15 +74,15 @@ void readyEvent(io, socket, readys, int currentWave) async {
   });
 }
 
-void setUnit(socket, readys) async {
-  ///The first player will have few units,
-  /// and the second player the other units
+void waitEvent(io, socket, readys, players) async {
+  ///Set one player as ready
+  /// to lauch a wave or other things
 
-  print("Setting the unit");
-  if (readys.length == 2) {
-    print("envoie 1");
-    socket.emit('unit', 1);
-  }
+  socket.on('wait', (data) {
+    players.add(1);
+    print("Setting the unit " + (players.length - 1).toString());
+    socket.emit('unit', players.length - 1);
+  });
 }
 
 bool checkReady(readys) {

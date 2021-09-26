@@ -119,8 +119,6 @@ class GameButtons extends GameNetwork with TapDetector {
     secondButtonPosition = Vector2(size.x-buttonsUnitSize.x,buttonsUnitSize.y);
     thirdButtonPosition = Vector2(size.x-buttonsUnitSize.x,buttonsUnitSize.y*2);
     fourthButtonPosition = Vector2(size.x-buttonsUnitSize.x,buttonsUnitSize.y*3);
-
-    setUnitType();
   }
 
   @override
@@ -221,13 +219,13 @@ class GameButtons extends GameNetwork with TapDetector {
   }
 
   void setUnitType() async {
+    print("Dedans Button Set unit type : " + playerType.toString());
+    //this.images.fromCache(fileName); //faire avec ça ?
     if(playerType == 1) {
-      print("Good !");
-
       firstButton = await loadSprite(
         'Unit/dragon/button.png',
         srcPosition: Vector2.zero(),
-        srcSize: Vector2(40, 40),
+        srcSize: Vector2(100, 100),
       );
       secondButton = await loadSprite(
         'Unit/marshall/button.png',
@@ -237,17 +235,17 @@ class GameButtons extends GameNetwork with TapDetector {
       thirdButton = await loadSprite(
         'Unit/spear/button.png',
         srcPosition: Vector2.zero(),
-        srcSize: Vector2(60, 60),
+        srcSize: Vector2(50, 50),
       );
       fourthButton = await loadSprite(
         'Unit/wizard/button.png',
         srcPosition: Vector2.zero(),
-        srcSize: Vector2(70, 70),
+        srcSize: Vector2(50, 50),
       );
       firstButtonSelected = await loadSprite(
         'Unit/dragon/buttonselected.png',
         srcPosition: Vector2.zero(),
-        srcSize: Vector2(40, 40),
+        srcSize: Vector2(100, 100),
       );
       secondButtonSelected = await loadSprite(
         'Unit/marshall/buttonselected.png',
@@ -257,13 +255,18 @@ class GameButtons extends GameNetwork with TapDetector {
       thirdButtonSelected = await loadSprite(
         'Unit/spear/buttonselected.png',
         srcPosition: Vector2.zero(),
-        srcSize: Vector2(60, 60),
+        srcSize: Vector2(50, 50),
       );
       fourthButtonSelected = await loadSprite(
         'Unit/wizard/buttonselected.png',
         srcPosition: Vector2.zero(),
-        srcSize: Vector2(70, 70),
+        srcSize: Vector2(50, 50),
       );
+      selectedUnit = 8;
+      firstButtonUnitType = 8;
+      secondButtonUnitType = 10;
+      thirdButtonUnitType = 12;
+      fourthButtonUnitType = 14;
     }
   }
 }

@@ -89,8 +89,7 @@ class _NetworkMenu extends State<NetworkMenu> {
                                 field3,
                                 field4,
                                 ElevatedButton(
-                                  onPressed: () {
-                                    gameRef.startGame();
+                                  onPressed: () async {
                                     gameRef.socketFromIP(
                                         field1.val.toString() +
                                             '.' +
@@ -100,6 +99,9 @@ class _NetworkMenu extends State<NetworkMenu> {
                                             '.' +
                                             field4.val.toString()
                                     );
+                                    await Future.delayed(const Duration(seconds: 5), (){});
+                                    gameRef.startGame();
+                                    gameRef.setUnitType();
 
                                     gameRef.overlays.remove(NetworkMenu.id);
                                     gameRef.overlays.add(Hud.id);
@@ -122,9 +124,12 @@ class _NetworkMenu extends State<NetworkMenu> {
                                 ),
                                 SizedBox(width: 32),
                                 ElevatedButton(
-                                  onPressed: () {
-                                    gameRef.startGame();
+                                  onPressed: () async {
                                     gameRef.unknowLocalIP();
+
+                                    await Future.delayed(const Duration(seconds: 5), (){});
+                                    gameRef.startGame();
+                                    gameRef.setUnitType();
 
                                     gameRef.overlays.remove(NetworkMenu.id);
                                     gameRef.overlays.add(Hud.id);
@@ -159,6 +164,7 @@ class IPFieldState extends State<IPField> {
           textStyle: TextStyle(color: Colors.grey),
           selectedTextStyle: TextStyle(color: Colors.white),
           value: widget.val,
+          step: 1,
           minValue: 0,
           maxValue: 255,
           onChanged: (value) => setState(() => widget.val = value),

@@ -24,9 +24,9 @@ class GameNetwork extends GameLoader {
 
   void unknowLocalIP() {
     bool ipFound = false;
-    int i = 254;
+    int i = 2;
 
-    while(i >= 2 && ipFound == false)
+    while(i <= 254 && ipFound == false)
     {
       socket = IO.io('http://192.168.1.' + i.toString() + ':3000',
           IO.OptionBuilder()
@@ -43,11 +43,11 @@ class GameNetwork extends GameLoader {
                 .build());
         print("connected to 192.168.1." + msg);
         unitEvent(socket);
-        socket.emit('ready', 'true');
+        createEvent(socket);
+        waveEvent(socket);
+        socket.emit('wait', 'true');
       });
-      createEvent(socket);
-      waveEvent(socket);
-      i--;
+      i++;
     }
   }
 
@@ -66,11 +66,10 @@ class GameNetwork extends GameLoader {
               .build());
       print("connected");
       unitEvent(socket);
-      socket.emit('ready', 'true');
+      createEvent(socket);
+      waveEvent(socket);
+      socket.emit('wait', 'true');
     });
-    createEvent(socket);
-    waveEvent(socket);
-    //unitEvent(socket);
   }
 
   void createEvent(IO.Socket socket) {
@@ -92,11 +91,12 @@ class GameNetwork extends GameLoader {
 
   void unitEvent(IO.Socket socket) {
     socket.on('unit', (type) {
-      print('Unit type : ' + type.toString());
+      print('Type received (event) : ' + type.toString());
       if(type == 1) {
         print("dedans");
         playerType = 1;
       }
+      socket.emit('ready', 'true');
     });
   }
 

@@ -2,6 +2,7 @@
 Yo !
 
 Serveur:
+    ecran de chargement + attente autre joueur
     clients pas avec meme unités
 
 Client:
