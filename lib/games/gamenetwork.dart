@@ -72,12 +72,16 @@ class GameNetwork extends GameLoader {
     });
   }
 
+
+  ///
+  /// msg.id type of enemy
+  /// msg.nb number of enemy
   void createEvent(IO.Socket socket) {
     socket.on('create', (msg) {
-      print('create ennemies');
-      for(int i = 0; i < int.parse(msg); i++)
+      print('create enemies');
+      for(int i = 0; i < int.parse(msg['nb']); i++)
       {
-        listUnit.add(UnitWidget.unitWidgetSpawn(size.x/2,size.y-40,0,images));
+        listUnit.add(UnitWidget.unitWidgetSpawn(size.x/2,size.y-40,int.parse(msg['id']),images));
       }
     });
   }

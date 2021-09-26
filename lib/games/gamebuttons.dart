@@ -200,7 +200,7 @@ class GameButtons extends GameNetwork with TapDetector {
       if (buttonArea.contains(event.eventPosition.game.toOffset()) &&
           allyPressed == false) {
         print("Send unit to ally");
-        socket.emit('toother', '1');
+        socket.emit('toother', { 'id': selectedUnit.toString(), 'nb': '1' });
       }
       allyPressed = buttonArea.contains(event.eventPosition.game.toOffset());
     }
