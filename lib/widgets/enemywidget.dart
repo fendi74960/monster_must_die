@@ -168,7 +168,7 @@ class EnemyWidget extends Enemy {
   ///Avec le [dt] : deltaTime, on update l'animation sur la next frame
   ///On attaque la [target] avec sa stats de degats
   void attaque(double dt,UnitWidget target) {
-    if(target.x+range>x+size.x/2 ) {
+    if(target.x>x ) {
       scale.x=-1;
     }
     else {
@@ -248,7 +248,7 @@ class EnemyWidget extends Enemy {
       //2-3 : cyclop
         case 2:
           animation=SpriteAnimation.fromFrameData(
-              images.fromCache('Enemy/archer/moving.png'),
+              images.fromCache('Enemy/cyclop/moving.png'),
               SpriteAnimationData.sequenced(
                 amount: 4,
                 amountPerRow: 1,

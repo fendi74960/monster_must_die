@@ -38,43 +38,39 @@ class Enemy extends SpriteAnimationComponent {
       //0-1 : archer
       case 0:
       case 1: {
-        damage = 1;
-        health = 100;
-        maxHealth = 100;
-        speed = 0.3;
+        damage = 0.8;
+        health = 10;
+        speed = 0.4;
         size = Vector2(60, 60);
-        range=50;
+        range=190;
       }
       break;
       //2-3 : cyclop
       case 2:
       case 3: {
-        damage = 1;
-        health = 100;
-        maxHealth = 100;
+        damage = 20;
+        health = 5000;
         speed = 0.1;
         size = Vector2(60, 60);
-        range=50;
+        range=10;
       }
       break;
       //4-5 : dog
       case 4:
       case 5: {
-        damage = 1;
-        health = 100;
-        maxHealth = 100;
-        speed = 0.1;
+        damage = 6;
+        health = 75;
+        speed = 1.5;
         size = Vector2(60, 60);
-        range=50;
+        range=30;
       }
       break;
       //6-7 : eye
       case 6:
       case 7: {
         damage = 1;
-        health = 100;
-        maxHealth = 100;
-        speed = 0.3;
+        health = 200;
+        speed = 0.5;
         size = Vector2(60, 60);
         range=50;
       }
@@ -82,10 +78,9 @@ class Enemy extends SpriteAnimationComponent {
       //8-9 : gargoyle
       case 8:
       case 9: {
-        damage = 1;
-        health = 100;
-        maxHealth = 100;
-        speed = 0.1;
+        damage = 2;
+        health = 200;
+        speed = 0.8;
         size = Vector2(60, 60);
         range=50;
       }
@@ -95,7 +90,6 @@ class Enemy extends SpriteAnimationComponent {
       case 11: {
         damage = 1;
         health = 100;
-        maxHealth = 100;
         speed = 0.3;
         size = Vector2(60, 60);
         range=50;
@@ -105,23 +99,23 @@ class Enemy extends SpriteAnimationComponent {
       case 12:
       case 13: {
         damage = 1;
-        health = 100;
-        maxHealth = 100;
-        speed = 0.1;
+        health = 1000;
+        speed = 0.3;
         size = Vector2(60, 60);
-        range=50;
+        range=40;
       }
       break;
 
       default: {
         damage = 1;
         health = 100;
-        maxHealth = 100;
         speed = 0.1;
         range=50;
         size = Vector2(40, 40);
       }
       break;
+
     }
+    maxHealth = health;
   }
 }

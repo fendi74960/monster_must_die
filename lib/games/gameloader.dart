@@ -73,7 +73,7 @@ class GameLoader extends FlameGame {
 
   ///Lance le jeu en creant pour l'instant des ennemies random
   void startGame(){
-    for(int i = 0; i < 20 ; i++){
+    for(int i = 0; i < 5 ; i++){
       listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 0,images));
     }
     //TODO y supprimer plus tard

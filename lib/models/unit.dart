@@ -36,42 +36,38 @@ class Unit extends SpriteAnimationComponent{
       case 0:
       case 1: {
         damage = 1;
-        health = 1000;
-        maxHealth = 1000;
+        health = 10;
         speed = 0.4;
         size = Vector2(60, 60);
-        range=50;
+        range=200;
       }
       break;
     //2-3 : balista
       case 2:
       case 3: {
         damage = 1;
-        health = 1000;
-        maxHealth = 1000;
-        speed = 0.4;
+        health = 5;
+        speed = 0.2;
         size = Vector2(60, 60);
-        range=50;
+        range=250;
       }
       break;
     //4-5 : berserker
       case 4:
       case 5: {
-        damage = 1;
-        health = 1000;
-        maxHealth = 1000;
-        speed = 0.4;
+        damage = 5;
+        health = 300;
+        speed = 0.6;
         size = Vector2(60, 60);
-        range=50;
+        range=20;
       }
       break;
     //6-7 : cavalier
       case 6:
       case 7: {
-        damage = 1;
-        health = 1000;
-        maxHealth = 1000;
-        speed = 0.4;
+        damage = 2;
+        health = 150;
+        speed = 1;
         size = Vector2(60, 60);
         range=50;
       }
@@ -79,10 +75,9 @@ class Unit extends SpriteAnimationComponent{
     //8-9 : dragon
       case 8:
       case 9: {
-        damage = 1;
-        health = 1000;
-        maxHealth = 1000;
-        speed = 0.4;
+        damage = 1.5;
+        health = 175;
+        speed = 0.9;
         size = Vector2(60, 60);
         range=50;
       }
@@ -91,19 +86,17 @@ class Unit extends SpriteAnimationComponent{
       case 10:
       case 11: {
         damage = 1;
-        health = 1000;
-        maxHealth = 1000;
-        speed = 0.4;
+        health = 300;
+        speed = 0.2;
         size = Vector2(60, 60);
-        range=50;
+        range=20;
       }
       break;
     //12-13 : spear
       case 12:
       case 13: {
-        damage = 1;
-        health = 1000;
-        maxHealth = 1000;
+        damage = 2;
+        health = 100;
         speed = 0.4;
         size = Vector2(60, 60);
         range=50;
@@ -112,25 +105,24 @@ class Unit extends SpriteAnimationComponent{
     //14-15 : wizard
       case 14:
       case 15: {
-        damage = 1;
-        health = 1000;
-        maxHealth = 1000;
-        speed = 0.4;
+        damage = 5;
+        health = 1;
+        speed = 0.2;
         size = Vector2(60, 60);
-        range=50;
+        range=100;
       }
       break;
 
       default: {
         damage = 1;
         health = 1;
-        maxHealth=100;
         speed = 0.5;
         range=50;
         size = Vector2(40, 40);
       }
       break;
     }
+    maxHealth = health;
   }
 
 }
