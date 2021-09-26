@@ -164,7 +164,7 @@ class UnitWidget extends Unit  {
   ///Avec le [dt] : deltaTime, on update l'animation sur la next frame
   ///On attaque la [target] avec sa stats de degats
   void attaque(double dt,EnemyWidget target) {
-    if(target.x+range>x+size.x/2 ) {
+    if(target.x>x ) {
       scale.x=-1;
     }
     else {
