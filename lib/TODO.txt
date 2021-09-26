@@ -2,6 +2,10 @@
 Yo !
 
 Serveur:
+    toast quand recoit
+    toast demande
+    toast wave
+    envoie par paquet toute les x second
     ecran de chargement + attente autre joueur
     trouver le moyen d'attendre qu'on est connecté (check avec variable bool)
 
