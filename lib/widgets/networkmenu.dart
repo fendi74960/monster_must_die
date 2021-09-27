@@ -25,10 +25,10 @@ class _NetworkMenu extends State<NetworkMenu> {
   GameSetting gameRef;
   int _currentValue = 3;
 
-  IPField field1 = IPField(192);
-  IPField field2 = IPField(168);
-  IPField field3 = IPField(1);
-  IPField field4 = IPField(105);
+  IPField field1 = IPField(127);
+  IPField field2 = IPField(0);
+  IPField field3 = IPField(0);
+  IPField field4 = IPField(1);
 
   _NetworkMenu(this.gameRef);
 
