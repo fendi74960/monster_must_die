@@ -1,12 +1,15 @@
 import 'dart:math';
 import 'package:flame/assets.dart';
+import 'package:flutter/material.dart';
 import 'package:monster_must_die/models/player_data.dart';
 import 'package:monster_must_die/widgets/enemywidget.dart';
+import 'package:oktoast/oktoast.dart';
 
 class WaveController {
   static newWave(int wave, List<EnemyWidget> listEnemy, double minX, double maxX, double minY, double maxY, Images images,PlayerData data) {
     data.pointsCoop+=100+10*wave;
     data.pointsPerso+=100+10*wave;
+    showToast('The wave ' + wave.toString() + " is starting !", position: ToastPosition.top, textStyle: TextStyle(color: Colors.white, fontSize: 30));
     switch(wave) {
       case 1: {
         /*for(int i = 0; i < 10; i++){
