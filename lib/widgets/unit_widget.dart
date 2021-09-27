@@ -19,6 +19,11 @@ class UnitWidget extends Unit  {
 
   late Images images;
 
+  static int howMuchItCost(int id)
+  {
+    const unitsCost = [15, 0, 20, 0, 30, 0, 15, 0, 15, 0, 30, 0, 10, 0, 40, 0 ];
+    return unitsCost[id];
+  }
 
   ///Constructors : prend position [x] [y] et un [type]
   ///de plus [images] pour pouvoir prendre les images depuis le cache directement
@@ -32,7 +37,7 @@ class UnitWidget extends Unit  {
       case 0:
       case 1:
         if (playerType==0){
-          data?.pointsPerso-=15;
+          data?.pointsPerso-=UnitWidget.howMuchItCost(type);
         }
         animation = SpriteAnimation.fromFrameData(
           images.fromCache('Unit/archer/moving.png'),
@@ -47,7 +52,7 @@ class UnitWidget extends Unit  {
       case 2:
       case 3:
       if (playerType==0){
-        data?.pointsPerso-=20;
+        data?.pointsPerso-=UnitWidget.howMuchItCost(type);
       }
         animation = SpriteAnimation.fromFrameData(
           images.fromCache('Unit/balista/moving.png'),
@@ -62,7 +67,7 @@ class UnitWidget extends Unit  {
       case 4:
       case 5:
       if (playerType==0){
-        data?.pointsPerso-=30;
+        data?.pointsPerso-=UnitWidget.howMuchItCost(type);
       }
         animation = SpriteAnimation.fromFrameData(
           images.fromCache('Unit/berserker/moving.png'),
@@ -77,7 +82,7 @@ class UnitWidget extends Unit  {
       case 6:
       case 7:
       if (playerType==0){
-        data?.pointsPerso-=15;
+        data?.pointsPerso-=UnitWidget.howMuchItCost(type);
       }
         animation = SpriteAnimation.fromFrameData(
           images.fromCache('Unit/cavalrer/moving.png'),
@@ -92,7 +97,7 @@ class UnitWidget extends Unit  {
       case 8:
       case 9:
       if (playerType==1){
-        data?.pointsPerso-=15;
+        data?.pointsPerso-=UnitWidget.howMuchItCost(type);
       }
         animation = SpriteAnimation.fromFrameData(
           images.fromCache('Unit/dragon/moving.png'),
@@ -107,7 +112,7 @@ class UnitWidget extends Unit  {
       case 10:
       case 11:
       if (playerType==1){
-        data?.pointsPerso-=30;
+        data?.pointsPerso-=UnitWidget.howMuchItCost(type);
       }
         animation = SpriteAnimation.fromFrameData(
           images.fromCache('Unit/marshall/moving.png'),
@@ -122,7 +127,7 @@ class UnitWidget extends Unit  {
       case 12:
       case 13:
       if (playerType==1){
-        data?.pointsPerso-=10;
+        data?.pointsPerso-=UnitWidget.howMuchItCost(type);
       }
         animation = SpriteAnimation.fromFrameData(
           images.fromCache('Unit/spear/moving.png'),
@@ -137,7 +142,7 @@ class UnitWidget extends Unit  {
       case 14:
       case 15:
       if (playerType==1){
-        data?.pointsPerso-=40;
+        data?.pointsPerso-=UnitWidget.howMuchItCost(type);
       }
         animation = SpriteAnimation.fromFrameData(
           images.fromCache('Unit/wizard/moving.png'),
