@@ -3,6 +3,7 @@ import 'package:monster_must_die/controller/wavecontroller.dart';
 import 'package:monster_must_die/games/gameloader.dart';
 import 'package:monster_must_die/widgets/unit_widget.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:oktoast/oktoast.dart';
 
 
 class GameNetwork extends GameLoader {
@@ -73,7 +74,7 @@ class GameNetwork extends GameLoader {
   /// msg.nb number of enemy
   void createEvent(IO.Socket socket) {
     socket.on('create', (msg) {
-      print('create enemies');
+      showToast('You receive ' + msg['nb'].toString() + " unit(s)", position: ToastPosition.top, textStyle: TextStyle(color: Colors.white, fontSize: 30), backgroundColor: Colors.blue);
       for(int i = 0; i < int.parse(msg['nb']); i++)
       {
         listUnit.add(UnitWidget.unitWidgetSpawn(size.x/2,size.y-40,int.parse(msg['id']),images,null,playerType));

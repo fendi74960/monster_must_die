@@ -3,10 +3,7 @@ ecran de chargement + attente autre joueur
 trouver le moyen d'attendre qu'on est connecté (check avec variable bool)
 
 envoie par paquet toute les x second
-toast quand recoit
 toast demande
-toast wave
-création de vrai vague 1-10 finis
 
 ajouter la perte des points coop
 tracking (ex utilisé xAPI)
