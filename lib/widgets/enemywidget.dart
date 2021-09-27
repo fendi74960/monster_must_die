@@ -32,7 +32,7 @@ class EnemyWidget extends Enemy {
         SpriteAnimationData.sequenced(
           amount: 4,
           amountPerRow: 1,
-          textureSize: Vector2(32, 30),
+          textureSize: Vector2(32, 32),
           stepTime: 0.1,
         ));
       break;
@@ -56,7 +56,7 @@ class EnemyWidget extends Enemy {
         SpriteAnimationData.sequenced(
           amount: 4,
           amountPerRow: 1,
-          textureSize: Vector2(32, 30),
+          textureSize: Vector2(32, 32),
           stepTime: 0.1,
         ));
       break;
@@ -103,7 +103,7 @@ class EnemyWidget extends Enemy {
         SpriteAnimationData.sequenced(
           amount: 4,
           amountPerRow: 1,
-          textureSize: Vector2(32, 30),
+          textureSize: Vector2(32, 32),
           stepTime: 0.1,
         ));
       break;
@@ -232,7 +232,7 @@ class EnemyWidget extends Enemy {
               SpriteAnimationData.sequenced(
                 amount: 4,
                 amountPerRow: 1,
-                textureSize: Vector2(32, 30),
+                textureSize: Vector2(32, 32),
                 stepTime: 0.1,
               ));
           break;
@@ -271,7 +271,7 @@ class EnemyWidget extends Enemy {
               SpriteAnimationData.sequenced(
                 amount: 4,
                 amountPerRow: 1,
-                textureSize: Vector2(32, 30),
+                textureSize: Vector2(32, 32),
                 stepTime: 0.1,
               ));
           break;
@@ -334,7 +334,7 @@ class EnemyWidget extends Enemy {
               SpriteAnimationData.sequenced(
                 amount: 4,
                 amountPerRow: 1,
-                textureSize: Vector2(32, 30),
+                textureSize: Vector2(32, 32),
                 stepTime: 0.1,
               ));
           break;

@@ -9,7 +9,7 @@ class GameNetwork extends GameLoader {
 
   late IO.Socket socket;
 
-  int playerType = 0;
+  int playerType = 1;
 
   ///If the server is on local network and we don't want to write the IP
   /// it try all the adress, then the server send the right number

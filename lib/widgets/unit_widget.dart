@@ -44,7 +44,7 @@ class UnitWidget extends Unit  {
           SpriteAnimationData.sequenced(
             amount: 4,
             amountPerRow: 1,
-            textureSize: Vector2(32, 30),
+            textureSize: Vector2(32, 32),
             stepTime: 0.1,
           ));
       break;
@@ -59,7 +59,7 @@ class UnitWidget extends Unit  {
           SpriteAnimationData.sequenced(
             amount: 4,
             amountPerRow: 1,
-            textureSize: Vector2(32, 30),
+            textureSize: Vector2(32, 32),
             stepTime: 0.1,
           ));
       break;
@@ -119,7 +119,7 @@ class UnitWidget extends Unit  {
           SpriteAnimationData.sequenced(
             amount: 4,
             amountPerRow: 1,
-            textureSize: Vector2(32, 30),
+            textureSize: Vector2(32, 32),
             stepTime: 0.1,
           ));
       break;
@@ -134,7 +134,7 @@ class UnitWidget extends Unit  {
           SpriteAnimationData.sequenced(
             amount: 4,
             amountPerRow: 1,
-            textureSize: Vector2(32, 30),
+            textureSize: Vector2(32, 32),
             stepTime: 0.1,
           ));
       break;
@@ -149,12 +149,12 @@ class UnitWidget extends Unit  {
           SpriteAnimationData.sequenced(
             amount: 4,
             amountPerRow: 1,
-            textureSize: Vector2(32, 30),
+            textureSize: Vector2(32, 32),
             stepTime: 0.1,
           ));
       break;
 
-      default: {
+      default: /*{
         animation=SpriteAnimation.fromFrameData(
             images.fromCache('heheboy.png'),
             SpriteAnimationData.sequenced(
@@ -162,7 +162,7 @@ class UnitWidget extends Unit  {
               textureSize: Vector2(700, 660),
               stepTime: 0.1,
             ));
-      }
+      }*/
       break;
     }
 
@@ -286,7 +286,7 @@ class UnitWidget extends Unit  {
               SpriteAnimationData.sequenced(
                 amount: 4,
                 amountPerRow: 1,
-                textureSize: Vector2(32, 30),
+                textureSize: Vector2(32, 32),
                 stepTime: 0.1,
               ));
           break;
@@ -306,7 +306,7 @@ class UnitWidget extends Unit  {
               SpriteAnimationData.sequenced(
                 amount: 4,
                 amountPerRow: 1,
-                textureSize: Vector2(32, 30),
+                textureSize: Vector2(32, 32),
                 stepTime: 0.1,
               ));
           break;
@@ -386,7 +386,7 @@ class UnitWidget extends Unit  {
               SpriteAnimationData.sequenced(
                 amount: 4,
                 amountPerRow: 1,
-                textureSize: Vector2(32, 30),
+                textureSize: Vector2(32, 32),
                 stepTime: 0.1,
               ));
           break;
@@ -406,7 +406,7 @@ class UnitWidget extends Unit  {
               SpriteAnimationData.sequenced(
                 amount: 4,
                 amountPerRow: 1,
-                textureSize: Vector2(32, 30),
+                textureSize: Vector2(32, 32),
                 stepTime: 0.1,
               ));
           break;
@@ -426,7 +426,7 @@ class UnitWidget extends Unit  {
               SpriteAnimationData.sequenced(
                 amount: 4,
                 amountPerRow: 1,
-                textureSize: Vector2(32, 30),
+                textureSize: Vector2(32, 32),
                 stepTime: 0.1,
               ));
           break;

@@ -13,16 +13,9 @@ class GameLoader extends FlameGame {
   //Permet de mettre en cache les images plus tard
   static const _imageAssets = [
     'heheboy.png',
-    'Archer.png',
-    'Axe.png',
-    'Bishop.png',
-    'CavArcher.png',
-    'Lance.png',
-    'Mage.png',
     'lifebar.png',
     'lifebarRouge.png',
     'fe.png',
-    'Lance_attaque_anim.png',
     'Enemy/zombie/attack.png',
     'Enemy/ghost/moving.png',
     'Enemy/gargoyle/attack.png',

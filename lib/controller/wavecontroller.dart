@@ -93,7 +93,8 @@ class WaveController {
       }
       case 10: {
         EnemyWidget tempEn=EnemyWidget.enemyWidgetRandom(minX, maxX, minY, maxY, 12,images);
-        tempEn.scale*=2;
+        tempEn.scale.x*=2;
+        tempEn.scale.y*=2;
         tempEn.health+=2500;
         tempEn.maxHealth+=2500;
         tempEn.damage+=3;
