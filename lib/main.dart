@@ -23,7 +23,6 @@ class MyGameApp extends StatelessWidget {
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Monster must die',
-
           home: Scaffold(
             body: GameWidget(
               // This will display a loading bar
@@ -46,32 +45,6 @@ class MyGameApp extends StatelessWidget {
             ),
           ),
         )
-    );
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Monster must die',
-
-      home: Scaffold(
-        body: GameWidget(
-          // This will display a loading bar
-          // its onLoad method.
-          loadingBuilder: (context) => Center(
-            child: Container(
-              width: 200,
-              child: LinearProgressIndicator(),
-            ),
-          ),
-          // Register all the overlays that will be used by this game.
-          overlayBuilderMap: {
-            Hud.id: (_, GameSetting gameRef) => Hud(gameRef),
-            MainMenu.id:(_,GameSetting gameRef) => MainMenu(gameRef),
-            NetworkMenu.id:(_,GameSetting gameRef) => NetworkMenu(gameRef),
-          },
-          // By default MainMenu overlay will be active.
-          initialActiveOverlays: [MainMenu.id],
-          game: myGame,
-        ),
-      ),
     );
   }
 }
