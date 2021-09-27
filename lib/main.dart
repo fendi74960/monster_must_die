@@ -15,8 +15,11 @@ void main() {
 
 // The main widget for this game.
 class MyGameApp extends StatelessWidget {
+  static late BuildContext currentContext;
+
   @override
   Widget build(BuildContext context) {
+    currentContext = context;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Monster must die',
