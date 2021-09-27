@@ -1,9 +1,12 @@
 import 'dart:math';
 import 'package:flame/assets.dart';
+import 'package:monster_must_die/models/player_data.dart';
 import 'package:monster_must_die/widgets/enemywidget.dart';
 
 class WaveController {
-  static newWave(int wave, List<EnemyWidget> listEnemy, double minX, maxX, minY, maxY, Images images) {
+  static newWave(int wave, List<EnemyWidget> listEnemy, double minX, double maxX, double minY, double maxY, Images images,PlayerData data) {
+    data.pointsCoop+=100+10*wave;
+    data.pointsPerso+=100+10*wave;
     switch(wave) {
       case 1: {
         /*for(int i = 0; i < 10; i++){
@@ -46,6 +49,57 @@ class WaveController {
         }
         listEnemy.add(EnemyWidget.enemyWidgetRandom(minX, maxX, minY, maxY, 2,images));
         listEnemy.add(EnemyWidget.enemyWidgetRandom(minX, maxX, minY, maxY, 2,images));
+
+        break;
+      }
+      case 6: {
+        for(int i = 0; i < 10; i++){
+          listEnemy.add(EnemyWidget.enemyWidgetRandom(minX, maxX, minY, maxY, 4,images));
+        }
+        listEnemy.add(EnemyWidget.enemyWidgetRandom(minX, maxX, minY, maxY, 2,images));
+        listEnemy.add(EnemyWidget.enemyWidgetRandom(minX, maxX, minY, maxY, 2,images));
+
+        break;
+      }
+      case 7: {
+        for(int i = 0; i < 3; i++){
+          listEnemy.add(EnemyWidget.enemyWidgetRandom(minX, maxX, minY, maxY, 8,images));
+        }
+        for(int i = 0; i < 8; i++){
+          listEnemy.add(EnemyWidget.enemyWidgetRandom(minX, maxX, minY, maxY, 12,images));
+        }
+        listEnemy.add(EnemyWidget.enemyWidgetRandom(minX, maxX, minY, maxY, 6,images));
+        listEnemy.add(EnemyWidget.enemyWidgetRandom(minX, maxX, minY, maxY, 6,images));
+
+        break;
+      }
+      case 8: {
+        for(int i = 0; i < 25; i++){
+          listEnemy.add(EnemyWidget.enemyWidgetRandom(minX, maxX, minY, maxY, 12,images));
+        }
+        listEnemy.add(EnemyWidget.enemyWidgetRandom(minX, maxX, minY, maxY, 2,images));
+
+        break;
+      }
+      case 9: {
+        for(int i = 0; i < 10; i++){
+          listEnemy.add(EnemyWidget.enemyWidgetRandom(minX, maxX, minY, maxY, 12,images));
+        }
+        listEnemy.add(EnemyWidget.enemyWidgetRandom(minX, maxX, minY, maxY, 2,images));
+        listEnemy.add(EnemyWidget.enemyWidgetRandom(minX, maxX, minY, maxY, 10,images));
+        listEnemy.add(EnemyWidget.enemyWidgetRandom(minX, maxX, minY, maxY, 10,images));
+
+        break;
+      }
+      case 10: {
+        EnemyWidget tempEn=EnemyWidget.enemyWidgetRandom(minX, maxX, minY, maxY, 12,images);
+        tempEn.scale*=2;
+        tempEn.health+=2500;
+        tempEn.maxHealth+=2500;
+        tempEn.damage+=3;
+        tempEn.range+=30;
+        tempEn.speed+=0.5;
+        listEnemy.add(tempEn);
 
         break;
       }

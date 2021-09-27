@@ -9,7 +9,7 @@ class GameNetwork extends GameLoader {
 
   late IO.Socket socket;
 
-  int playerType = 1;
+  int playerType = 0;
 
   ///If the server is on local network and we don't want to write the IP
   /// it try all the adress, then the server send the right number
@@ -86,7 +86,7 @@ class GameNetwork extends GameLoader {
   void waveEvent(IO.Socket socket) {
     socket.on('wave', (wave) {
       print('wave number: ' + wave.toString());
-      WaveController.newWave(wave.round(), listEnemy, 0.toDouble(), size.x , 0, size.y/3, images);
+      WaveController.newWave(wave.round(), listEnemy, 0.toDouble(), size.x , 0, size.y/3, images,playerData);
     });
   }
 

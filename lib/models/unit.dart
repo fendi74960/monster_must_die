@@ -45,9 +45,9 @@ class Unit extends SpriteAnimationComponent{
     //2-3 : balista
       case 2:
       case 3: {
-        damage = 1;
+        damage = 1.1;
         health = 5;
-        speed = 0.2;
+        speed = 0.05;
         size = Vector2(60, 60);
         range=250;
       }

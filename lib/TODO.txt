@@ -6,15 +6,13 @@ envoie par paquet toute les x second
 toast quand recoit
 toast demande
 toast wave
-création de vrai vague
-equilibrage - a peu pres fait
-donner des points aux joueurs changement vague
+création de vrai vague 1-10 finis
+
 ajouter la perte des points coop
 tracking (ex utilisé xAPI)
     -> dire avec quoi l'unité est tué ? pour savoir si le joueur est plus solo ou demande de l'aide ? et aussi pour équilibrer
 
 
-dragon peut pas etre attaqué par unité terestre
 
 bug:
 deux fois première vague

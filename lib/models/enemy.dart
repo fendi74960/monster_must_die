@@ -50,7 +50,7 @@ class Enemy extends SpriteAnimationComponent {
       case 3: {
         damage =15;
         health = 3000;
-        speed = 0.1;
+        speed = 0.15;
         size = Vector2(60, 60);
         range=10;
       }
@@ -100,7 +100,7 @@ class Enemy extends SpriteAnimationComponent {
       case 13: {
         damage = 0.8;
         health = 500;
-        speed = 0.3;
+        speed = 0.4;
         size = Vector2(60, 60);
         range=40;
       }

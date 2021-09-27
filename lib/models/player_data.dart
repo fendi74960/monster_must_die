@@ -7,8 +7,8 @@ class PlayerData extends ChangeNotifier   {
   //Valeur de l'hud
   int _waves = 5;
   int _lives = 5;
-  int _pointsCoop =100;
-  int _pointsPerso =100;
+  int _pointsCoop =0;
+  int _pointsPerso =0;
 
   ///getter et setter pour les waves
   int get waves => _waves;
