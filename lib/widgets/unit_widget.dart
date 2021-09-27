@@ -229,14 +229,13 @@ class UnitWidget extends Unit  {
     EnemyWidget plusProche=EnemyWidget(position.x, position.y, 0,images);
     double proximite=9999999;
     double tempProxi=9999999;
-
     for(int ii=0;ii<ens.length;ii++) {
       //Check si ennemie=arien et qu'on peut taper
       if((ens[ii].type == 8 || ens[ii].type == 9) && type > 3) {
         canHit=false;
       }
       //mage peut taper ghost
-      else if((ens[ii].type == 10 || ens[ii].type == 11) && (type != 14 || type != 15)){
+      else if((ens[ii].type == 10 || ens[ii].type == 11) && (type < 14)){
         canHit=false;
       }
       else {

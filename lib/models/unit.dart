@@ -86,18 +86,18 @@ class Unit extends SpriteAnimationComponent{
       case 10:
       case 11: {
         damage = 1;
-        health = 300;
-        speed = 0.2;
+        health = 1000;
+        speed = 0.3;
         size = Vector2(60, 60);
-        range=20;
+        range=30;
       }
       break;
     //12-13 : spear
       case 12:
       case 13: {
         damage = 1.2;
-        health = 100;
-        speed = 0.4;
+        health = 200;
+        speed = 0.6;
         size = Vector2(60, 60);
         range=50;
       }
@@ -107,9 +107,9 @@ class Unit extends SpriteAnimationComponent{
       case 15: {
         damage = 5;
         health = 1;
-        speed = 0.2;
+        speed = 0.3;
         size = Vector2(60, 60);
-        range=100;
+        range=120;
       }
       break;
 
