@@ -98,7 +98,7 @@ class Enemy extends SpriteAnimationComponent {
       //12-13 : zombie
       case 12:
       case 13: {
-        damage = 1;
+        damage = 0.8;
         health = 500;
         speed = 0.3;
         size = Vector2(60, 60);

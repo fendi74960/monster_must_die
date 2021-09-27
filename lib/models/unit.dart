@@ -75,11 +75,11 @@ class Unit extends SpriteAnimationComponent{
     //8-9 : dragon
       case 8:
       case 9: {
-        damage = 1.5;
-        health = 175;
+        damage = 1.75;
+        health = 200;
         speed = 0.9;
         size = Vector2(60, 60);
-        range=50;
+        range=60;
       }
       break;
     //10-11 : marshall
@@ -99,17 +99,17 @@ class Unit extends SpriteAnimationComponent{
         health = 200;
         speed = 0.6;
         size = Vector2(60, 60);
-        range=50;
+        range=45;
       }
       break;
     //14-15 : wizard
       case 14:
       case 15: {
-        damage = 5;
+        damage = 4;
         health = 1;
         speed = 0.3;
         size = Vector2(60, 60);
-        range=120;
+        range=85;
       }
       break;
 

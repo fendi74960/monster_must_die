@@ -8,6 +8,7 @@ toast demande
 toast wave
 création de vrai vague
 equilibrage - a peu pres fait
+donner des points aux joueurs changement vague
 ajouter la perte des points coop
 tracking (ex utilisé xAPI)
     -> dire avec quoi l'unité est tué ? pour savoir si le joueur est plus solo ou demande de l'aide ? et aussi pour équilibrer

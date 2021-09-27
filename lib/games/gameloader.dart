@@ -2,6 +2,7 @@ import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:monster_must_die/controller/wavecontroller.dart';
 import 'package:monster_must_die/widgets/enemywidget.dart';
 import 'package:monster_must_die/widgets/unit_widget.dart';
 
@@ -72,7 +73,7 @@ class GameLoader extends FlameGame {
 
   ///Lance le jeu en creant pour l'instant des ennemies random
   void startGame(){
-    for(int i = 0; i < 5 ; i++){
+    /*for(int i = 0; i < 5 ; i++){
       listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 0,images));
     }
     //TODO y supprimer plus tard
@@ -81,7 +82,8 @@ class GameLoader extends FlameGame {
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 6,images));
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 8,images));
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 10,images));
-    listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 12,images));
+    listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 12,images));*/
+    WaveController.newWave(5, listEnemy, 0.toDouble(), size.x , 0, size.y/3, images);
 
 
 

@@ -21,7 +21,7 @@ class UnitWidget extends Unit  {
 
   static int howMuchItCost(int id)
   {
-    const unitsCost = [15, 0, 20, 0, 30, 0, 15, 0, 15, 0, 30, 0, 10, 0, 40, 0 ];
+    const unitsCost = [25, 0, 20, 0, 30, 0, 15, 0, 15, 0, 30, 0, 10, 0, 40, 0 ];
     return unitsCost[id];
   }
 
