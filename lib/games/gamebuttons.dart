@@ -42,7 +42,7 @@ class GameButtons extends GameNetwork with TapDetector {
   int fourthButtonUnitType = 6;
 
   int selectedUnit = 0;
-  bool enemyClicked=false;
+  bool enemyClicked = false;
 
   final buttonsSize = Vector2(120, 30);
   final buttonsUnitSize = Vector2(60, 60);
@@ -118,10 +118,13 @@ class GameButtons extends GameNetwork with TapDetector {
       srcSize: Vector2(70, 70),
     );
 
-    firstButtonPosition = Vector2(size.x-buttonsUnitSize.x,0);
-    secondButtonPosition = Vector2(size.x-buttonsUnitSize.x,buttonsUnitSize.y);
-    thirdButtonPosition = Vector2(size.x-buttonsUnitSize.x,buttonsUnitSize.y*2);
-    fourthButtonPosition = Vector2(size.x-buttonsUnitSize.x,buttonsUnitSize.y*3);
+    firstButtonPosition = Vector2(size.x - buttonsUnitSize.x, 0);
+    secondButtonPosition =
+        Vector2(size.x - buttonsUnitSize.x, buttonsUnitSize.y);
+    thirdButtonPosition =
+        Vector2(size.x - buttonsUnitSize.x, buttonsUnitSize.y * 2);
+    fourthButtonPosition =
+        Vector2(size.x - buttonsUnitSize.x, buttonsUnitSize.y * 3);
 
     //Start the send thread
     sendThread();
@@ -139,48 +142,68 @@ class GameButtons extends GameNetwork with TapDetector {
     button.render(canvas, position: allyPosition, size: buttonsSize);
 
     //check if the unit is selected and it change the sprite if yes
-    if(selectedUnit == firstButtonUnitType) {
-      firstButtonSelected.render(canvas,position:firstButtonPosition, size: buttonsUnitSize);
+    if (selectedUnit == firstButtonUnitType) {
+      firstButtonSelected.render(canvas,
+          position: firstButtonPosition, size: buttonsUnitSize);
     } else {
-      firstButton.render(canvas,position:firstButtonPosition, size: buttonsUnitSize);
+      firstButton.render(canvas,
+          position: firstButtonPosition, size: buttonsUnitSize);
     }
 
-    if(selectedUnit == secondButtonUnitType) {
-      secondButtonSelected.render(canvas,position:secondButtonPosition, size: buttonsUnitSize);
+    if (selectedUnit == secondButtonUnitType) {
+      secondButtonSelected.render(canvas,
+          position: secondButtonPosition, size: buttonsUnitSize);
     } else {
-      secondButton.render(canvas,position:secondButtonPosition, size: buttonsUnitSize);
+      secondButton.render(canvas,
+          position: secondButtonPosition, size: buttonsUnitSize);
     }
 
-    if(selectedUnit == thirdButtonUnitType) {
-      thirdButtonSelected.render(canvas,position:thirdButtonPosition, size: buttonsUnitSize);
+    if (selectedUnit == thirdButtonUnitType) {
+      thirdButtonSelected.render(canvas,
+          position: thirdButtonPosition, size: buttonsUnitSize);
     } else {
-      thirdButton.render(canvas,position:thirdButtonPosition, size: buttonsUnitSize);
+      thirdButton.render(canvas,
+          position: thirdButtonPosition, size: buttonsUnitSize);
     }
 
-    if(selectedUnit == fourthButtonUnitType) {
-      fourthButtonSelected.render(canvas,position:fourthButtonPosition, size: buttonsUnitSize);
+    if (selectedUnit == fourthButtonUnitType) {
+      fourthButtonSelected.render(canvas,
+          position: fourthButtonPosition, size: buttonsUnitSize);
     } else {
-      fourthButton.render(canvas,position:fourthButtonPosition, size: buttonsUnitSize);
+      fourthButton.render(canvas,
+          position: fourthButtonPosition, size: buttonsUnitSize);
     }
   }
 
   //Every 5 seconds, send the selected units to send to your comrade
   void sendThread() async {
-    if(arrayToSend[0] > 0) {
-      socket.emit('toother', { 'id': firstButtonUnitType.toString(), 'nb': arrayToSend[0].toString() });
+    if (arrayToSend[0] > 0) {
+      socket.emit('toother', {
+        'id': firstButtonUnitType.toString(),
+        'nb': arrayToSend[0].toString()
+      });
     }
     if (arrayToSend[1] > 0) {
-      socket.emit('toother', { 'id': secondButtonUnitType.toString(), 'nb': arrayToSend[1].toString() });
+      socket.emit('toother', {
+        'id': secondButtonUnitType.toString(),
+        'nb': arrayToSend[1].toString()
+      });
     }
     if (arrayToSend[2] > 0) {
-      socket.emit('toother', { 'id': thirdButtonUnitType.toString(), 'nb': arrayToSend[2].toString() });
+      socket.emit('toother', {
+        'id': thirdButtonUnitType.toString(),
+        'nb': arrayToSend[2].toString()
+      });
     }
     if (arrayToSend[3] > 0) {
-      socket.emit('toother', { 'id': fourthButtonUnitType.toString(), 'nb': arrayToSend[3].toString() });
+      socket.emit('toother', {
+        'id': fourthButtonUnitType.toString(),
+        'nb': arrayToSend[3].toString()
+      });
     }
 
     arrayToSend = [0, 0, 0, 0];
-    await Future.delayed(const Duration(seconds: 5), (){});
+    await Future.delayed(const Duration(seconds: 5), () {});
     sendThread();
   }
 
@@ -191,17 +214,18 @@ class GameButtons extends GameNetwork with TapDetector {
 
   @override
   void onTapDown(TapDownInfo event) {
-
     //check if the unit is selected and it change the selectedUnit if yes
     if (this.overlays.isActive(Hud.id)) {
-      for(int i = 0; i < listEnemy.length; i++)
-      {
-        var buttonArea = listEnemy[i].position-Vector2(listEnemy[i].size.x/2,listEnemy[i].size.y/2) & listEnemy[i].size;
+      for (int i = 0; i < listEnemy.length; i++) {
+        var buttonArea = listEnemy[i].position -
+                Vector2(listEnemy[i].size.x / 2, listEnemy[i].size.y / 2) &
+            listEnemy[i].size;
 
         if (buttonArea.contains(event.eventPosition.game.toOffset())) {
           print("Enemy clicked");
           print("Need help enemy type : " + listEnemy[i].type.toString());
-          enemyClicked=true;
+          sendHelp(listEnemy[i].type);
+          enemyClicked = true;
           //await Future.delayed(const Duration(seconds: 5), (){});
         }
       }
@@ -224,12 +248,21 @@ class GameButtons extends GameNetwork with TapDetector {
       }
 
       //add unit when we tap on the screen (at the bottom half of the screen)
-      if(!enemyClicked && event.eventPosition.game.x<size.x-buttonsUnitSize.x  && event.eventPosition.game.y>size.y/2) {
-        if(playerData.pointsPerso>0 && UnitWidget.howMuchItCost(selectedUnit)<=playerData.pointsPerso) {
-          listUnit.add(UnitWidget.unitWidgetSpawn(event.eventPosition.game.x, event.eventPosition.game.y, selectedUnit, images,playerData,playerType));
+      if (!enemyClicked &&
+          event.eventPosition.game.x < size.x - buttonsUnitSize.x &&
+          event.eventPosition.game.y > size.y / 2) {
+        if (playerData.pointsPerso > 0 &&
+            UnitWidget.howMuchItCost(selectedUnit) <= playerData.pointsPerso) {
+          listUnit.add(UnitWidget.unitWidgetSpawn(
+              event.eventPosition.game.x,
+              event.eventPosition.game.y,
+              selectedUnit,
+              images,
+              playerData,
+              playerType));
         }
       }
-      enemyClicked=false;
+      enemyClicked = false;
 
       //emit to the server a command (ready or toother)
       buttonArea = readyPosition & buttonsSize;
@@ -243,23 +276,17 @@ class GameButtons extends GameNetwork with TapDetector {
       buttonArea = allyPosition & buttonsSize;
       if (buttonArea.contains(event.eventPosition.game.toOffset()) &&
           allyPressed == false) {
-        if(UnitWidget.howMuchItCost(selectedUnit) <playerData.pointsCoop)
-          {
-            playerData.pointsCoop-=UnitWidget.howMuchItCost(selectedUnit);
-            print("Send unit to ally");
-            socket.emit('toother', { 'id': selectedUnit.toString(), 'nb': '1' });
-            if(selectedUnit == firstButtonUnitType) {
-	          arrayToSend[0]++;
-	        } else if (selectedUnit == secondButtonUnitType) {
-	          arrayToSend[1]++;
-	        } else if (selectedUnit == thirdButtonUnitType) {
-	          arrayToSend[2]++;
-	        } else {
-	          arrayToSend[3]++;
-	        }
+        if (UnitWidget.howMuchItCost(selectedUnit) < playerData.pointsCoop) {
+          playerData.pointsCoop -= UnitWidget.howMuchItCost(selectedUnit);
+          if (selectedUnit == firstButtonUnitType) {
+            arrayToSend[0]++;
+          } else if (selectedUnit == secondButtonUnitType) {
+            arrayToSend[1]++;
+          } else if (selectedUnit == thirdButtonUnitType) {
+            arrayToSend[2]++;
+          } else {
+            arrayToSend[3]++;
           }
-        else{
-          print("not enough point");
         }
       }
       allyPressed = buttonArea.contains(event.eventPosition.game.toOffset());
@@ -278,12 +305,9 @@ class GameButtons extends GameNetwork with TapDetector {
     allyPressed = false;
   }
 
-
-
   ///Set the unit of the player (there's 2 possibility)
   void setUnitType() async {
-
-    if(playerType == 1) {
+    if (playerType == 1) {
       firstButton = await loadSprite(
         'Unit/dragon/button.png',
         srcPosition: Vector2.zero(),
