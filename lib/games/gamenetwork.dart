@@ -82,7 +82,7 @@ class GameNetwork extends GameLoader {
   /// msg.nb number of enemy
   void createEvent(IO.Socket socket) {
     socket.on('create', (msg) {
-      showToast('Your comrade are here !', position: ToastPosition.top, textStyle: TextStyle(color: Colors.white, fontSize: 30), backgroundColor: Colors.blue);
+      showToast('Your comrades are here !', position: ToastPosition.top, textStyle: TextStyle(color: Colors.white, fontSize: 30), backgroundColor: Colors.blue);
       var rng = Random();
       for(int i = 0; i < int.parse(msg['nb']); i++)
       {
