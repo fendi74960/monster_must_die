@@ -45,6 +45,8 @@ class GameButtons extends GameNetwork with TapDetector {
   final buttonsSize = Vector2(120, 30);
   final buttonsUnitSize = Vector2(60, 60);
 
+  List<int> arrayToSend = [0, 0, 0, 0];
+
   @override
   Future<void> onLoad() async {
     await super.onLoad();
@@ -118,6 +120,9 @@ class GameButtons extends GameNetwork with TapDetector {
     secondButtonPosition = Vector2(size.x-buttonsUnitSize.x,buttonsUnitSize.y);
     thirdButtonPosition = Vector2(size.x-buttonsUnitSize.x,buttonsUnitSize.y*2);
     fourthButtonPosition = Vector2(size.x-buttonsUnitSize.x,buttonsUnitSize.y*3);
+
+    //Start the send thread
+    sendThread();
   }
 
   @override
@@ -155,6 +160,26 @@ class GameButtons extends GameNetwork with TapDetector {
     } else {
       fourthButton.render(canvas,position:fourthButtonPosition, size: buttonsUnitSize);
     }
+  }
+
+  //Every 5 seconds, send the selected units to send to your comrade
+  void sendThread() async {
+    if(arrayToSend[0] > 0) {
+      socket.emit('toother', { 'id': firstButtonUnitType.toString(), 'nb': arrayToSend[0].toString() });
+    }
+    if (arrayToSend[1] > 0) {
+      socket.emit('toother', { 'id': secondButtonUnitType.toString(), 'nb': arrayToSend[1].toString() });
+    }
+    if (arrayToSend[2] > 0) {
+      socket.emit('toother', { 'id': thirdButtonUnitType.toString(), 'nb': arrayToSend[2].toString() });
+    }
+    if (arrayToSend[3] > 0) {
+      socket.emit('toother', { 'id': fourthButtonUnitType.toString(), 'nb': arrayToSend[3].toString() });
+    }
+
+    arrayToSend = [0, 0, 0, 0];
+    await Future.delayed(const Duration(seconds: 5), (){});
+    sendThread();
   }
 
   @override
@@ -203,8 +228,15 @@ class GameButtons extends GameNetwork with TapDetector {
       buttonArea = allyPosition & buttonsSize;
       if (buttonArea.contains(event.eventPosition.game.toOffset()) &&
           allyPressed == false) {
-        print("Send unit to ally");
-        socket.emit('toother', { 'id': selectedUnit.toString(), 'nb': '1' });
+        if(selectedUnit == firstButtonUnitType) {
+          arrayToSend[0]++;
+        } else if (selectedUnit == secondButtonUnitType) {
+          arrayToSend[1]++;
+        } else if (selectedUnit == thirdButtonUnitType) {
+          arrayToSend[2]++;
+        } else {
+          arrayToSend[3]++;
+        }
       }
       allyPressed = buttonArea.contains(event.eventPosition.game.toOffset());
     }

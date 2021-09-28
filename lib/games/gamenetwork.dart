@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:monster_must_die/controller/wavecontroller.dart';
 import 'package:monster_must_die/games/gameloader.dart';
@@ -81,9 +83,11 @@ class GameNetwork extends GameLoader {
   void createEvent(IO.Socket socket) {
     socket.on('create', (msg) {
       showToast('You receive ' + msg['nb'].toString() + " unit(s)", position: ToastPosition.top, textStyle: TextStyle(color: Colors.white, fontSize: 30), backgroundColor: Colors.blue);
+      var rng = Random();
       for(int i = 0; i < int.parse(msg['nb']); i++)
       {
-        listUnit.add(UnitWidget.unitWidgetSpawn(size.x/2,size.y-40,int.parse(msg['id']),images,null,playerType));
+        double randomX = rng.nextInt(size.x.toInt()).toDouble();
+        listUnit.add(UnitWidget.unitWidgetSpawn(randomX, size.y-40, int.parse(msg['id']), images, null, playerType));
       }
     });
   }
