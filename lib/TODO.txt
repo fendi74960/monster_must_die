@@ -2,9 +2,7 @@
 ecran de chargement + attente autre joueur
 
 affichage du nombre d'unité qui sera envoyé + timer ce serais top !
-toast demande
 
-ajouter la perte des points coop
 tracking (ex utilisé xAPI)
     -> dire avec quoi l'unité est tué ? pour savoir si le joueur est plus solo ou demande de l'aide ? et aussi pour équilibrer
 

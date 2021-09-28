@@ -39,7 +39,6 @@ void toOtherEvent(sockets, socket) async {
   /// want to send unit to the other client
 
   socket.on('toother', (data) {
-    print('Receive toother');
     for (int i = 0; i < sockets.length; i++) {
       if (socket != sockets[i]) {
         sockets[i].emit('create', data);
@@ -53,7 +52,6 @@ void toAllEvent(io, socket) async {
   /// want to send unit to all the clients
 
   socket.on('toall', (data) {
-    print('Receive toall');
     io.to("room").emit('create', data);
   });
 }
@@ -97,7 +95,6 @@ void helpToOtherEvent(sockets, socket) async {
   /// want to send a help toast about an enmy to the other client
 
   socket.on('helptoother', (data) {
-    print('Receive helptoother');
     for (int i = 0; i < sockets.length; i++) {
       if (socket != sockets[i]) {
         sockets[i].emit('help', data);
