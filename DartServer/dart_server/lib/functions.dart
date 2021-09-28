@@ -28,6 +28,7 @@ void createEvents(io, sockets, socket, players, readys, currentWave) async {
   ///Create all the events used for the server
 
   waitEvent(io, socket, readys, players, currentWave);
+  helpToOtherEvent(sockets, socket);
   toOtherEvent(sockets, socket);
   toAllEvent(io, socket);
   readyEvent(io, socket, readys, currentWave);
@@ -87,6 +88,20 @@ void readyEvent(io, socket, readys, int currentWave) async {
       currentWave++;
       io.to("room").emit('wave', currentWave);
       readys.clear();
+    }
+  });
+}
+
+void helpToOtherEvent(sockets, socket) async {
+  ///We call this event if one of the client
+  /// want to send a help toast about an enmy to the other client
+
+  socket.on('helptoother', (data) {
+    print('Receive helptoother');
+    for (int i = 0; i < sockets.length; i++) {
+      if (socket != sockets[i]) {
+        sockets[i].emit('help', data);
+      }
     }
   });
 }

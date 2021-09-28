@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:monster_must_die/controller/wavecontroller.dart';
 import 'package:monster_must_die/games/gameloader.dart';
+import 'package:monster_must_die/models/enemy.dart';
 import 'package:monster_must_die/widgets/unit_widget.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:oktoast/oktoast.dart';
@@ -11,6 +12,7 @@ class GameNetwork extends GameLoader {
   late IO.Socket socket;
   bool socketCreated = false;
 
+  //It's the default type of unit that the player will have
   int playerType = 0;
 
   ///If the server is on local network and we don't want to write the IP
@@ -36,10 +38,7 @@ class GameNetwork extends GameLoader {
                 .setExtraHeaders({'foo': 'bar'}) // optional
                 .build());
         print("connected to 192.168.1." + msg);
-        unitEvent(socket);
-        createEvent(socket);
-        waveEvent(socket);
-        socket.emit('wait', 'true');
+        createCommonEvents(socket);
       });
       i++;
     }
@@ -61,13 +60,19 @@ class GameNetwork extends GameLoader {
               .setExtraHeaders({'foo': 'bar'}) // optional
               .build());
       print("connected");
-      unitEvent(socket);
-      createEvent(socket);
-      waveEvent(socket);
-      socket.emit('wait', 'true');
+      createCommonEvents(socket);
     });
   }
 
+  ///Used when we have created the socket
+  /// it add the events to the socket
+  void createCommonEvents(IO.Socket socket) {
+    unitEvent(socket);
+    helpEvent(socket);
+    createEvent(socket);
+    waveEvent(socket);
+    socket.emit('wait', 'true');
+  }
 
   ///If the server send a 'create' event,
   /// then we add the good number and type of units
@@ -81,6 +86,19 @@ class GameNetwork extends GameLoader {
         listUnit.add(UnitWidget.unitWidgetSpawn(size.x/2,size.y-40,int.parse(msg['id']),images,null,playerType));
       }
     });
+  }
+
+  ///If the server send a 'help' event,
+  /// it launch the toast with a enemy name (maybe the sprite in the futur)
+  void helpEvent(IO.Socket socket) {
+    socket.on('help', (msg) {
+      showToast('Your comrade need help\n to kill a ' + Enemy.TypeToName(msg.round()), position: ToastPosition.top, textStyle: TextStyle(color: Colors.white, fontSize: 30), backgroundColor: Colors.red);
+    });
+  }
+
+  ///Send a 'helptoother' to the server
+  void sendHelp(int type) {
+    socket.emit("helptother", type);
   }
 
   ///If the server send a 'wave' event,

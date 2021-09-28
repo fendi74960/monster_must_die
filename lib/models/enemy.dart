@@ -27,7 +27,32 @@ class Enemy extends SpriteAnimationComponent {
   //10-11 : ghost
   //12-13 : zombie
 
-
+  static String TypeToName(int type) {
+    switch(type) {
+      case 0:
+      case 1:
+        return 'Archer';
+      case 2:
+      case 3:
+        return 'Cyclop';
+      case 4:
+      case 5:
+        return 'Dog';
+      case 6:
+      case 7:
+        return 'Eye';
+      case 8:
+      case 9:
+        return 'Gargoyle';
+      case 10:
+      case 11:
+        return 'ghost';
+      case 12:
+      case 13:
+        return 'Zombie';
+    }
+    return '';
+  }
 
   ///Constructors : prend position [x] [y] et un [type]
   Enemy(double x, double y, int pType):super(position: Vector2(x,y)){
