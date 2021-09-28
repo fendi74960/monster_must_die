@@ -1,6 +1,5 @@
 
 ecran de chargement + attente autre joueur
-trouver le moyen d'attendre qu'on est connecté (check avec variable bool)
 
 envoie par paquet toute les x second
 toast demande

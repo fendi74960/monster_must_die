@@ -9,8 +9,9 @@ import 'package:oktoast/oktoast.dart';
 class GameNetwork extends GameLoader {
 
   late IO.Socket socket;
+  bool socketCreated = false;
 
-  int playerType = 1;
+  int playerType = 0;
 
   ///If the server is on local network and we don't want to write the IP
   /// it try all the adress, then the server send the right number
@@ -99,6 +100,7 @@ class GameNetwork extends GameLoader {
         playerType = 1;
       }
       socket.emit('ready', 'true');
+      socketCreated = true;
     });
   }
 

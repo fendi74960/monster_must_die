@@ -72,7 +72,12 @@ class _NetworkMenu extends State<NetworkMenu> {
                                             '.' +
                                             field4.val.toString()
                                     );
-                                    await Future.delayed(const Duration(seconds: 5), (){});
+                                    await Future.delayed(const Duration(seconds: 3), (){});
+                                    /*
+                                    while(gameRef.socketCreated == false) /////////////////////////////////////////////// if the socket don't connect, let's Alt+F4 !
+                                    {
+                                      await Future.delayed(const Duration(microseconds: 100), (){});
+                                    }*/
                                     gameRef.startGame();
                                     gameRef.setUnitType();
 
@@ -100,8 +105,12 @@ class _NetworkMenu extends State<NetworkMenu> {
                                 ElevatedButton(
                                   onPressed: () async {
                                     gameRef.unknowLocalIP();
-
-                                    await Future.delayed(const Duration(seconds: 5), (){});
+                                    await Future.delayed(const Duration(seconds: 4), (){});
+                                    /*
+                                    while(gameRef.socketCreated == false)
+                                    {
+                                      await Future.delayed(const Duration(microseconds: 100), (){});
+                                    }*/
                                     gameRef.startGame();
                                     gameRef.setUnitType();
 
