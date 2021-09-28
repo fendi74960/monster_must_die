@@ -1,6 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:monster_must_die/widgets/hud.dart';
 import 'package:monster_must_die/widgets/unit_widget.dart';
@@ -41,6 +42,7 @@ class GameButtons extends GameNetwork with TapDetector {
   int fourthButtonUnitType = 6;
 
   int selectedUnit = 0;
+  bool enemyClicked=false;
 
   final buttonsSize = Vector2(120, 30);
   final buttonsUnitSize = Vector2(60, 60);
@@ -167,6 +169,18 @@ class GameButtons extends GameNetwork with TapDetector {
 
     //check if the unit is selected and it change the selectedUnit if yes
     if (this.overlays.isActive(Hud.id)) {
+      for(int i = 0; i < listEnemy.length; i++)
+      {
+        var buttonArea = listEnemy[i].position-Vector2(listEnemy[i].size.x/2,listEnemy[i].size.y/2) & listEnemy[i].size;
+
+        if (buttonArea.contains(event.eventPosition.game.toOffset())) {
+          print("Enemy clicked");
+          print("Need help enemy type : " + listEnemy[i].type.toString());
+          enemyClicked=true;
+          //await Future.delayed(const Duration(seconds: 5), (){});
+        }
+      }
+
       var buttonArea = firstButtonPosition & buttonsUnitSize;
       if (buttonArea.contains(event.eventPosition.game.toOffset())) {
         selectedUnit = firstButtonUnitType;
@@ -185,11 +199,12 @@ class GameButtons extends GameNetwork with TapDetector {
       }
 
       //add unit when we tap on the screen (at the bottom half of the screen)
-      if(event.eventPosition.game.x<size.x-buttonsUnitSize.x  && event.eventPosition.game.y>size.y/2) {
+      if(!enemyClicked && event.eventPosition.game.x<size.x-buttonsUnitSize.x  && event.eventPosition.game.y>size.y/2) {
         if(playerData.pointsPerso>0 && UnitWidget.howMuchItCost(selectedUnit)<=playerData.pointsPerso) {
           listUnit.add(UnitWidget.unitWidgetSpawn(event.eventPosition.game.x, event.eventPosition.game.y, selectedUnit, images,playerData,playerType));
         }
       }
+      enemyClicked=false;
 
       //emit to the server a command (ready or toother)
       buttonArea = readyPosition & buttonsSize;
@@ -203,8 +218,16 @@ class GameButtons extends GameNetwork with TapDetector {
       buttonArea = allyPosition & buttonsSize;
       if (buttonArea.contains(event.eventPosition.game.toOffset()) &&
           allyPressed == false) {
-        print("Send unit to ally");
-        socket.emit('toother', { 'id': selectedUnit.toString(), 'nb': '1' });
+        if(UnitWidget.howMuchItCost(selectedUnit) <playerData.pointsCoop)
+          {
+            playerData.pointsCoop-=UnitWidget.howMuchItCost(selectedUnit);
+            print("Send unit to ally");
+            socket.emit('toother', { 'id': selectedUnit.toString(), 'nb': '1' });
+          }
+        else{
+          print("not enough point");
+        }
+
       }
       allyPressed = buttonArea.contains(event.eventPosition.game.toOffset());
     }
@@ -221,6 +244,8 @@ class GameButtons extends GameNetwork with TapDetector {
     readyPressed = false;
     allyPressed = false;
   }
+
+
 
   ///Set the unit of the player (there's 2 possibility)
   void setUnitType() async {
