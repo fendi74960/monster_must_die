@@ -102,7 +102,7 @@ class GameNetwork extends GameLoader {
 
   ///Send a 'helptoother' to the server
   void sendHelp(int type) {
-    socket.emit("helptother", type);
+    socket.emit("helptoother", type);
   }
 
   ///If the server send a 'wave' event,
