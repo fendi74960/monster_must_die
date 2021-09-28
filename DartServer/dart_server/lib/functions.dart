@@ -27,7 +27,8 @@ void sendLocalIp(socket) async {
 void createEvents(io, sockets, socket, players, readys, currentWave) async {
   ///Create all the events used for the server
 
-  waitEvent(io, socket, readys, players);
+  waitEvent(io, socket, readys, players, currentWave);
+  helpToOtherEvent(sockets, socket);
   toOtherEvent(sockets, socket);
   toAllEvent(io, socket);
   readyEvent(io, socket, readys, currentWave);
@@ -57,6 +58,23 @@ void toAllEvent(io, socket) async {
   });
 }
 
+void waitEvent(io, socket, readys, players, currentWave) async {
+  ///Set one player as ready
+  /// to lauch a wave or other things
+
+  socket.on('wait', (data) {
+    players.add(1);
+    print("Setting the unit " + (players.length - 1).toString());
+    socket.emit('unit', players.length - 1);
+
+    //So if we connect again, we reset
+    if (players.length >= 2) {
+      players.clear();
+      currentWave = 0;
+    }
+  });
+}
+
 void readyEvent(io, socket, readys, int currentWave) async {
   ///Set one player as ready
   /// to lauch a wave or other things
@@ -74,14 +92,17 @@ void readyEvent(io, socket, readys, int currentWave) async {
   });
 }
 
-void waitEvent(io, socket, readys, players) async {
-  ///Set one player as ready
-  /// to lauch a wave or other things
+void helpToOtherEvent(sockets, socket) async {
+  ///We call this event if one of the client
+  /// want to send a help toast about an enmy to the other client
 
-  socket.on('wait', (data) {
-    players.add(1);
-    print("Setting the unit " + (players.length - 1).toString());
-    socket.emit('unit', players.length - 1);
+  socket.on('helptoother', (data) {
+    print('Receive helptoother');
+    for (int i = 0; i < sockets.length; i++) {
+      if (socket != sockets[i]) {
+        sockets[i].emit('help', data);
+      }
+    }
   });
 }
 
