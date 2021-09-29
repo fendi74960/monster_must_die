@@ -8,7 +8,6 @@ import 'package:monster_must_die/widgets/unit_widget.dart';
 
 import '../models/player_data.dart';
 
-
 class GameLoader extends FlameGame {
   //Permet de mettre en cache les images plus tard
   static const _imageAssets = [
@@ -46,12 +45,15 @@ class GameLoader extends FlameGame {
     'Unit/wizard/moving.png',
   ];
 
+  late SpriteComponent background;
+  late int typeBg = 0;
 
   late PlayerData playerData;
 
   //Listes des unit/ennemie qui vont apparaitre
   late List<EnemyWidget> listEnemy;
   late List<UnitWidget> listUnit;
+
   //boolean temp pour voir si unit/ennemy ne bouge plus
   late bool tempAStopper;
 
@@ -59,13 +61,14 @@ class GameLoader extends FlameGame {
   @override
   Future<void> onLoad() async {
     await images.loadAll(_imageAssets);
-    playerData=PlayerData();
+    playerData = PlayerData();
     listUnit = List.empty(growable: true);
     listEnemy = List.empty(growable: true);
+    changeBackground(typeBg);
   }
 
   ///Lance le jeu en creant pour l'instant des ennemies random
-  void startGame(){
+  void startGame() {
     /*for(int i = 0; i < 5 ; i++){
       listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 0,images));
     }
@@ -76,21 +79,39 @@ class GameLoader extends FlameGame {
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 8,images));
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 10,images));
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 12,images));*/
-    WaveController.newWave(7, listEnemy, 0.toDouble(), size.x , 0, size.y/3, images,playerData);
+    WaveController.newWave(7, listEnemy, 0.toDouble(), size.x, 0, size.y / 3, images, playerData);
   }
 
+  void changeBackground(int typeBg) {
+    switch (typeBg) {
+      case 0:
+        background = SpriteComponent.fromImage(images.fromCache("heheboy.png"),
+            size: Vector2(size.x, size.y),
+            srcSize: Vector2(700, 660),
+            position: Vector2(0, 0));
+        break;
+      case 1:
+        background = SpriteComponent.fromImage(images.fromCache("fe.png"),
+            size: Vector2(size.x, size.y),
+            srcSize: Vector2(40, 40),
+            position: Vector2(0, 0));
+        break;
+      default:
+        break;
+    }
+  }
 
   ///Execute chaque frame pour render les differents choses sur le [canvas]
   @override
   void render(Canvas canvas) {
-
-    for(int i = 0; i < listUnit.length; i++)
-    {
+    canvas.save();
+    background.render(canvas);
+    canvas.restore();
+    for (int i = 0; i < listUnit.length; i++) {
       listUnit[i].renderUnit(canvas);
     }
 
-    for(int i = 0; i < listEnemy.length; i++)
-    {
+    for (int i = 0; i < listEnemy.length; i++) {
       listEnemy[i].renderEnemy(canvas);
     }
   }
@@ -99,10 +120,10 @@ class GameLoader extends FlameGame {
   @override
   void update(double dt) {
     //LOGIQUE POUR UNIT ALLIER
-    for(int i = 0; i < listUnit.length; i++)
-    {
-      EnemyWidget target=EnemyWidget(0,0,0,images);
-      if(listUnit[i].isAlive()) {
+    for (int i = 0; i < listUnit.length; i++) {
+      EffectOfBg(listUnit[i]);
+      EnemyWidget target = EnemyWidget(0, 0, 0, images);
+      if (listUnit[i].isAlive()) {
         if (listEnemy.isNotEmpty) {
           tempAStopper = listUnit[i].isStopped;
 
@@ -110,8 +131,7 @@ class GameLoader extends FlameGame {
 
           if (tempAStopper == listUnit[i].isStopped) {
             listUnit[i].etatChanger = false;
-          }
-          else {
+          } else {
             listUnit[i].etatChanger = true;
           }
 
@@ -119,38 +139,33 @@ class GameLoader extends FlameGame {
             //Move TOWARDS nearest ennemy
             listUnit[i].updateMovUnit(dt, listUnit[i].speed, target);
             listUnit[i].actualisationAnim(-1);
-          }
-          else {
+          } else {
             listUnit[i].attaque(dt, target);
             listUnit[i].actualisationAnim(1);
           }
         }
-      }
-      else {
+      } else {
         listUnit.removeAt(i);
       }
     }
     //LOGIQUE POUR ENEMIES
-    for(int i = 0; i < listEnemy.length; i++)
-    {
-      UnitWidget target=UnitWidget(0,0,0,images,null,0);
-      if(listEnemy[i].isAlive()) {
-        tempAStopper=listEnemy[i].isStopped;
-        target = listEnemy[i].checkInRangeUnit(listUnit,size);
-        if(tempAStopper==listEnemy[i].isStopped){
-          listEnemy[i].etatChanger=false;
-        }
-        else{
-          listEnemy[i].etatChanger=true;
+    for (int i = 0; i < listEnemy.length; i++) {
+      UnitWidget target = UnitWidget(0, 0, 0, images, null, 0);
+      if (listEnemy[i].isAlive()) {
+        tempAStopper = listEnemy[i].isStopped;
+        target = listEnemy[i].checkInRangeUnit(listUnit, size);
+        if (tempAStopper == listEnemy[i].isStopped) {
+          listEnemy[i].etatChanger = false;
+        } else {
+          listEnemy[i].etatChanger = true;
         }
 
-        if(!listEnemy[i].isStopped) {
+        if (!listEnemy[i].isStopped) {
           //Move TOWARDS nearest ennemy
-          listEnemy[i].updateMovEnemie(dt, listEnemy[i].speed,target);
+          listEnemy[i].updateMovEnemie(dt, listEnemy[i].speed, target);
           listEnemy[i].actualisationAnim(-1);
-        }
-        else{
-          listEnemy[i].attaque(dt,target);
+        } else {
+          listEnemy[i].attaque(dt, target);
           listEnemy[i].actualisationAnim(1);
         }
 
@@ -158,13 +173,17 @@ class GameLoader extends FlameGame {
           playerData.lives -= 1;
           listEnemy.removeAt(i);
         }
-      }
-      else {
+      } else {
         listEnemy.removeAt(i);
       }
     }
   }
 
-
+  void EffectOfBg(UnitWidget unit) {
+    switch (typeBg) {
+      default:
+        //unit.health += 0.1;
+        break;
+    }
+  }
 }
-

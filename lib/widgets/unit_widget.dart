@@ -174,7 +174,6 @@ class UnitWidget extends Unit  {
   ///puis on fait un calculer vectorielle pour pouvoir se diriger vers une [target] avec une certaine [speed]
   void updateMovUnit(double dt,double speed,EnemyWidget target) {
     animation?.update(dt);
-    //super.update(dt);
 
     double vectorX=target.position.x-position.x;
     double vectorY=target.position.y-position.y;
