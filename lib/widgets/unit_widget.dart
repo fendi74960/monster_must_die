@@ -226,7 +226,7 @@ class UnitWidget extends Unit  {
   ///Si oui alors renvoie l'ennemie le plus proche pour l'attaque
   ///sinon renvoie soit l'ennemie le plus proche mais pas a portee d'attaque
   EnemyWidget checkInRangeEnnemie(List<EnemyWidget> ens ){
-    bool canHit=true;
+    //bool canHit=true;
     double enemyX,enemyY;
     //get sa position au centre du sprite
     double unitX=position.x,unitY=position.y;
@@ -235,18 +235,7 @@ class UnitWidget extends Unit  {
     double proximite=9999999;
     double tempProxi=9999999;
     for(int ii=0;ii<ens.length;ii++) {
-      //Check si ennemie=arien et qu'on peut taper
-      if((ens[ii].type == 8 || ens[ii].type == 9) && type > 3) {
-        canHit=false;
-      }
-      //mage peut taper ghost
-      else if((ens[ii].type == 10 || ens[ii].type == 11) && (type < 14)){
-        canHit=false;
-      }
-      else {
-        canHit=true;
-      }
-      if (canHit) {
+      if (canHit(type,ens[ii].type)) {
         //get la position au centre du sprit de l'ennemie
         enemyX = ens[ii].position.x ;
         enemyY = ens[ii].position.y;
@@ -444,4 +433,27 @@ class UnitWidget extends Unit  {
       }
     }
   }
+
+  bool canHit(int typeU,int typeE){
+    switch (typeE){
+      //Peut taper volant
+      case 8:
+      case 9:
+        if(typeU<4) {
+          return true;
+        }
+        break;
+      //Peut taper ghost
+      case 10:
+      case 11:
+        if (typeU==14 || typeU==15) {
+          return true;
+        }
+        break;
+      default:
+        return true;
+    }
+    return false;
+  }
+
 }
