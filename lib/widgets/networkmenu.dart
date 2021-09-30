@@ -32,8 +32,11 @@ class _NetworkMenu extends State<NetworkMenu> {
 
   _NetworkMenu(this.gameRef);
 
+  late double textSizeDefault;
+
   @override
   Widget build(BuildContext context) {
+    textSizeDefault = MediaQuery.of(context).textScaleFactor;
     return Center(
         child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
@@ -52,7 +55,7 @@ class _NetworkMenu extends State<NetworkMenu> {
                               Text(
                                 'Where is the server ?',
                                 style: TextStyle(
-                                  fontSize: 50,
+                                  fontSize: textSizeDefault * 50,
                                   color: Colors.white,
                                 ),
                               ),
@@ -97,7 +100,7 @@ class _NetworkMenu extends State<NetworkMenu> {
                                 Text(
                                   'If the server is on local network',
                                   style: TextStyle(
-                                    fontSize: MediaQuery.of(context).devicePixelRatio * 8,
+                                    fontSize: textSizeDefault * 25,
                                     color: Colors.white,
                                   ),
                                 ),
@@ -140,13 +143,16 @@ class IPField extends StatefulWidget {
 }
 
 class IPFieldState extends State<IPField> {
+  late double textSizeDefault;
+
   @override
   Widget build(BuildContext context) {
+    textSizeDefault = MediaQuery.of(context).textScaleFactor;
     return Column(
       children: <Widget>[
         NumberPicker(
-          textStyle: TextStyle(color: Colors.grey),
-          selectedTextStyle: TextStyle(color: Colors.white, fontSize: MediaQuery.of(context).devicePixelRatio * 9),
+          textStyle: TextStyle(color: Colors.grey, fontSize: textSizeDefault * 20),
+          selectedTextStyle: TextStyle(color: Colors.white, fontSize: textSizeDefault * 30),
           value: widget.val,
           step: 1,
           minValue: 0,
