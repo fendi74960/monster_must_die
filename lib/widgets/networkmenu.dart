@@ -97,7 +97,7 @@ class _NetworkMenu extends State<NetworkMenu> {
                                 Text(
                                   'If the server is on local network',
                                   style: TextStyle(
-                                    fontSize: 21,
+                                    fontSize: MediaQuery.of(context).devicePixelRatio * 8,
                                     color: Colors.white,
                                   ),
                                 ),
@@ -146,35 +146,38 @@ class IPFieldState extends State<IPField> {
       children: <Widget>[
         NumberPicker(
           textStyle: TextStyle(color: Colors.grey),
-          selectedTextStyle: TextStyle(color: Colors.white),
+          selectedTextStyle: TextStyle(color: Colors.white, fontSize: MediaQuery.of(context).devicePixelRatio * 9),
           value: widget.val,
           step: 1,
           minValue: 0,
           maxValue: 255,
           onChanged: (value) => setState(() => widget.val = value),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            IconButton(
-              icon: Icon(Icons.remove),
-              color: Colors.white,
-              onPressed: () => setState(() {
-                final newValue = widget.val - 1;
-                widget.val = newValue.clamp(0, 255);
-              }),
-            ),
-            Text(widget.val.toString(), style: TextStyle(color: Colors.white)),
-            IconButton(
-              icon: Icon(Icons.add),
-              color: Colors.white,
-              onPressed: () => setState(() {
-                final newValue = widget.val + 1;
-                widget.val = newValue.clamp(0, 255);
-              }),
-            ),
-          ],
-        ),
+        Visibility(
+          visible:  MediaQuery.of(context).size.width > 500 == true,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                icon: Icon(Icons.remove),
+                color: Colors.white,
+                onPressed: () => setState(() {
+                  final newValue = widget.val - 1;
+                  widget.val = newValue.clamp(0, 255);
+                }),
+              ),
+              Text(widget.val.toString(), style: TextStyle(color: Colors.white)),
+              IconButton(
+                icon: Icon(Icons.add),
+                color: Colors.white,
+                onPressed: () => setState(() {
+                  final newValue = widget.val + 1;
+                  widget.val = newValue.clamp(0, 255);
+                }),
+              ),
+            ],
+          ),
+        )
       ],
     );
   }
