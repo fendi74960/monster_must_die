@@ -1,0 +1,57 @@
+
+Archer:
+    It does ranged attack
+    Efficient against wizard, spear
+    Weak against cavalrie
+
+Cyclop:
+    It does heavy attack
+    Efficent against cavalrie, spearman
+    Weak against archer, berserk
+
+Dog:
+    It is fast but have low health point and it does heavy attack
+    Efficient against marshall
+    Weak against archer
+
+Eye:
+    It fly and go directly to your health bar
+    Efficient X
+    Weak against archer, balista
+
+Gargoyle:
+    It fly
+    Efficient against ground units
+    Weak against balista
+
+Ghost:
+    Can only be attacked with magic and go directly to your health bar
+    Efficient against X
+    Weak against wizard
+
+Zombie:
+    Basic unit
+    Efficient against spearman
+    Weak against berserker
+
+Dragon:
+    It have a lot of health point
+    Efficient against ground units
+    Weak against balista
+
+Litch:
+    It spawn enemies after few seconds
+    Efficient against X
+    Weak against berserker
+
+Chicken:
+    It transform to an random enemy when killed
+    Efficient against X
+    Weak against X
+
+
+
+
+
+
+
