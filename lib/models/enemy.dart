@@ -16,6 +16,8 @@ class Enemy extends SpriteAnimationComponent {
 
   //Autres
   late int type;
+  late bool isFlying;
+  late bool isRanged;
 
   //Vu que je sais pas faire les enum et que sa a l'air chiant a faire
   //TYPE
@@ -58,6 +60,8 @@ class Enemy extends SpriteAnimationComponent {
   Enemy(double x, double y, int pType):super(position: Vector2(x,y)){
     type = pType;
     anchor=Anchor.center;
+    isFlying=false;
+    isRanged=false;
     //switch sur le type pour ses stats
     switch(type) {
       //0-1 : archer
@@ -68,6 +72,7 @@ class Enemy extends SpriteAnimationComponent {
         speed = 0.4;
         size = Vector2(60, 60);
         range=190;
+        isRanged=true;
       }
       break;
       //2-3 : cyclop
@@ -108,6 +113,7 @@ class Enemy extends SpriteAnimationComponent {
         speed = 0.8;
         size = Vector2(60, 60);
         range=50;
+        isFlying=true;
       }
       break;
       //10-11 : ghost

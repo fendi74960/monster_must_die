@@ -15,6 +15,7 @@ class UnitWidget extends Unit  {
 
   bool etatChanger=false;
   bool isStopped=false;
+  bool effetUnique=true;
   late Sprite lifebar;
 
   late Images images;

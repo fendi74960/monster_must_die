@@ -50,6 +50,7 @@ flutter:
     - assets/images/Unit/marshall/
     - assets/images/Unit/spear/
     - assets/images/Unit/wizard/
+    - assets/images/Background/
 
   uses-material-design: true
 

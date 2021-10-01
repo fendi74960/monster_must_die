@@ -11,6 +11,7 @@ class EnemyWidget extends Enemy {
   late Sprite lifebar;
   bool etatChanger=false;
   bool isStopped=false;
+  bool effetUnique=true;
 
   late Images images;
 

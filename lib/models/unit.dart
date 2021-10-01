@@ -15,6 +15,8 @@ class Unit extends SpriteAnimationComponent{
 
   //Autres
   late int type;
+  late bool isFlying;
+  late bool isRanged;
 
   //Vu que je sais pas faire les enum et que sa a l'air chiant a faire
   //TYPE
@@ -31,6 +33,8 @@ class Unit extends SpriteAnimationComponent{
   Unit(double x, double y, int pType,Images images):super(position: Vector2(x,y)){
     type = pType;
     anchor=Anchor.center;
+    isFlying=false;
+    isRanged=false;
     switch(type) {
     //0-1 : archer
       case 0:
@@ -40,6 +44,7 @@ class Unit extends SpriteAnimationComponent{
         speed = 0.4;
         size = Vector2(60, 60);
         range=200;
+        isRanged=true;
       }
       break;
     //2-3 : balista
@@ -50,6 +55,7 @@ class Unit extends SpriteAnimationComponent{
         speed = 0.05;
         size = Vector2(60, 60);
         range=250;
+        isRanged=true;
       }
       break;
     //4-5 : berserker
@@ -80,6 +86,7 @@ class Unit extends SpriteAnimationComponent{
         speed = 0.9;
         size = Vector2(60, 60);
         range=60;
+        isFlying=true;
       }
       break;
     //10-11 : marshall
@@ -110,6 +117,7 @@ class Unit extends SpriteAnimationComponent{
         speed = 0.3;
         size = Vector2(60, 60);
         range=85;
+        isRanged=true;
       }
       break;
 
