@@ -39,7 +39,7 @@ Dragon:
     Efficient against ground units
     Weak against balista
 
-Litch:
+Lich:
     It spawn enemies after few seconds
     Efficient against X
     Weak against berserker
