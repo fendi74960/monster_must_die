@@ -3,8 +3,6 @@ import 'package:monster_must_die/games/gamebuttons.dart';
 import 'package:monster_must_die/games/gamesetting.dart';
 import 'package:monster_must_die/widgets/unit_widget.dart';
 import 'package:provider/provider.dart';
-
-import '../games/gameloader.dart';
 import '../models/player_data.dart';
 
 class Hud extends StatelessWidget {
@@ -25,51 +23,60 @@ class Hud extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.end,
+
         children: [
-          ChangeNotifierProvider.value(
-            value: gameRef.buttonData,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 15.0, left: 15.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.end,
+          Container(
+            height: MediaQuery.of(context).size.height * 0.5,
+            child: ChangeNotifierProvider.value(
+              value: gameRef.buttonData,
+              child: Row(
+
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   ElevatedButton(
-                    onPressed: () async {
-
-                      //When we click on send, it :
-                      // check if the player has enough points
-                      // add the unit to the arrayToSend
-                      // increment nomberToSend
-                      if (UnitWidget.howMuchItCost(gameRef.selectedUnit) < gameRef.playerData.pointsCoop) {
-                        gameRef.buttonData.numberToSend++;
-                        gameRef.playerData.pointsCoop -= UnitWidget.howMuchItCost(gameRef.selectedUnit);
-                        if (gameRef.selectedUnit == gameRef.firstButtonUnitType) {
-                          gameRef.arrayToSend[0]++;
-                        } else if (gameRef.selectedUnit == gameRef.secondButtonUnitType) {
-                          gameRef.arrayToSend[1]++;
-                        } else if (gameRef.selectedUnit == gameRef.thirdButtonUnitType) {
-                          gameRef.arrayToSend[2]++;
-                        } else {
-                          gameRef.arrayToSend[3]++;
+                      onPressed: () async {
+                        //When we click on send, it :
+                        // check if the player has enough points
+                        // add the unit to the arrayToSend
+                        // increment nomberToSend
+                        if (UnitWidget.howMuchItCost(gameRef.selectedUnit) <
+                            gameRef.playerData.pointsCoop) {
+                          gameRef.buttonData.numberToSend++;
+                          gameRef.playerData.pointsCoop -=
+                              UnitWidget.howMuchItCost(gameRef.selectedUnit);
+                          if (gameRef.selectedUnit ==
+                              gameRef.firstButtonUnitType) {
+                            gameRef.arrayToSend[0]++;
+                          } else if (gameRef.selectedUnit ==
+                              gameRef.secondButtonUnitType) {
+                            gameRef.arrayToSend[1]++;
+                          } else if (gameRef.selectedUnit ==
+                              gameRef.thirdButtonUnitType) {
+                            gameRef.arrayToSend[2]++;
+                          } else {
+                            gameRef.arrayToSend[3]++;
+                          }
                         }
-                      }
-                    },
-                    child: Row(
-                      children: [
-                        Selector<ButtonData, int>(
-                          selector: (_, buttonData) => buttonData.numberToSend,
-                          builder: (_, numberToSend, __) {
-                            return Expanded(
-                                child: Text(
-                                  'Send $numberToSend unit(s)',
-                                  style: TextStyle(color: Colors.white, fontSize: 20),
-                                ));
-                          },
-                        ),
-                      ],
-                    )
+                      },
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(Colors.amber),
+                      ),
+                      child: Row(
+                        children: [
+                          Selector<ButtonData, int>(
+                            selector: (_, buttonData) =>
+                            buttonData.numberToSend,
+                            builder: (_, numberToSend, __) {
+                              return Text(
+                                'Send $numberToSend unit(s)',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              );
+                            },
+                          ),
+                        ],
+                      )
                   ),
                 ],
               ),
