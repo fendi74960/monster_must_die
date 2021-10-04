@@ -1,7 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:monster_must_die/widgets/hud.dart';
 import 'package:monster_must_die/widgets/unit_widget.dart';
@@ -48,6 +47,7 @@ class GameButtons extends GameNetwork with TapDetector {
   final buttonsUnitSize = Vector2(60, 60);
 
   List<int> arrayToSend = [0, 0, 0, 0];
+  ButtonData buttonData = ButtonData();
 
   @override
   Future<void> onLoad() async {
@@ -203,6 +203,7 @@ class GameButtons extends GameNetwork with TapDetector {
     }
 
     arrayToSend = [0, 0, 0, 0];
+    //buttonData.numberToSend = 0;
     await Future.delayed(const Duration(seconds: 5), () {});
     sendThread();
   }
@@ -270,13 +271,17 @@ class GameButtons extends GameNetwork with TapDetector {
           readyPressed == false) {
         print("I'm ready");
         socket.emit('ready', 'true');
+        buttonData.numberToSend = 0;
       }
       readyPressed = buttonArea.contains(event.eventPosition.game.toOffset());
 
+      //When tap on Send button
       buttonArea = allyPosition & buttonsSize;
       if (buttonArea.contains(event.eventPosition.game.toOffset()) &&
           allyPressed == false) {
+        /*
         if (UnitWidget.howMuchItCost(selectedUnit) < playerData.pointsCoop) {
+          buttonData.numberToSend++;
           playerData.pointsCoop -= UnitWidget.howMuchItCost(selectedUnit);
           if (selectedUnit == firstButtonUnitType) {
             arrayToSend[0]++;
@@ -288,6 +293,8 @@ class GameButtons extends GameNetwork with TapDetector {
             arrayToSend[3]++;
           }
         }
+
+         */
       }
       allyPressed = buttonArea.contains(event.eventPosition.game.toOffset());
     }
@@ -354,5 +361,18 @@ class GameButtons extends GameNetwork with TapDetector {
       thirdButtonUnitType = 12;
       fourthButtonUnitType = 14;
     }
+  }
+}
+
+//Class where the variable inside can be display on the hud menu
+// it use a notifier when the variable change
+class ButtonData extends ChangeNotifier   {
+  int _numberToSend = 0;
+
+  int get numberToSend => _numberToSend;
+
+  set numberToSend(int value) {
+    _numberToSend = value;
+    notifyListeners();
   }
 }
