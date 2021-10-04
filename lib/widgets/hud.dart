@@ -37,6 +37,11 @@ class Hud extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () async {
+
+                      //When we click on send, it :
+                      // check if the player has enough points
+                      // add the unit to the arrayToSend
+                      // increment nomberToSend
                       if (UnitWidget.howMuchItCost(gameRef.selectedUnit) < gameRef.playerData.pointsCoop) {
                         gameRef.buttonData.numberToSend++;
                         gameRef.playerData.pointsCoop -= UnitWidget.howMuchItCost(gameRef.selectedUnit);
@@ -135,102 +140,3 @@ class Hud extends StatelessWidget {
         ]);
   }
 }
-
-/*
-return Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          ChangeNotifierProvider.value(
-            value: gameRef.numberToSend,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 15.0, left: 15.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  ElevatedButton(
-                    onPressed: () async {
-                      //++
-                    },
-                    child: Selector<int, int>(
-                      selector: (_, numberToSend) => numberToSend,
-                      builder: (_, numberToSend, __) {
-                        return Expanded(
-                            child: Text(
-                              'Unit To send: $numberToSend',
-                              style: TextStyle(color: Colors.white, fontSize: 20),
-                            ));
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          ChangeNotifierProvider.value(
-            value: gameRef.playerData,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 15.0, left: 15.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Selector<PlayerData, int>(
-                        selector: (_, playerData) => playerData.waves,
-                        builder: (_, waves, __) {
-                          return Expanded(
-                              child: Text(
-                            'Waves: $waves',
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          ));
-                        },
-                      ),
-                      Selector<PlayerData, int>(
-                        selector: (_, playerData) => playerData.lives,
-                        builder: (_, lives, __) {
-                          return Expanded(
-                              child: Text(
-                            'Lives: $lives',
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          ));
-                        },
-                      ),
-                      Selector<PlayerData, int>(
-                        selector: (_, playerData) => playerData.pointsPerso,
-                        builder: (_, pointsPerso, __) {
-                          return Expanded(
-                            child: Text(
-                              'pointsPerso: $pointsPerso',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
-                            ),
-                          );
-                        },
-                      ),
-                      Selector<PlayerData, int>(
-                        selector: (_, playerData) => playerData.pointsCoop,
-                        builder: (_, pointsCoop, __) {
-                          return Expanded(
-                            child: Text(
-                              'pointsCoop: $pointsCoop',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
-                            ),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          )
-        ]);
- */

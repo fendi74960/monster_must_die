@@ -13,12 +13,6 @@ class GameButtons extends GameNetwork with TapDetector {
   final readyPosition = Vector2(0, 0);
   bool readyPressed = false;
 
-  //ally button
-  late Sprite allyPressedButton;
-  late Sprite allyUnpressedButton;
-  final allyPosition = Vector2(0, 40);
-  bool allyPressed = false;
-
   //first unit button
   late Sprite firstButton;
   late Sprite firstButtonSelected;
@@ -61,17 +55,6 @@ class GameButtons extends GameNetwork with TapDetector {
     );
     readyPressedButton = await loadSprite(
       'ready-buttons.png',
-      srcPosition: Vector2(0, 20),
-      srcSize: Vector2(60, 20),
-    );
-
-    allyUnpressedButton = await loadSprite(
-      'send-buttons.png',
-      srcPosition: Vector2.zero(),
-      srcSize: Vector2(60, 20),
-    );
-    allyPressedButton = await loadSprite(
-      'send-buttons.png',
       srcPosition: Vector2(0, 20),
       srcSize: Vector2(60, 20),
     );
@@ -138,9 +121,6 @@ class GameButtons extends GameNetwork with TapDetector {
     var button = readyPressed ? readyPressedButton : readyUnpressedButton;
     button.render(canvas, position: readyPosition, size: buttonsSize);
 
-    button = allyPressed ? allyPressedButton : allyUnpressedButton;
-    button.render(canvas, position: allyPosition, size: buttonsSize);
-
     //check if the unit is selected and it change the sprite if yes
     if (selectedUnit == firstButtonUnitType) {
       firstButtonSelected.render(canvas,
@@ -203,7 +183,7 @@ class GameButtons extends GameNetwork with TapDetector {
     }
 
     arrayToSend = [0, 0, 0, 0];
-    //buttonData.numberToSend = 0;
+    buttonData.numberToSend = 0;
     await Future.delayed(const Duration(seconds: 5), () {});
     sendThread();
   }
@@ -271,45 +251,19 @@ class GameButtons extends GameNetwork with TapDetector {
           readyPressed == false) {
         print("I'm ready");
         socket.emit('ready', 'true');
-        buttonData.numberToSend = 0;
       }
       readyPressed = buttonArea.contains(event.eventPosition.game.toOffset());
-
-      //When tap on Send button
-      buttonArea = allyPosition & buttonsSize;
-      if (buttonArea.contains(event.eventPosition.game.toOffset()) &&
-          allyPressed == false) {
-        /*
-        if (UnitWidget.howMuchItCost(selectedUnit) < playerData.pointsCoop) {
-          buttonData.numberToSend++;
-          playerData.pointsCoop -= UnitWidget.howMuchItCost(selectedUnit);
-          if (selectedUnit == firstButtonUnitType) {
-            arrayToSend[0]++;
-          } else if (selectedUnit == secondButtonUnitType) {
-            arrayToSend[1]++;
-          } else if (selectedUnit == thirdButtonUnitType) {
-            arrayToSend[2]++;
-          } else {
-            arrayToSend[3]++;
-          }
-        }
-
-         */
-      }
-      allyPressed = buttonArea.contains(event.eventPosition.game.toOffset());
     }
   }
 
   @override
   void onTapUp(TapUpInfo event) {
     readyPressed = false;
-    allyPressed = false;
   }
 
   @override
   void onTapCancel() {
     readyPressed = false;
-    allyPressed = false;
   }
 
   ///Set the unit of the player (there's 2 possibility)
