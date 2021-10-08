@@ -49,10 +49,16 @@ class GameLoader extends FlameGame {
     'Background/rain.png',
     'Background/swamp.png',
     'Background/volcano.png',
+    'Spell/fireball.png',
+    'Spell/thunder.png',
+    'Spell/transformation.png'
   ];
 
   late SpriteComponent background;
-  late int typeBg = 5;
+
+  late SpriteAnimationComponent spell;
+  late int typeBg = 1;
+  late int typeSpell=1;
 
   late PlayerData playerData;
 
@@ -71,6 +77,8 @@ class GameLoader extends FlameGame {
     listUnit = List.empty(growable: true);
     listEnemy = List.empty(growable: true);
     changeBackground(typeBg);
+    spell=SpriteAnimationComponent(position: Vector2.zero(),size:size );
+
   }
 
   ///Lance le jeu en creant pour l'instant des ennemies random
@@ -86,10 +94,11 @@ class GameLoader extends FlameGame {
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 10,images));
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 12,images));*/
     WaveController.newWave(7, listEnemy, 0.toDouble(), size.x, 0, size.y / 3, images, playerData);
-
+    startSpell(typeSpell);
   }
 
-  void changeBackground(int typeBg) {
+  void changeBackground(int bgId) {
+    typeBg=bgId;
     switch (typeBg) {
       case 0:
         background = SpriteComponent.fromImage(images.fromCache("Background/field.png"),
@@ -132,6 +141,49 @@ class GameLoader extends FlameGame {
     }
   }
 
+  void startSpell(int spellId){
+      typeSpell=spellId;
+      switch (spellId) {
+      //fireball
+        case 0:
+          spell.animation=SpriteAnimation.fromFrameData(
+              images.fromCache('Spell/fireball.png'),
+              SpriteAnimationData.sequenced(
+                amount: 21,
+                textureSize: Vector2(240, 61),
+                stepTime: 0.1,
+              ));
+          break;
+          //thunder
+        case 1:
+          spell.animation=SpriteAnimation.fromFrameData(
+              images.fromCache('Spell/thunder.png'),
+              SpriteAnimationData.sequenced(
+                amount: 12,
+                textureSize: Vector2(137, 63),
+                stepTime: 0.1,
+              ));
+          break;
+          //transfo
+        case 2:
+          spell.animation=SpriteAnimation.fromFrameData(
+              images.fromCache('Spell/transformation.png'),
+              SpriteAnimationData.sequenced(
+                amount: 22,
+                textureSize: Vector2(240, 61),
+                stepTime: 0.1,
+              ));
+          break;
+
+        default:
+          break;
+      }
+      spell.animation?.loop=false;
+      spell.setOpacity(0.5);
+    }
+
+
+
   ///Execute chaque frame pour render les differents choses sur le [canvas]
   @override
   void render(Canvas canvas) {
@@ -145,6 +197,18 @@ class GameLoader extends FlameGame {
     for (int i = 0; i < listEnemy.length; i++) {
       listEnemy[i].renderEnemy(canvas);
     }
+    canvas.save();
+    if(spell.animation != null ){
+      int? temp =spell.animation?.frames.length;
+      if(spell.animation?.currentIndex ==temp!-1 ) {
+        spell.playing=false;
+      }
+    }
+
+    if(spell.playing) {
+      spell.render(canvas);
+    }
+    canvas.restore();
   }
 
   ///Executer chaque frame pour update certaines action dont les mouvements avec un [dt]
@@ -182,6 +246,9 @@ class GameLoader extends FlameGame {
     //LOGIQUE POUR ENEMIES
     for (int i = 0; i < listEnemy.length; i++) {
       EffectOfBg(listEnemy[i]);
+      if(spell.playing) {
+        EffectOfSpell(listEnemy[i]);
+      }
       UnitWidget target = UnitWidget(0, 0, 0, images, null, 0);
       if (listEnemy[i].isAlive()) {
         tempAStopper = listEnemy[i].isStopped;
@@ -209,6 +276,7 @@ class GameLoader extends FlameGame {
         listEnemy.removeAt(i);
       }
     }
+    spell.animation?.update(dt);
   }
 
   void EffectOfBg(var unit) {
@@ -253,6 +321,29 @@ class GameLoader extends FlameGame {
         if(!unit.isFlying){
           unit.health-=0.1;
         }
+        break;
+      default:
+        break;
+    }
+  }
+
+  void EffectOfSpell(var unit) {
+    switch (typeSpell) {
+    //Fireball
+      case 0:
+        if(!unit.isFlying){
+          unit.health-=2;
+        }
+        break;
+    //Thunder
+      case 1:
+        if(unit.isFlying){
+          unit.health-=2;
+        }
+        break;
+    //Transfo
+      case 2:
+       //TODO
         break;
       default:
         break;

@@ -51,6 +51,7 @@ flutter:
     - assets/images/Unit/spear/
     - assets/images/Unit/wizard/
     - assets/images/Background/
+    - assets/images/Spell/
 
   uses-material-design: true
 
