@@ -6,10 +6,12 @@ affichage du nombre d'unité qui sera envoyé + timer ce serais top !
 tracking (ex utilisé xAPI)
     -> dire avec quoi l'unité est tué ? pour savoir si le joueur est plus solo ou demande de l'aide ? et aussi pour équilibrer
 
-Tout mettre en responsive (rip le menu de baub)
+Logo application + nom
+
 
 bug:
 deux fois première vague
 vague 3 puis 6
 vague 4 puis 7
 ...
+animation attaque cheval bizzare

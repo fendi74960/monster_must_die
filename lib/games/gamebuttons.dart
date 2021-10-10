@@ -38,7 +38,7 @@ class GameButtons extends GameNetwork with TapDetector {
   bool enemyClicked = false;
 
   final buttonsSize = Vector2(120, 30);
-  final buttonsUnitSize = Vector2(60, 60);
+  late Vector2 buttonsUnitSize;
 
   List<int> arrayToSend = [0, 0, 0, 0];
   ButtonData buttonData = ButtonData();
@@ -46,6 +46,8 @@ class GameButtons extends GameNetwork with TapDetector {
   @override
   Future<void> onLoad() async {
     await super.onLoad();
+
+    buttonsUnitSize = Vector2(size.x * 0.2, size.x * 0.2);
 
     //Ready and send buttons
     readyUnpressedButton = await loadSprite(

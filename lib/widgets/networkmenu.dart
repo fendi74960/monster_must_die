@@ -100,7 +100,7 @@ class _NetworkMenu extends State<NetworkMenu> {
                                 Text(
                                   'If the server is on local network',
                                   style: TextStyle(
-                                    fontSize: textSizeDefault * 25,
+                                    fontSize: textSizeDefault * 30,
                                     color: Colors.white,
                                   ),
                                 ),
@@ -172,7 +172,7 @@ class IPFieldState extends State<IPField> {
                   widget.val = newValue.clamp(0, 255);
                 }),
               ),
-              Text(widget.val.toString(), style: TextStyle(color: Colors.white)),
+              Text(widget.val.toString(), style: TextStyle(color: Colors.white, fontSize: textSizeDefault * 30)),
               IconButton(
                 icon: Icon(Icons.add),
                 color: Colors.white,

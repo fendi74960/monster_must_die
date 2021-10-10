@@ -68,6 +68,15 @@ class Hud extends StatelessWidget {
                             selector: (_, buttonData) =>
                             buttonData.numberToSend,
                             builder: (_, numberToSend, __) {
+                              return Container(
+                                width: MediaQuery.of(context).size.height * 0.1,
+                                child: Text(
+                                  'Send $numberToSend units',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20),
+                                )
+                              );
                               return Text(
                                 'Send $numberToSend unit(s)',
                                 style: TextStyle(
@@ -99,8 +108,9 @@ class Hud extends StatelessWidget {
                         builder: (_, waves, __) {
                           return Expanded(
                               child: Text(
-                                'Waves: $waves',
-                                style: TextStyle(color: Colors.white, fontSize: 20),
+                                'Wave: $waves',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(color: Colors.white, fontSize: 18),
                               ));
                         },
                       ),
@@ -110,7 +120,8 @@ class Hud extends StatelessWidget {
                           return Expanded(
                               child: Text(
                                 'Lives: $lives',
-                                style: TextStyle(color: Colors.white, fontSize: 20),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(color: Colors.white, fontSize: 18),
                               ));
                         },
                       ),
@@ -119,9 +130,10 @@ class Hud extends StatelessWidget {
                         builder: (_, pointsPerso, __) {
                           return Expanded(
                             child: Text(
-                              'pointsPerso: $pointsPerso',
+                              'Score: $pointsPerso',
+                              textAlign: TextAlign.center,
                               style:
-                              TextStyle(color: Colors.white, fontSize: 20),
+                              TextStyle(color: Colors.white, fontSize: 18),
                             ),
                           );
                         },
@@ -131,9 +143,10 @@ class Hud extends StatelessWidget {
                         builder: (_, pointsCoop, __) {
                           return Expanded(
                             child: Text(
-                              'pointsCoop: $pointsCoop',
+                              'Coop score: $pointsCoop',
+                              textAlign: TextAlign.center,
                               style:
-                              TextStyle(color: Colors.white, fontSize: 20),
+                              TextStyle(color: Colors.white, fontSize: 18),
                             ),
                           );
                         },
