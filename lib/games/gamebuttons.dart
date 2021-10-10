@@ -43,6 +43,8 @@ class GameButtons extends GameNetwork with TapDetector {
   List<int> arrayToSend = [0, 0, 0, 0];
   ButtonData buttonData = ButtonData();
 
+  bool threadStarted = false;
+
   @override
   Future<void> onLoad() async {
     await super.onLoad();
@@ -110,9 +112,6 @@ class GameButtons extends GameNetwork with TapDetector {
         Vector2(size.x - buttonsUnitSize.x, buttonsUnitSize.y * 2);
     fourthButtonPosition =
         Vector2(size.x - buttonsUnitSize.x, buttonsUnitSize.y * 3);
-
-    //Start the send thread
-    sendThread();
   }
 
   @override
@@ -159,6 +158,7 @@ class GameButtons extends GameNetwork with TapDetector {
 
   //Every 5 seconds, send the selected units to send to your comrade
   void sendThread() async {
+    await Future.delayed(const Duration(seconds: 5), () {});
     if (arrayToSend[0] > 0) {
       socket.emit('toother', {
         'id': firstButtonUnitType.toString(),
@@ -186,8 +186,7 @@ class GameButtons extends GameNetwork with TapDetector {
 
     arrayToSend = [0, 0, 0, 0];
     buttonData.numberToSend = 0;
-    await Future.delayed(const Duration(seconds: 5), () {});
-    sendThread();
+    threadStarted = false;
   }
 
   @override

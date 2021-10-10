@@ -40,6 +40,12 @@ class Hud extends StatelessWidget {
                         // check if the player has enough points
                         // add the unit to the arrayToSend
                         // increment nomberToSend
+                        // and check if the thread is launched (if no, it launch it)
+                        if(gameRef.threadStarted == false)
+                        {
+                          gameRef.sendThread();
+                          gameRef.threadStarted = true;
+                        }
                         if (UnitWidget.howMuchItCost(gameRef.selectedUnit) <
                             gameRef.playerData.pointsCoop) {
                           gameRef.buttonData.numberToSend++;
