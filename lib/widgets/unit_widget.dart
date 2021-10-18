@@ -101,7 +101,7 @@ class UnitWidget extends Unit  {
         data?.pointsPerso-=UnitWidget.howMuchItCost(type);
       }
         animation = SpriteAnimation.fromFrameData(
-          images.fromCache('Unit/dragon/moving.png'),
+          images.fromCache('Unit/pegas/moving.png'),
           SpriteAnimationData.sequenced(
             amount: 4,
             amountPerRow: 1,
@@ -351,7 +351,7 @@ class UnitWidget extends Unit  {
       //8-9 : dragon
         case 8:
           animation=SpriteAnimation.fromFrameData(
-              images.fromCache('Unit/dragon/moving.png'),
+              images.fromCache('Unit/pegas/moving.png'),
               SpriteAnimationData.sequenced(
                 amount: 4,
                 amountPerRow: 1,
@@ -361,7 +361,7 @@ class UnitWidget extends Unit  {
           break;
         case 9:
           animation = SpriteAnimation.fromFrameData(
-            images.fromCache('Unit/dragon/attack.png'),
+            images.fromCache('Unit/pegas/attack.png'),
             SpriteAnimationData.sequenced(
               amount: 20,
               textureSize: Vector2(140, 110),

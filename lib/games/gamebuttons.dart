@@ -271,9 +271,9 @@ class GameButtons extends GameNetwork with TapDetector {
   void setUnitType() async {
     if (playerType == 1) {
       firstButton = await loadSprite(
-        'Unit/dragon/button.png',
+        'Unit/pegas/button.png',
         srcPosition: Vector2.zero(),
-        srcSize: Vector2(100, 100),
+        srcSize: Vector2(70, 70),
       );
       secondButton = await loadSprite(
         'Unit/marshall/button.png',
@@ -291,9 +291,9 @@ class GameButtons extends GameNetwork with TapDetector {
         srcSize: Vector2(50, 50),
       );
       firstButtonSelected = await loadSprite(
-        'Unit/dragon/buttonselected.png',
+        'Unit/pegas/buttonselected.png',
         srcPosition: Vector2.zero(),
-        srcSize: Vector2(100, 100),
+        srcSize: Vector2(70, 70),
       );
       secondButtonSelected = await loadSprite(
         'Unit/marshall/buttonselected.png',
