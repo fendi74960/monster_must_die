@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flame/flame.dart';
+import 'package:flutter/services.dart';
 
 import '../games/gamebuttons.dart';
 
@@ -14,6 +15,7 @@ class GameSetting extends GameButtons {
     await super.onLoad();
 
     Flame.device.fullScreen();
+    Flame.device.setOrientation(DeviceOrientation.portraitUp);
   }
 
   @override
