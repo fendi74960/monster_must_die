@@ -37,6 +37,11 @@ class GameLoader extends FlameGame {
     'Enemy/dog/moving.png',
     'Enemy/cyclop/moving.png',
     'Enemy/archer/moving.png',
+    'Enemy/dragon/moving.png',
+    'Enemy/chicken/moving.png',
+    'Enemy/lich/moving.png',
+    'Enemy/dragon/attack.png',
+    'Enemy/lich/attack.png',
     'Unit/archer/moving.png',
     'Unit/balista/moving.png',
     'Unit/berserker/moving.png',
@@ -71,6 +76,7 @@ class GameLoader extends FlameGame {
   //boolean temp pour voir si unit/ennemy ne bouge plus
   late bool tempAStopper;
 
+  var typePossible=[0,4,6,8,10,12];
   ///Charger plusieurs element au debut du jeu
   @override
   Future<void> onLoad() async {
@@ -95,9 +101,12 @@ class GameLoader extends FlameGame {
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 8,images));
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 10,images));
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 12,images));*/
+    listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 14,images));
+    listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 16,images));
+    listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 18,images));
     WaveController.newWave(7, listEnemy, 0.toDouble(), size.x, 0, size.y / 3, images, playerData);
     //A ENLEVER
-    startSpell(typeSpell);
+    //startSpell(typeSpell);
   }
 
   void changeBackground(int bgId) {
@@ -276,7 +285,14 @@ class GameLoader extends FlameGame {
           listEnemy.removeAt(i);
         }
       } else {
-        listEnemy.removeAt(i);
+        if(listEnemy[i].type==16){
+          var rnd = new Random();
+          listEnemy[i]=EnemyWidget(listEnemy[i].x, listEnemy[i].y,typePossible[rnd.nextInt(typePossible.length)] , images);
+        }
+        else{
+          listEnemy.removeAt(i);
+        }
+
       }
     }
     spell.animation?.update(dt);
@@ -346,7 +362,6 @@ class GameLoader extends FlameGame {
         break;
     //Transfo
       case 2:
-        var typePossible=[0,4,6,8,10,12];
         if(spell.animation != null ){
           int? temp =spell.animation?.frames.length;
           if(spell.animation?.currentIndex ==temp!-2 ) {

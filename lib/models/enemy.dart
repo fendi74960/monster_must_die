@@ -19,7 +19,6 @@ class Enemy extends SpriteAnimationComponent {
   late bool isFlying;
   late bool isRanged;
 
-  //Vu que je sais pas faire les enum et que sa a l'air chiant a faire
   //TYPE
   //0-1 : archer
   //2-3 : cyclop
@@ -28,6 +27,9 @@ class Enemy extends SpriteAnimationComponent {
   //8-9 : gargoyle
   //10-11 : ghost
   //12-13 : zombie
+  //14-15 : dragon
+  //16-17 : chicken
+  //18-19 : lich
 
   static String TypeToName(int type) {
     switch(type) {
@@ -52,6 +54,15 @@ class Enemy extends SpriteAnimationComponent {
       case 12:
       case 13:
         return 'Zombie';
+      case 14:
+      case 15:
+        return 'Dragon';
+      case 16:
+      case 17:
+        return 'Chicken';
+      case 18:
+      case 19:
+        return 'Lich';
     }
     return '';
   }
@@ -138,6 +149,40 @@ class Enemy extends SpriteAnimationComponent {
         speed = 0.4;
         size = Vector2(60, 60);
         range=40;
+      }
+      break;
+
+      //14-15 : dragon
+      case 14:
+      case 15: {
+      damage = 1.55;
+      health = 150;
+      speed = 0.9;
+      size = Vector2(60, 60);
+      range=60;
+      isFlying=true;
+      }
+      break;
+
+      //16-17 : chicken
+      case 16:
+      case 17: {
+        damage = 0;
+        health = 20;
+        speed = 1.2;
+        size = Vector2(60, 60);
+        range=40;
+      }
+      break;
+
+      //18-19 : lich
+      case 18:
+      case 19: {
+        damage = 0;
+        health = 3000;
+        speed = 0.2;
+        size = Vector2(60, 60);
+        range=20;
       }
       break;
 

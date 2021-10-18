@@ -109,6 +109,44 @@ class EnemyWidget extends Enemy {
         ));
       break;
 
+    //14-15 : dragon
+      case 14:
+      case 15:
+        animation = SpriteAnimation.fromFrameData(
+            images.fromCache('Enemy/dragon/moving.png'),
+            SpriteAnimationData.sequenced(
+              amount: 4,
+              amountPerRow: 1,
+              textureSize: Vector2(32, 32),
+              stepTime: 0.1,
+            ));
+        break;
+
+    //16-17 : chicken
+      case 16:
+      case 17:
+        animation = SpriteAnimation.fromFrameData(
+            images.fromCache('Enemy/chicken/moving.png'),
+            SpriteAnimationData.sequenced(
+              amount: 4,
+              textureSize: Vector2(32, 32),
+              stepTime: 0.1,
+            ));
+        break;
+
+    //18-19 : lich
+      case 18:
+      case 19:
+        animation = SpriteAnimation.fromFrameData(
+            images.fromCache('Enemy/lich/moving.png'),
+            SpriteAnimationData.sequenced(
+              amount: 4,
+              amountPerRow: 1,
+              textureSize: Vector2(32, 32),
+              stepTime: 0.1,
+            ));
+        break;
+
       default: {
         animation = SpriteAnimation.fromFrameData(
             images.fromCache('fe.png'),
@@ -196,7 +234,7 @@ class EnemyWidget extends Enemy {
     double proximite=9999999;
     double tempProxi=9999999;
     //Si de type eye ou ghost alors ignore les units
-    if(![6,7,10,11].contains(type)) {
+    if(![6,10,16].contains(type)) {
       for (int ii = 0; ii < uns.length; ii++) {
         //get la position au centre du sprite de l'unit
         unitX = uns[ii].position.x ;
@@ -344,6 +382,60 @@ class EnemyWidget extends Enemy {
             SpriteAnimationData.sequenced(
               amount: 43,
               textureSize: Vector2(90, 65),
+              stepTime: 0.1,
+            ));
+        break;
+
+      //14-15 : dragon
+        case 14:
+          animation=SpriteAnimation.fromFrameData(
+              images.fromCache('Enemy/dragon/moving.png'),
+              SpriteAnimationData.sequenced(
+                amount: 4,
+                amountPerRow: 1,
+                textureSize: Vector2(32, 32),
+                stepTime: 0.1,
+              ));
+          break;
+        case 15:
+          animation = SpriteAnimation.fromFrameData(
+              images.fromCache('Enemy/dragon/attack.png'),
+              SpriteAnimationData.sequenced(
+                amount: 20,
+                textureSize: Vector2(140, 110),
+                stepTime: 0.1,
+              ));
+        break;
+
+      //16-17 : chicken
+        case 16:
+          animation=SpriteAnimation.fromFrameData(
+              images.fromCache('Enemy/chicken/moving.png'),
+              SpriteAnimationData.sequenced(
+                amount: 4,
+                textureSize: Vector2(32, 32),
+                stepTime: 0.1,
+              ));
+          break;
+        case 17:
+        break;
+
+      //18-19 : lich
+        case 18:
+          animation=SpriteAnimation.fromFrameData(
+              images.fromCache('Enemy/lich/moving.png'),
+              SpriteAnimationData.sequenced(
+                amount: 4,
+                amountPerRow: 1,
+                textureSize: Vector2(32, 32),
+                stepTime: 0.1,
+              ));
+          break;
+        case 19: animation = SpriteAnimation.fromFrameData(
+            images.fromCache('Enemy/lich/attack.png'),
+            SpriteAnimationData.sequenced(
+              amount: 43,
+              textureSize: Vector2(70, 90),
               stepTime: 0.1,
             ));
         break;

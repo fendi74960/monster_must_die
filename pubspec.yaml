@@ -48,6 +48,9 @@ flutter:
     - assets/images/Enemy/eye/
     - assets/images/Enemy/gargoyle/
     - assets/images/Enemy/ghost/
+    - assets/images/Enemy/dragon/
+    - assets/images/Enemy/chicken/
+    - assets/images/Enemy/lich/
     - assets/images/Enemy/zombie/
     - assets/images/Unit/archer/
     - assets/images/Unit/balista/
