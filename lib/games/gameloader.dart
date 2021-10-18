@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/palette.dart';
@@ -58,7 +60,7 @@ class GameLoader extends FlameGame {
 
   late SpriteAnimationComponent spell;
   late int typeBg = 1;
-  late int typeSpell=1;
+  late int typeSpell=2;
 
   late PlayerData playerData;
 
@@ -94,6 +96,7 @@ class GameLoader extends FlameGame {
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 10,images));
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 12,images));*/
     WaveController.newWave(7, listEnemy, 0.toDouble(), size.x, 0, size.y / 3, images, playerData);
+    //A ENLEVER
     startSpell(typeSpell);
   }
 
@@ -200,7 +203,7 @@ class GameLoader extends FlameGame {
     canvas.save();
     if(spell.animation != null ){
       int? temp =spell.animation?.frames.length;
-      if(spell.animation?.currentIndex ==temp!-1 ) {
+      if(spell.animation?.currentIndex ==temp! ) {
         spell.playing=false;
       }
     }
@@ -343,7 +346,19 @@ class GameLoader extends FlameGame {
         break;
     //Transfo
       case 2:
-       //TODO
+        var typePossible=[0,4,6,8,10,12];
+        if(spell.animation != null ){
+          int? temp =spell.animation?.frames.length;
+          if(spell.animation?.currentIndex ==temp!-2 ) {
+            var rnd = new Random();
+            double oldHealthPource;
+            for(int i=0;i<listEnemy.length;i++){
+              oldHealthPource=listEnemy[i].health/listEnemy[i].maxHealth;
+              listEnemy[i]=EnemyWidget(listEnemy[i].x, listEnemy[i].y,typePossible[rnd.nextInt(typePossible.length)] , images);
+              listEnemy[i].health=listEnemy[i].maxHealth*oldHealthPource;
+            }
+          }
+        }
         break;
       default:
         break;

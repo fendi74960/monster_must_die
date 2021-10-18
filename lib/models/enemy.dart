@@ -59,6 +59,10 @@ class Enemy extends SpriteAnimationComponent {
   ///Constructors : prend position [x] [y] et un [type]
   Enemy(double x, double y, int pType):super(position: Vector2(x,y)){
     type = pType;
+    //Si le type est impair alors reduit de 1 pour que sa start sur moveAnimation
+    if(type.isOdd){
+      type-=1;
+    }
     anchor=Anchor.center;
     isFlying=false;
     isRanged=false;
