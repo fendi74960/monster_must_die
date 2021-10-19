@@ -94,7 +94,7 @@ class UnitWidget extends Unit  {
             stepTime: 0.1,
           ));
       break;
-    //8-9 : dragon
+    //8-9 : pegase
       case 8:
       case 9:
       if (playerType==1){
@@ -263,10 +263,13 @@ class UnitWidget extends Unit  {
 
   ///Permet d'actualiser l'animation en changeant son type grace a [modificateurType] qui est  1 ou -1
   ///Passe entre moving<->attacking
-  void actualisationAnim(int modificateurType){
-    if(etatChanger) {
-      type += modificateurType;
-
+  void actualisationAnim(){
+    if(type.isOdd) {
+      type -= 1;
+    }
+    else {
+      type+=1;
+    }
       switch (type) {
       //0-1 : archer
         case 0:
@@ -348,7 +351,7 @@ class UnitWidget extends Unit  {
               stepTime: 0.1,
             ));
         break;
-      //8-9 : dragon
+      //8-9 : pegase
         case 8:
           animation=SpriteAnimation.fromFrameData(
               images.fromCache('Unit/pegas/moving.png'),
@@ -363,8 +366,8 @@ class UnitWidget extends Unit  {
           animation = SpriteAnimation.fromFrameData(
             images.fromCache('Unit/pegas/attack.png'),
             SpriteAnimationData.sequenced(
-              amount: 20,
-              textureSize: Vector2(140, 110),
+              amount: 54,
+              textureSize: Vector2(130, 100),
               stepTime: 0.1,
             ));
         break;
@@ -439,7 +442,7 @@ class UnitWidget extends Unit  {
       //Peut taper volant
       case 8:
       case 9:
-        if(typeU<4) {
+        if(typeU<4 || typeU==8 || typeU==9 || typeU==14 || typeU==15) {
           return true;
         }
         break;
@@ -451,9 +454,12 @@ class UnitWidget extends Unit  {
         }
         break;
       default:
+        if(typeU==8 || typeU==9 || typeU==2 || typeU==3) {
+          return false;
+        }
         return true;
     }
     return false;
-  }
+
 
 }

@@ -4,7 +4,6 @@ ecran de chargement + attente autre joueur
 tracking (ex utilisé xAPI)
     -> dire avec quoi l'unité est tué ? pour savoir si le joueur est plus solo ou demande de l'aide ? et aussi pour équilibrer
 
-jouter nouvelles unités
 
 finir sort ( on mets le 4 ou pas ? car barricade hum)
 

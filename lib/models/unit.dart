@@ -54,7 +54,7 @@ class Unit extends SpriteAnimationComponent{
         health = 5;
         speed = 0.05;
         size = Vector2(60, 60);
-        range=250;
+        range=275;
         isRanged=true;
       }
       break;
@@ -78,14 +78,14 @@ class Unit extends SpriteAnimationComponent{
         range=50;
       }
       break;
-    //8-9 : dragon
+    //8-9 : pegase
       case 8:
       case 9: {
-        damage = 1.75;
-        health = 200;
-        speed = 0.9;
+        damage = 2.55;
+        health = 100;
+        speed = 1.3;
         size = Vector2(60, 60);
-        range=60;
+        range=80;
         isFlying=true;
       }
       break;

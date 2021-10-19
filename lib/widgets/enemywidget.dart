@@ -140,7 +140,7 @@ class EnemyWidget extends Enemy {
         animation = SpriteAnimation.fromFrameData(
             images.fromCache('Enemy/lich/moving.png'),
             SpriteAnimationData.sequenced(
-              amount: 4,
+              amount: 32,
               amountPerRow: 1,
               textureSize: Vector2(32, 32),
               stepTime: 0.1,
@@ -233,19 +233,22 @@ class EnemyWidget extends Enemy {
     UnitWidget plusProche=UnitWidget(size.x/2, size.y+100, 0,images,null,0);
     double proximite=9999999;
     double tempProxi=9999999;
-    //Si de type eye ou ghost alors ignore les units
-    if(![6,10,16].contains(type)) {
+    //Si de type eye ou ghost ou chicken alors ignore les units
+    if(![6,10,16,18,19].contains(type)) {
       for (int ii = 0; ii < uns.length; ii++) {
-        //get la position au centre du sprite de l'unit
-        unitX = uns[ii].position.x ;
-        unitY = uns[ii].position.y ;
+        //Check pour les pegases
+        if(![8,9].contains(uns[ii].type) || ([0,1,8,9,14,15].contains(type)&&[8,9].contains(uns[ii].type))){
+          //get la position au centre du sprite de l'unit
+          unitX = uns[ii].position.x ;
+          unitY = uns[ii].position.y ;
 
-        //Calcul de la distance
-        tempProxi = sqrt(pow(unitX - enemyX, 2) + pow(unitY - enemyY, 2));
+          //Calcul de la distance
+          tempProxi = sqrt(pow(unitX - enemyX, 2) + pow(unitY - enemyY, 2));
 
-        if (tempProxi < proximite) {
-            plusProche = uns[ii];
-            proximite = tempProxi;
+          if (tempProxi < proximite) {
+              plusProche = uns[ii];
+              proximite = tempProxi;
+          }
         }
       }
     }
@@ -259,10 +262,13 @@ class EnemyWidget extends Enemy {
 
   ///Permet d'actualiser l'animation en changeant son type grace a [modificateurType] qui est  1 ou -1
   ///Passe entre moving<->attacking
-  void actualisationAnim(int modificateurType){
-    if(etatChanger) {
-      type += modificateurType;
-
+  void actualisationAnim(/*int modificateurType*/){
+    if(type.isOdd) {
+      type -=1;
+    }
+    else{
+      type +=1;
+    }
       switch (type) {
       //0-1 : archer
         case 0:
@@ -425,7 +431,7 @@ class EnemyWidget extends Enemy {
           animation=SpriteAnimation.fromFrameData(
               images.fromCache('Enemy/lich/moving.png'),
               SpriteAnimationData.sequenced(
-                amount: 4,
+                amount: 32,
                 amountPerRow: 1,
                 textureSize: Vector2(32, 32),
                 stepTime: 0.1,
@@ -442,6 +448,5 @@ class EnemyWidget extends Enemy {
         default:
           break;
       }
-    }
   }
 }

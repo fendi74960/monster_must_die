@@ -76,7 +76,7 @@ class GameLoader extends FlameGame {
   //boolean temp pour voir si unit/ennemy ne bouge plus
   late bool tempAStopper;
 
-  var typePossible=[0,4,6,8,10,12];
+  var typePossible=[0,4,6,8,10,12,14,16];
   ///Charger plusieurs element au debut du jeu
   @override
   Future<void> onLoad() async {
@@ -101,14 +101,15 @@ class GameLoader extends FlameGame {
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 8,images));
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 10,images));
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 12,images));*/
-    listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 14,images));
-    listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 16,images));
+    /*listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 14,images));
+    listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 16,images));*/
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 18,images));
     WaveController.newWave(7, listEnemy, 0.toDouble(), size.x, 0, size.y / 3, images, playerData);
     //A ENLEVER
     //startSpell(typeSpell);
   }
 
+  ///change le background en fonction de [bgID] donnée
   void changeBackground(int bgId) {
     typeBg=bgId;
     switch (typeBg) {
@@ -152,7 +153,7 @@ class GameLoader extends FlameGame {
         break;
     }
   }
-
+ ///Lance l'animation d'un sort en fonction de [spellId] donnée
   void startSpell(int spellId){
       typeSpell=spellId;
       switch (spellId) {
@@ -245,10 +246,11 @@ class GameLoader extends FlameGame {
           if (!listUnit[i].isStopped) {
             //Move TOWARDS nearest ennemy
             listUnit[i].updateMovUnit(dt, listUnit[i].speed, target);
-            listUnit[i].actualisationAnim(-1);
           } else {
             listUnit[i].attaque(dt, target);
-            listUnit[i].actualisationAnim(1);
+          }
+          if(listUnit[i].etatChanger){
+            listUnit[i].actualisationAnim();
           }
         }
       } else {
@@ -271,33 +273,50 @@ class GameLoader extends FlameGame {
           listEnemy[i].etatChanger = true;
         }
 
-        if (!listEnemy[i].isStopped) {
+        if (!listEnemy[i].isStopped && listEnemy[i].type!=19) {
           //Move TOWARDS nearest ennemy
           listEnemy[i].updateMovEnemie(dt, listEnemy[i].speed, target);
-          listEnemy[i].actualisationAnim(-1);
         } else {
           listEnemy[i].attaque(dt, target);
-          listEnemy[i].actualisationAnim(1);
+        }
+        if(listEnemy[i].etatChanger){
+          listEnemy[i].actualisationAnim();
         }
 
         if (listEnemy[i].position.y > size.y) {
           playerData.lives -= 1;
           listEnemy.removeAt(i);
         }
+        if(listEnemy[i].type==18){
+          bool? isLast=listEnemy[i].animation?.isLastFrame;
+          if(isLast!=null && isLast){
+            listEnemy[i].actualisationAnim();
+          }
+        }
+        if(listEnemy[i].type==19){
+          bool? isLast=listEnemy[i].animation?.isLastFrame;
+          if(isLast!=null && isLast){
+            listEnemy[i].actualisationAnim();
+            //fait spawn un zombie
+            listEnemy.add(EnemyWidget(listEnemy[i].x,listEnemy[i].y,12,images));
+          }
+        }
+
       } else {
-        if(listEnemy[i].type==16){
-          var rnd = new Random();
-          listEnemy[i]=EnemyWidget(listEnemy[i].x, listEnemy[i].y,typePossible[rnd.nextInt(typePossible.length)] , images);
-        }
-        else{
-          listEnemy.removeAt(i);
-        }
+          if(listEnemy[i].type==16){
+            var rnd = new Random();
+            listEnemy[i]=EnemyWidget(listEnemy[i].x, listEnemy[i].y,typePossible[rnd.nextInt(typePossible.length)] , images);
+          }
+          else{
+            listEnemy.removeAt(i);
+          }
 
       }
     }
     spell.animation?.update(dt);
   }
 
+  ///L'effet du background sur les unit allier ou ennemies
   void EffectOfBg(var unit) {
     switch (typeBg) {
       //FOG

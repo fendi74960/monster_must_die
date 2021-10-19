@@ -180,7 +180,7 @@ class Enemy extends SpriteAnimationComponent {
       case 19: {
         damage = 0;
         health = 3000;
-        speed = 0.2;
+        speed = 0.25;
         size = Vector2(60, 60);
         range=20;
       }
