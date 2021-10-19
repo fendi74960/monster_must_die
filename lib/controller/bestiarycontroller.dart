@@ -96,46 +96,11 @@ class EnemieInformation {
 
 //Class where the variable inside can be display on the waitingMenu
 // it use a notifier when the variable change
-class InformationData extends ChangeNotifier   { //TODO Essayer avec un EnemieInformation
-  EnemieInformation _enemieInformation = new EnemieInformation("Error");
+class InformationData extends ChangeNotifier   {
+  EnemieInformation _enemieInformation = EnemieInformation("Error");
   EnemieInformation get enemieInformation => _enemieInformation;
   set enemieInformation(EnemieInformation value) {
-    enemieInformation = value;
+    _enemieInformation = value;
     notifyListeners();
   }
-  /*
-  String _name = "";
-  String _picture = "";
-  String _description = "";
-  String _pros = "";
-  String _cons = "";
-
-  String get name => _name;
-  String get picture => _picture;
-  String get description => _description;
-  String get pros => _pros;
-  String get cons => _cons;
-
-  set name(String value) {
-    name = value;
-    notifyListeners();
-  }
-  set picture(String value) {
-    picture = value;
-    notifyListeners();
-  }
-  set description(String value) {
-    description = value;
-    notifyListeners();
-  }
-  set pros(String value) {
-    pros = value;
-    notifyListeners();
-  }
-  set cons(String value) {
-    cons = value;
-    notifyListeners();
-  }
-
-   */
 }

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:monster_must_die/controller/bestiarycontroller.dart';
 import 'package:monster_must_die/games/gamesetting.dart';
 import 'hud.dart';
-import 'package:flame/assets.dart';
 import 'package:provider/provider.dart';
 
 class WaitingMenu extends StatefulWidget {
@@ -22,7 +21,6 @@ class WaitingMenu extends StatefulWidget {
 // Define a corresponding State class.
 // This class holds data related to the Form.
 class _WaitingMenu extends State<WaitingMenu> {
-
   GameSetting gameRef;
 
   _WaitingMenu(this.gameRef);
@@ -47,81 +45,83 @@ class _WaitingMenu extends State<WaitingMenu> {
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-
                               ChangeNotifierProvider.value(
-                                value: gameRef.informationData,
-                                child: Column(
-                                          children: [
-                                            Selector<InformationData, String>(
-                                              selector: (_, inforamationData) =>
-                                              inforamationData.enemieInformation.name,
-                                              builder: (_, name, __) {
-                                                return Container(
-                                                    //width: MediaQuery.of(context).size.height * 0.1,
-                                                    child: Text(
-                                                      '$name',
-                                                      textAlign: TextAlign.center,
-                                                      style: TextStyle(
-                                                          color: Colors.white, fontSize: 20),
-                                                    )
-                                                );
-                                              },
-                                            ),
-                                            Selector<InformationData, String>(
-                                              selector: (_, inforamationData) =>
-                                              inforamationData.enemieInformation.picture,
-                                              builder: (_, picture, __) {
-                                                return Image(image: AssetImage(picture));
-                                              },
-                                            ),
-                                            Selector<InformationData, String>(
-                                              selector: (_, inforamationData) =>
-                                              inforamationData.enemieInformation.description,
-                                              builder: (_, description, __) {
-                                                return Container(
-                                                  //width: MediaQuery.of(context).size.height * 0.1,
-                                                    child: Text(
-                                                      '$description',
-                                                      textAlign: TextAlign.center,
-                                                      style: TextStyle(
-                                                          color: Colors.white, fontSize: 20),
-                                                    )
-                                                );
-                                              },
-                                            ),
-                                            Selector<InformationData, String>(
-                                              selector: (_, inforamationData) =>
-                                              inforamationData.enemieInformation.pros,
-                                              builder: (_, pros, __) {
-                                                return Container(
-                                                  //width: MediaQuery.of(context).size.height * 0.1,
-                                                    child: Text(
-                                                      '$pros',
-                                                      textAlign: TextAlign.center,
-                                                      style: TextStyle(
-                                                          color: Colors.white, fontSize: 20),
-                                                    )
-                                                );
-                                              },
-                                            ),
-                                            Selector<InformationData, String>(
-                                              selector: (_, inforamationData) =>
-                                              inforamationData.enemieInformation.cons,
-                                              builder: (_, cons, __) {
-                                                return Container(
-                                                  //width: MediaQuery.of(context).size.height * 0.1,
-                                                    child: Text(
-                                                      '$cons',
-                                                      textAlign: TextAlign.center,
-                                                      style: TextStyle(
-                                                          color: Colors.white, fontSize: 20),
-                                                    )
-                                                );
-                                              },
-                                            ),
-                                          ],
-                                        )
-                              ),
+                                  value: gameRef.informationData,
+                                  child: Column(children: [
+                                    Selector<InformationData, String>(
+                                      selector: (_, inforamationData) =>
+                                          inforamationData
+                                              .enemieInformation.name,
+                                      builder: (_, name, __) {
+                                        return Container(
+                                            //width: MediaQuery.of(context).size.height * 0.1,
+                                            child: Text(
+                                          '$name',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20),
+                                        ));
+                                      },
+                                    ),
+                                    Selector<InformationData, String>(
+                                      selector: (_, inforamationData) =>
+                                          inforamationData
+                                              .enemieInformation.picture,
+                                      builder: (_, picture, __) {
+                                        return Image(
+                                            image: AssetImage(picture));
+                                      },
+                                    ),
+                                    Selector<InformationData, String>(
+                                      selector: (_, inforamationData) =>
+                                          inforamationData
+                                              .enemieInformation.description,
+                                      builder: (_, description, __) {
+                                        return Container(
+                                            //width: MediaQuery.of(context).size.height * 0.1,
+                                            child: Text(
+                                          '$description',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20),
+                                        ));
+                                      },
+                                    ),
+                                    Selector<InformationData, String>(
+                                      selector: (_, inforamationData) =>
+                                          inforamationData
+                                              .enemieInformation.pros,
+                                      builder: (_, pros, __) {
+                                        return Container(
+                                            //width: MediaQuery.of(context).size.height * 0.1,
+                                            child: Text(
+                                          '$pros',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20),
+                                        ));
+                                      },
+                                    ),
+                                    Selector<InformationData, String>(
+                                      selector: (_, inforamationData) =>
+                                          inforamationData
+                                              .enemieInformation.cons,
+                                      builder: (_, cons, __) {
+                                        return Container(
+                                            //width: MediaQuery.of(context).size.height * 0.1,
+                                            child: Text(
+                                          '$cons',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20),
+                                        ));
+                                      },
+                                    ),
+                                  ])),
 /*
                               Text(
                                 'Archer',
@@ -153,8 +153,8 @@ class _WaitingMenu extends State<WaitingMenu> {
                               SizedBox(height: 32),
                               ElevatedButton(
                                 onPressed: () async {
-
-                                  gameRef.startGame(); //TODO start que quand les deux joueurs sont ready
+                                  gameRef
+                                      .startGame(); //TODO start que quand les deux joueurs sont ready
                                   gameRef.setUnitType();
 
                                   gameRef.overlays.remove(WaitingMenu.id);
