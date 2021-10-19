@@ -83,11 +83,6 @@ class Hud extends StatelessWidget {
                                       color: Colors.white, fontSize: 20),
                                 )
                               );
-                              return Text(
-                                'Send $numberToSend unit(s)',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              );
                             },
                           ),
                         ],

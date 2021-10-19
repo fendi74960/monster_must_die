@@ -42,7 +42,7 @@ class MyGameApp extends StatelessWidget {
                 NetworkMenu.id:(_,GameSetting gameRef) => NetworkMenu(gameRef),
               },
               // By default MainMenu overlay will be active.
-              initialActiveOverlays: [MainMenu.id],
+              initialActiveOverlays: [WaitingMenu.id],
               game: myGame,
             ),
           ),

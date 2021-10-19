@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:monster_must_die/widgets/hud.dart';
 import 'package:monster_must_die/widgets/unit_widget.dart';
 import '../games/gamenetwork.dart';
+import 'package:monster_must_die/controller/bestiarycontroller.dart';
 
 class GameButtons extends GameNetwork with TapDetector {
   //ready button
@@ -49,7 +50,13 @@ class GameButtons extends GameNetwork with TapDetector {
   late Vector2 buttonsUnitSize;
 
   List<int> arrayToSend = [0, 0, 0, 0];
+  //For the HUD
   ButtonData buttonData = ButtonData();
+
+  // For the Bestiary
+  InformationData informationData = InformationData();
+  BestiaryController bController = BestiaryController();
+  int currentBestiaryIndex = 0;
 
   bool threadStarted = false;
 
@@ -134,6 +141,8 @@ class GameButtons extends GameNetwork with TapDetector {
         Vector2(size.x - buttonsUnitSize.x, buttonsUnitSize.y * 3);
     firstSpellButtonPosition= Vector2(size.x - buttonsUnitSize.x, buttonsUnitSize.y * 4);
     secondSpellButtonPosition= Vector2(size.x - buttonsUnitSize.x, buttonsUnitSize.y * 5);
+
+    majInformationData();
   }
 
   @override
@@ -366,6 +375,10 @@ class GameButtons extends GameNetwork with TapDetector {
       thirdButtonUnitType = 12;
       fourthButtonUnitType = 14;
     }
+  }
+
+  void majInformationData() {
+    informationData.enemieInformation = bController.getEnemieInformation(currentBestiaryIndex);
   }
 }
 
