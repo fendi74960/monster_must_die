@@ -116,7 +116,7 @@ class Unit extends SpriteAnimationComponent{
         health = 1;
         speed = 0.3;
         size = Vector2(60, 60);
-        range=85;
+        range=95;
         isRanged=true;
       }
       break;

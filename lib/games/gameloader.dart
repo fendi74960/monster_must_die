@@ -58,9 +58,17 @@ class GameLoader extends FlameGame {
     'Background/volcano.png',
     'Spell/fireball.png',
     'Spell/thunder.png',
-    'Spell/transformation.png'
-  ];
+    'Spell/transformation.png',
+    'Spell/transformation_button.png',
+    'Spell/thunder_button.png',
+    'Spell/fireball_button.png',
 
+  ];
+  int howMuchItCostSpell(int id)
+  {
+    const unitsCost = [40,30,60 ];
+    return unitsCost[id];
+  }
   late SpriteComponent background;
 
   late SpriteAnimationComponent spell;
@@ -192,6 +200,7 @@ class GameLoader extends FlameGame {
           break;
       }
       spell.animation?.loop=false;
+      spell.playing=true;
       spell.setOpacity(0.5);
     }
 
@@ -212,8 +221,8 @@ class GameLoader extends FlameGame {
     }
     canvas.save();
     if(spell.animation != null ){
-      int? temp =spell.animation?.frames.length;
-      if(spell.animation?.currentIndex ==temp! ) {
+      bool? temp =spell.animation?.isLastFrame;
+      if( temp !=null && temp) {
         spell.playing=false;
       }
     }
@@ -283,10 +292,7 @@ class GameLoader extends FlameGame {
           listEnemy[i].actualisationAnim();
         }
 
-        if (listEnemy[i].position.y > size.y) {
-          playerData.lives -= 1;
-          listEnemy.removeAt(i);
-        }
+
         if(listEnemy[i].type==18){
           bool? isLast=listEnemy[i].animation?.isLastFrame;
           if(isLast!=null && isLast){
@@ -300,6 +306,10 @@ class GameLoader extends FlameGame {
             //fait spawn un zombie
             listEnemy.add(EnemyWidget(listEnemy[i].x,listEnemy[i].y,12,images));
           }
+        }
+        if (listEnemy[i].position.y > size.y) {
+          playerData.lives -= 1;
+          listEnemy.removeAt(i);
         }
 
       } else {
@@ -387,9 +397,12 @@ class GameLoader extends FlameGame {
             var rnd = new Random();
             double oldHealthPource;
             for(int i=0;i<listEnemy.length;i++){
-              oldHealthPource=listEnemy[i].health/listEnemy[i].maxHealth;
-              listEnemy[i]=EnemyWidget(listEnemy[i].x, listEnemy[i].y,typePossible[rnd.nextInt(typePossible.length)] , images);
-              listEnemy[i].health=listEnemy[i].maxHealth*oldHealthPource;
+              if(![18,19].contains(listEnemy[i].type)) {
+                oldHealthPource = listEnemy[i].health / listEnemy[i].maxHealth;
+                listEnemy[i] = EnemyWidget(listEnemy[i].x, listEnemy[i].y,
+                    typePossible[rnd.nextInt(typePossible.length)], images);
+                listEnemy[i].health = listEnemy[i].maxHealth * oldHealthPource;
+              }
             }
           }
         }

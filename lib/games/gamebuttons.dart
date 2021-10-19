@@ -34,6 +34,14 @@ class GameButtons extends GameNetwork with TapDetector {
   late Vector2 fourthButtonPosition;
   int fourthButtonUnitType = 6;
 
+  late Sprite firstSpellButton;
+  late Vector2 firstSpellButtonPosition;
+
+  late Sprite secondSpellButton;
+  late Vector2 secondSpellButtonPosition;
+
+  int spellUnique=0;
+
   int selectedUnit = 0;
   bool enemyClicked = false;
 
@@ -49,7 +57,7 @@ class GameButtons extends GameNetwork with TapDetector {
   Future<void> onLoad() async {
     await super.onLoad();
 
-    buttonsUnitSize = Vector2(size.x * 0.2, size.x * 0.2);
+    buttonsUnitSize = Vector2(size.x * 0.15, size.x * 0.15);
 
     //Ready and send buttons
     readyUnpressedButton = await loadSprite(
@@ -105,6 +113,18 @@ class GameButtons extends GameNetwork with TapDetector {
       srcSize: Vector2(70, 70),
     );
 
+    firstSpellButton = await loadSprite(
+      'Spell/fireball_button.png',
+      srcPosition:Vector2.zero() ,
+      srcSize: Vector2(650,650),
+    );
+
+    secondSpellButton = await loadSprite(
+      'Spell/transformation_button.png',
+      srcPosition:Vector2.zero() ,
+      srcSize: Vector2(62,63),
+    );
+
     firstButtonPosition = Vector2(size.x - buttonsUnitSize.x, 0);
     secondButtonPosition =
         Vector2(size.x - buttonsUnitSize.x, buttonsUnitSize.y);
@@ -112,6 +132,8 @@ class GameButtons extends GameNetwork with TapDetector {
         Vector2(size.x - buttonsUnitSize.x, buttonsUnitSize.y * 2);
     fourthButtonPosition =
         Vector2(size.x - buttonsUnitSize.x, buttonsUnitSize.y * 3);
+    firstSpellButtonPosition= Vector2(size.x - buttonsUnitSize.x, buttonsUnitSize.y * 4);
+    secondSpellButtonPosition= Vector2(size.x - buttonsUnitSize.x, buttonsUnitSize.y * 5);
   }
 
   @override
@@ -154,6 +176,9 @@ class GameButtons extends GameNetwork with TapDetector {
       fourthButton.render(canvas,
           position: fourthButtonPosition, size: buttonsUnitSize);
     }
+
+    firstSpellButton.render(canvas,position: firstSpellButtonPosition,size:buttonsUnitSize);
+    secondSpellButton.render(canvas,position: secondSpellButtonPosition,size:buttonsUnitSize);
   }
 
   //Every 5 seconds, send the selected units to send to your comrade
@@ -226,7 +251,24 @@ class GameButtons extends GameNetwork with TapDetector {
       }
       buttonArea = fourthButtonPosition & buttonsUnitSize;
       if (buttonArea.contains(event.eventPosition.game.toOffset())) {
+
         selectedUnit = fourthButtonUnitType;
+      }
+
+      buttonArea = firstSpellButtonPosition & buttonsUnitSize;
+      if (buttonArea.contains(event.eventPosition.game.toOffset())) {
+        if(howMuchItCostSpell(spellUnique) <= playerData.pointsPerso) {
+          playerData.pointsPerso-=howMuchItCostSpell(spellUnique);
+          startSpell(spellUnique);
+        }
+      }
+
+      buttonArea = secondSpellButtonPosition & buttonsUnitSize;
+      if (buttonArea.contains(event.eventPosition.game.toOffset())) {
+        if(howMuchItCostSpell(2) <= playerData.pointsPerso) {
+          playerData.pointsPerso-=howMuchItCostSpell(2);
+          startSpell(2);
+        }
       }
 
       //add unit when we tap on the screen (at the bottom half of the screen)
@@ -310,6 +352,14 @@ class GameButtons extends GameNetwork with TapDetector {
         srcPosition: Vector2.zero(),
         srcSize: Vector2(50, 50),
       );
+
+      firstSpellButton = await loadSprite(
+        'Spell/thunder_button.png',
+        srcPosition:Vector2.zero() ,
+        srcSize: Vector2(580,540),
+      );
+
+      spellUnique=1;
       selectedUnit = 8;
       firstButtonUnitType = 8;
       secondButtonUnitType = 10;
