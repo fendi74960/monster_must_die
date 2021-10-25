@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:monster_must_die/games/gamesetting.dart';
+import 'package:monster_must_die/widgets/waitingmenu.dart';
 import 'hud.dart';
 import 'package:numberpicker/numberpicker.dart';
 
@@ -75,17 +76,14 @@ class _NetworkMenu extends State<NetworkMenu> {
                                             '.' +
                                             field4.val.toString()
                                     );
-                                    await Future.delayed(const Duration(seconds: 3), (){});
                                     /*
                                     while(gameRef.socketCreated == false) /////////////////////////////////////////////// if the socket don't connect, let's Alt+F4 !
                                     {
                                       await Future.delayed(const Duration(microseconds: 100), (){});
                                     }*/
-                                    gameRef.startGame();
-                                    gameRef.setUnitType();
 
                                     gameRef.overlays.remove(NetworkMenu.id);
-                                    gameRef.overlays.add(Hud.id);
+                                    gameRef.overlays.add(WaitingMenu.id);
                                   },
                                   child: Text(
                                     'Connect',
@@ -108,17 +106,14 @@ class _NetworkMenu extends State<NetworkMenu> {
                                 ElevatedButton(
                                   onPressed: () async {
                                     gameRef.unknowLocalIP();
-                                    await Future.delayed(const Duration(seconds: 4), (){});
                                     /*
                                     while(gameRef.socketCreated == false)
                                     {
                                       await Future.delayed(const Duration(microseconds: 100), (){});
                                     }*/
-                                    gameRef.startGame();
-                                    gameRef.setUnitType();
 
                                     gameRef.overlays.remove(NetworkMenu.id);
-                                    gameRef.overlays.add(Hud.id);
+                                    gameRef.overlays.add(WaitingMenu.id);
                                   },
                                   child: Text(
                                     'Auto-connect',

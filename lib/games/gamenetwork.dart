@@ -121,7 +121,6 @@ class GameNetwork extends GameLoader {
       if(type == 1) {
         playerType = 1;
       }
-      socket.emit('ready', 'true');
       socketCreated = true;
     });
   }
