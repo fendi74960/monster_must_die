@@ -13,6 +13,8 @@ Faire vidéo de présentation !
 
 finir sort (barricade) + possibilité de les selectioné
 
+Ecran game over + rejouer
+
 bug:
 deux fois première vague
 vague 3 puis 6
