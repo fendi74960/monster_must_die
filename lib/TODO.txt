@@ -2,23 +2,23 @@
 tracking (ex utilisé xAPI)
     -> dire avec quoi l'unité est tué ? pour savoir si le joueur est plus solo ou demande de l'aide ? et aussi pour équilibrer
 
-Refaire changement de vague (10 secondes de préparation --> un petit toast) créer sur serveur un event
+Menu/bouton expliquation du jeu au démarrage
 
-Bouton expliquation du jeu au démarrage
+finir sort (barricade) + possibilité de les selectioné
+
+Faire vidéo de présentation pour le prof!
 
 changer monstre dans vague ? + les faires spawn petit a petit ?
 ré-équilibrer
 
-Faire vidéo de présentation !
-
-finir sort (barricade) + possibilité de les selectioné
-
 Ecran game over + rejouer
 
-bug:
-deux fois première vague
-vague 3 puis 6
-vague 4 puis 7
-...
+Delete ready quand tout sera finis !
 
+bug:
+numéro de vague dépend de qui est ready en premier ? variable non partagé ?
 animation attaque cheval bizzare
+
+bug normalment disparu :
+Toast your comrade are here en solo quand envoie ?
+wave number: répété trop de fois ?

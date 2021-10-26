@@ -6,15 +6,19 @@ import 'package:monster_must_die/widgets/enemywidget.dart';
 import 'package:oktoast/oktoast.dart';
 
 class WaveController {
-  static newWave(int wave, List<EnemyWidget> listEnemy, double minX, double maxX, double minY, double maxY, Images images,PlayerData data) {
+  static newWave(int wave, List<EnemyWidget> listEnemy, double minX, double maxX, double minY, double maxY, Images images,PlayerData data) async {
+    //We wait 5 seconds before the wave, so players can prepare themself
+    showToast('The wave ' + wave.toString() + " is coming in 5 seconds !", position: ToastPosition.top, textStyle: TextStyle(color: Colors.white, fontSize: 30));
+    await Future.delayed(Duration(seconds: 5));
+
     data.pointsCoop+=100+10*wave;
     data.pointsPerso+=100+10*wave;
     showToast('The wave ' + wave.toString() + " is starting !", position: ToastPosition.top, textStyle: TextStyle(color: Colors.white, fontSize: 30));
     switch(wave) {
       case 1: {
-        /*for(int i = 0; i < 10; i++){
+        for(int i = 0; i < 10; i++){
           listEnemy.add(EnemyWidget.enemyWidgetRandom(minX, maxX, minY, maxY, 12,images));
-        }*/
+        }
         break;
       }
       case 2: {

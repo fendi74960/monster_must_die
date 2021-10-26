@@ -13,6 +13,7 @@ class GameNetwork extends GameLoader {
 
   late IO.Socket socket;
   bool socketCreated = false;
+  bool waveFinished = true;
 
   //It's the default type of unit that the player will have
   int playerType = 0;
@@ -108,9 +109,10 @@ class GameNetwork extends GameLoader {
   ///If the server send a 'wave' event,
   /// it launch the wave of enemy !
   void waveEvent(IO.Socket socket) {
-    socket.on('wave', (wave) {
+    socket.on('wave', (wave) async {
       print('wave number: ' + wave.toString());
-      WaveController.newWave(wave.round(), listEnemy, 0.toDouble(), size.x , 0, size.y/3, images,playerData);
+      await WaveController.newWave(wave.round(), listEnemy, 0.toDouble(), size.x , 0, size.y/3, images,playerData);
+      waveFinished = false;
     });
   }
 
@@ -138,5 +140,11 @@ class GameNetwork extends GameLoader {
   @override
   void update(double dt) {
     super.update(dt);
+
+    //Check if the wave is (localy) finished
+    if(!waveFinished && listEnemy.length == 0) {
+      waveFinished = true;
+      socket.emit('ready', 'true');
+    }
   }
 }
