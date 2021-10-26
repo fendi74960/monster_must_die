@@ -50,112 +50,119 @@ class _WaitingMenu extends State<WaitingMenu> {
                                   child: Column(children: [
                                     Selector<InformationData, String>(
                                       selector: (_, inforamationData) =>
-                                          inforamationData
-                                              .enemieInformation.name,
+                                      inforamationData
+                                          .enemieInformation.name,
                                       builder: (_, name, __) {
                                         return Container(
-                                            //width: MediaQuery.of(context).size.height * 0.1,
                                             child: Text(
-                                          '$name',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20),
-                                        ));
+                                              '$name',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20),
+                                            ));
                                       },
                                     ),
-                                    Selector<InformationData, String>(
-                                      selector: (_, inforamationData) =>
+                                    Row(
+                                      children: [
+                                        ElevatedButton(
+                                          onPressed: () async {
+                                            if(--gameRef.currentBestiaryIndex < 0)
+                                              gameRef.currentBestiaryIndex = gameRef.bController.liste.length - 1;
+                                            gameRef.informationData.enemieInformation = gameRef.bController.getEnemieInformation(gameRef.currentBestiaryIndex);
+                                          },
+                                          child: Text(
+                                            'Before',
+                                            style: TextStyle(
+                                              fontSize: 30,
+                                            ),
+                                          ),
+                                        ),
+                                        Selector<InformationData, String>(
+                                          selector: (_, inforamationData) =>
                                           inforamationData
                                               .enemieInformation.picture,
-                                      builder: (_, picture, __) {
-                                        return Image(
-                                            image: AssetImage(picture));
-                                      },
+                                          builder: (_, picture, __) {
+                                            return Image.asset(
+                                              picture,
+                                              width: MediaQuery.of(context).size.width * 0.4,
+                                              height: MediaQuery.of(context).size.width * 0.4,
+                                              fit: BoxFit.fitWidth,
+                                            );
+                                          },
+                                        ),
+                                        ElevatedButton(
+                                          onPressed: () async {
+                                            if(++gameRef.currentBestiaryIndex > gameRef.bController.liste.length - 1)
+                                              gameRef.currentBestiaryIndex = 0;
+                                            gameRef.informationData.enemieInformation = gameRef.bController.getEnemieInformation(gameRef.currentBestiaryIndex);
+                                          },
+                                          child: Text(
+                                            'Next',
+                                            style: TextStyle(
+                                              fontSize: 30,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                     Selector<InformationData, String>(
                                       selector: (_, inforamationData) =>
-                                          inforamationData
-                                              .enemieInformation.description,
+                                      inforamationData
+                                          .enemieInformation.description,
                                       builder: (_, description, __) {
                                         return Container(
-                                            //width: MediaQuery.of(context).size.height * 0.1,
+                                          //width: MediaQuery.of(context).size.height * 0.1,
                                             child: Text(
-                                          '$description',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20),
-                                        ));
+                                              '$description',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20),
+                                            ));
                                       },
                                     ),
                                     Selector<InformationData, String>(
                                       selector: (_, inforamationData) =>
-                                          inforamationData
-                                              .enemieInformation.pros,
+                                      inforamationData
+                                          .enemieInformation.pros,
                                       builder: (_, pros, __) {
                                         return Container(
-                                            //width: MediaQuery.of(context).size.height * 0.1,
+                                          //width: MediaQuery.of(context).size.height * 0.1,
                                             child: Text(
-                                          '$pros',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20),
-                                        ));
+                                              '$pros',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20),
+                                            ));
                                       },
                                     ),
                                     Selector<InformationData, String>(
                                       selector: (_, inforamationData) =>
-                                          inforamationData
-                                              .enemieInformation.cons,
+                                      inforamationData
+                                          .enemieInformation.cons,
                                       builder: (_, cons, __) {
                                         return Container(
-                                            //width: MediaQuery.of(context).size.height * 0.1,
+                                          //width: MediaQuery.of(context).size.height * 0.1,
                                             child: Text(
-                                          '$cons',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20),
-                                        ));
+                                              '$cons',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20),
+                                            ));
                                       },
                                     ),
                                   ])),
-/*
-                              Text(
-                                'Archer',
-                                style: TextStyle(
-                                  fontSize: 30,
-                                ),
-                              ),
-                              Image(image: AssetImage('images/Enemy/archer/attack.png')),
-                              Text(
-                                'It does ranged attack',
-                                style: TextStyle(
-                                  fontSize: 30,
-                                ),
-                              ),
-                              Text(
-                                'Efficient against wizard, spear',
-                                style: TextStyle(
-                                  fontSize: 30,
-                                ),
-                              ),
-                              Text(
-                                'Weak against cavalrie',
-                                style: TextStyle(
-                                  fontSize: 30,
-                                ),
-                              ),
-
- */
                               SizedBox(height: 32),
                               ElevatedButton(
                                 onPressed: () async {
-                                  gameRef
-                                      .startGame(); //TODO start que quand les deux joueurs sont ready
+                                  gameRef.startGame();
                                   gameRef.setUnitType();
+
+                                  gameRef.socket.emit('ready', 'true');
+                                  //When the two player will be ready, then the wave start (server side)
 
                                   gameRef.overlays.remove(WaitingMenu.id);
                                   gameRef.overlays.add(Hud.id);
@@ -167,7 +174,8 @@ class _WaitingMenu extends State<WaitingMenu> {
                                   ),
                                 ),
                               ),
-                            ]))))));
+                            ])
+                          )))));
   }
 }
 

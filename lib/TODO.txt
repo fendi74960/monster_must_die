@@ -1,11 +1,19 @@
 
-ecran de chargement + attente autre joueur
-
 tracking (ex utilisé xAPI)
     -> dire avec quoi l'unité est tué ? pour savoir si le joueur est plus solo ou demande de l'aide ? et aussi pour équilibrer
 
+Refaire changement de vague (10 secondes de préparation --> un petit toast) créer sur serveur un event
 
-finir sort ( on mets le 4 ou pas ? car barricade hum)
+Bouton expliquation du jeu au démarrage
+
+changer monstre dans vague ? + les faires spawn petit a petit ?
+ré-équilibrer
+
+Faire vidéo de présentation !
+
+finir sort (barricade) + possibilité de les selectioné
+
+Ecran game over + rejouer
 
 bug:
 deux fois première vague
