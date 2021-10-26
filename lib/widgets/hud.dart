@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:monster_must_die/games/gamebuttons.dart';
 import 'package:monster_must_die/games/gamesetting.dart';
+import 'package:monster_must_die/games/gamebuttons.dart';
 import 'package:monster_must_die/widgets/unit_widget.dart';
 import 'package:provider/provider.dart';
-import '../models/player_data.dart';
+import 'package:monster_must_die/models/player_data.dart';
 
 class Hud extends StatelessWidget {
   // An unique identified for this overlay.
@@ -37,31 +37,46 @@ class Hud extends StatelessWidget {
                   ElevatedButton(
                       onPressed: () async {
                         //When we click on send, it :
+                        // check if the thread is launched (if no, it launch it)
+                        // The player has few seconds to select what he want to send
                         // check if the player has enough points
-                        // add the unit to the arrayToSend
-                        // increment nomberToSend
-                        // and check if the thread is launched (if no, it launch it)
+                        // add the unit or the spell to the arrayToSend
+                        // increment numberToSend
                         if(gameRef.threadStarted == false)
                         {
                           gameRef.sendThread();
                           gameRef.threadStarted = true;
                         }
-                        if (UnitWidget.howMuchItCost(gameRef.selectedUnit) <
-                            gameRef.playerData.pointsCoop) {
-                          gameRef.buttonData.numberToSend++;
-                          gameRef.playerData.pointsCoop -=
-                              UnitWidget.howMuchItCost(gameRef.selectedUnit);
-                          if (gameRef.selectedUnit ==
-                              gameRef.firstButtonUnitType) {
-                            gameRef.arrayToSend[0]++;
-                          } else if (gameRef.selectedUnit ==
-                              gameRef.secondButtonUnitType) {
-                            gameRef.arrayToSend[1]++;
-                          } else if (gameRef.selectedUnit ==
-                              gameRef.thirdButtonUnitType) {
-                            gameRef.arrayToSend[2]++;
-                          } else {
-                            gameRef.arrayToSend[3]++;
+
+                        //Check if it's a spell or a unit
+                        if(gameRef.selectedButton >= 16) {
+                          if(gameRef.howMuchItCostSpell(gameRef.selectedButton-16) <= gameRef.playerData.pointsCoop) {
+                            gameRef.buttonData.numberToSend++;
+                            gameRef.playerData.pointsCoop-=gameRef.howMuchItCostSpell(gameRef.selectedButton-16);
+                            if (gameRef.selectedButton == gameRef.firstSpellButtonType) {
+                              gameRef.arrayToSend[4]++;
+                            } else {
+                              gameRef.arrayToSend[5]++;
+                            }
+                          }
+                        } else {
+                          if (UnitWidget.howMuchItCost(gameRef.selectedButton) <
+                              gameRef.playerData.pointsCoop) {
+                            gameRef.buttonData.numberToSend++;
+                            gameRef.playerData.pointsCoop -=
+                                UnitWidget.howMuchItCost(gameRef.selectedButton);
+                            if (gameRef.selectedButton ==
+                                gameRef.firstButtonUnitType) {
+                              gameRef.arrayToSend[0]++;
+                            } else if (gameRef.selectedButton ==
+                                gameRef.secondButtonUnitType) {
+                              gameRef.arrayToSend[1]++;
+                            } else if (gameRef.selectedButton ==
+                                gameRef.thirdButtonUnitType) {
+                              gameRef.arrayToSend[2]++;
+                            } else {
+                              gameRef.arrayToSend[3]++;
+                            }
                           }
                         }
                       },

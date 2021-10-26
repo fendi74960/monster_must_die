@@ -1,11 +1,7 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:monster_must_die/games/gamesetting.dart';
 import 'package:monster_must_die/widgets/networkmenu.dart';
-
-import '/widgets/hud.dart';
-import '/games/gameloader.dart';
 
 // This represents the main menu overlay.
 class MainMenu extends StatelessWidget {

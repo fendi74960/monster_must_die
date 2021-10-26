@@ -3,8 +3,7 @@ import 'dart:ui';
 import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import '../games/gamebuttons.dart';
+import 'package:monster_must_die/games/gamebuttons.dart';
 
 class GameSetting extends GameButtons {
 

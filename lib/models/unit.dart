@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flame/assets.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame/components.dart';

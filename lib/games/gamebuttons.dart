@@ -4,7 +4,7 @@ import 'package:flame/input.dart';
 import 'package:flutter/material.dart';
 import 'package:monster_must_die/widgets/hud.dart';
 import 'package:monster_must_die/widgets/unit_widget.dart';
-import '../games/gamenetwork.dart';
+import 'package:monster_must_die/games/gamenetwork.dart';
 import 'package:monster_must_die/controller/bestiarycontroller.dart';
 
 class GameButtons extends GameNetwork with TapDetector {
@@ -36,20 +36,24 @@ class GameButtons extends GameNetwork with TapDetector {
   int fourthButtonUnitType = 6;
 
   late Sprite firstSpellButton;
+  late Sprite firstSpellButtonSelected;
   late Vector2 firstSpellButtonPosition;
+  int firstSpellButtonType = 16;                  //16 - 17 - 18 - 19
 
   late Sprite secondSpellButton;
+  late Sprite secondSpellButtonSelected;
   late Vector2 secondSpellButtonPosition;
+  int secondSpellButtonType = 18;
 
   int spellUnique=0;
 
-  int selectedUnit = 0;
+  int selectedButton = 0;
   bool enemyClicked = false;
 
   final buttonsSize = Vector2(120, 30);
   late Vector2 buttonsUnitSize;
 
-  List<int> arrayToSend = [0, 0, 0, 0];
+  List<int> arrayToSend = [0, 0, 0, 0, 0, 0];
   //For the HUD
   ButtonData buttonData = ButtonData();
 
@@ -126,21 +130,30 @@ class GameButtons extends GameNetwork with TapDetector {
       srcSize: Vector2(650,650),
     );
 
+    firstSpellButtonSelected = await loadSprite(
+      'Spell/fireball_button_selected.png',
+      srcPosition:Vector2.zero() ,
+      srcSize: Vector2(650,650),
+    );
+
     secondSpellButton = await loadSprite(
       'Spell/transformation_button.png',
       srcPosition:Vector2.zero() ,
-      srcSize: Vector2(62,63),
+      srcSize: Vector2(62,62),
+    );
+
+    secondSpellButtonSelected = await loadSprite(
+      'Spell/transformation_button_selected.png',
+      srcPosition:Vector2.zero() ,
+      srcSize: Vector2(62,62),
     );
 
     firstButtonPosition = Vector2(size.x - buttonsUnitSize.x, 0);
-    secondButtonPosition =
-        Vector2(size.x - buttonsUnitSize.x, buttonsUnitSize.y);
-    thirdButtonPosition =
-        Vector2(size.x - buttonsUnitSize.x, buttonsUnitSize.y * 2);
-    fourthButtonPosition =
-        Vector2(size.x - buttonsUnitSize.x, buttonsUnitSize.y * 3);
-    firstSpellButtonPosition= Vector2(size.x - buttonsUnitSize.x, buttonsUnitSize.y * 4);
-    secondSpellButtonPosition= Vector2(size.x - buttonsUnitSize.x, buttonsUnitSize.y * 5);
+    secondButtonPosition = Vector2(size.x - buttonsUnitSize.x, buttonsUnitSize.y);
+    thirdButtonPosition = Vector2(size.x - buttonsUnitSize.x, buttonsUnitSize.y * 2);
+    fourthButtonPosition = Vector2(size.x - buttonsUnitSize.x, buttonsUnitSize.y * 3);
+    firstSpellButtonPosition = Vector2(size.x - buttonsUnitSize.x, buttonsUnitSize.y * 4);
+    secondSpellButtonPosition = Vector2(size.x - buttonsUnitSize.x, buttonsUnitSize.y * 5);
 
     majInformationData();
   }
@@ -154,7 +167,7 @@ class GameButtons extends GameNetwork with TapDetector {
     button.render(canvas, position: readyPosition, size: buttonsSize);
 
     //check if the unit is selected and it change the sprite if yes
-    if (selectedUnit == firstButtonUnitType) {
+    if (selectedButton == firstButtonUnitType) {
       firstButtonSelected.render(canvas,
           position: firstButtonPosition, size: buttonsUnitSize);
     } else {
@@ -162,7 +175,7 @@ class GameButtons extends GameNetwork with TapDetector {
           position: firstButtonPosition, size: buttonsUnitSize);
     }
 
-    if (selectedUnit == secondButtonUnitType) {
+    if (selectedButton == secondButtonUnitType) {
       secondButtonSelected.render(canvas,
           position: secondButtonPosition, size: buttonsUnitSize);
     } else {
@@ -170,7 +183,7 @@ class GameButtons extends GameNetwork with TapDetector {
           position: secondButtonPosition, size: buttonsUnitSize);
     }
 
-    if (selectedUnit == thirdButtonUnitType) {
+    if (selectedButton == thirdButtonUnitType) {
       thirdButtonSelected.render(canvas,
           position: thirdButtonPosition, size: buttonsUnitSize);
     } else {
@@ -178,7 +191,7 @@ class GameButtons extends GameNetwork with TapDetector {
           position: thirdButtonPosition, size: buttonsUnitSize);
     }
 
-    if (selectedUnit == fourthButtonUnitType) {
+    if (selectedButton == fourthButtonUnitType) {
       fourthButtonSelected.render(canvas,
           position: fourthButtonPosition, size: buttonsUnitSize);
     } else {
@@ -186,8 +199,21 @@ class GameButtons extends GameNetwork with TapDetector {
           position: fourthButtonPosition, size: buttonsUnitSize);
     }
 
-    firstSpellButton.render(canvas,position: firstSpellButtonPosition,size:buttonsUnitSize);
-    secondSpellButton.render(canvas,position: secondSpellButtonPosition,size:buttonsUnitSize);
+    if (selectedButton == firstSpellButtonType) {
+      firstSpellButtonSelected.render(canvas,
+          position: firstSpellButtonPosition, size: buttonsUnitSize);
+    } else {
+      firstSpellButton.render(canvas,
+          position: firstSpellButtonPosition, size: buttonsUnitSize);
+    }
+
+    if (selectedButton == secondSpellButtonType) {
+      secondSpellButtonSelected.render(canvas,
+          position: secondSpellButtonPosition, size: buttonsUnitSize);
+    } else {
+      secondSpellButton.render(canvas,
+          position: secondSpellButtonPosition, size: buttonsUnitSize);
+    }
   }
 
   //Every 5 seconds, send the selected units to send to your comrade
@@ -221,8 +247,20 @@ class GameButtons extends GameNetwork with TapDetector {
         'nb': arrayToSend[3].toString()
       });
     }
+    if (arrayToSend[4] > 0) {
+      socket.emit('toother', {
+        'id': firstSpellButtonType.toString(),
+        'nb': arrayToSend[4].toString()
+      });
+    }
+    if (arrayToSend[5] > 0) {
+      socket.emit('toother', {
+        'id': secondSpellButtonType.toString(),
+        'nb': arrayToSend[5].toString()
+      });
+    }
 
-    arrayToSend = [0, 0, 0, 0];
+    arrayToSend = [0, 0, 0, 0, 0, 0];
     buttonData.numberToSend = 0;
     threadStarted = false;
   }
@@ -234,90 +272,100 @@ class GameButtons extends GameNetwork with TapDetector {
 
   @override
   void onTapDown(TapDownInfo event) {
-    //check if the unit is selected and it change the selectedUnit if yes
+    //check if the unit is selected and it change the selectedButton if yes
     if (this.overlays.isActive(Hud.id)) {
       for (int i = 0; i < listEnemy.length; i++) {
         var buttonArea = listEnemy[i].position -
-                Vector2(listEnemy[i].size.x / 2, listEnemy[i].size.y / 2) &
-            listEnemy[i].size;
+            Vector2(listEnemy[i].size.x / 2, listEnemy[i].size.y / 2) &
+        listEnemy[i].size;
 
         if (buttonArea.contains(event.eventPosition.game.toOffset())) {
-          print("Enemy clicked");
-          print("Need help enemy type : " + listEnemy[i].type.toString());
           sendHelp(listEnemy[i].type);
           enemyClicked = true;
-          //await Future.delayed(const Duration(seconds: 5), (){});
         }
       }
 
       var buttonArea = firstButtonPosition & buttonsUnitSize;
       if (buttonArea.contains(event.eventPosition.game.toOffset())) {
-        selectedUnit = firstButtonUnitType;
+        selectedButton = firstButtonUnitType;
       }
       buttonArea = secondButtonPosition & buttonsUnitSize;
       if (buttonArea.contains(event.eventPosition.game.toOffset())) {
-        selectedUnit = secondButtonUnitType;
+        selectedButton = secondButtonUnitType;
       }
       buttonArea = thirdButtonPosition & buttonsUnitSize;
       if (buttonArea.contains(event.eventPosition.game.toOffset())) {
-        selectedUnit = thirdButtonUnitType;
+        selectedButton = thirdButtonUnitType;
       }
       buttonArea = fourthButtonPosition & buttonsUnitSize;
       if (buttonArea.contains(event.eventPosition.game.toOffset())) {
-
-        selectedUnit = fourthButtonUnitType;
+        selectedButton = fourthButtonUnitType;
       }
 
       buttonArea = firstSpellButtonPosition & buttonsUnitSize;
       if (buttonArea.contains(event.eventPosition.game.toOffset())) {
+        selectedButton = firstSpellButtonType;
+        /*
         if(howMuchItCostSpell(spellUnique) <= playerData.pointsPerso) {
           playerData.pointsPerso-=howMuchItCostSpell(spellUnique);
           startSpell(spellUnique);
         }
+         */
       }
 
       buttonArea = secondSpellButtonPosition & buttonsUnitSize;
       if (buttonArea.contains(event.eventPosition.game.toOffset())) {
+        selectedButton = secondSpellButtonType;
+        /*
         if(howMuchItCostSpell(2) <= playerData.pointsPerso) {
           playerData.pointsPerso-=howMuchItCostSpell(2);
           startSpell(2);
         }
+        */
       }
 
       //add unit when we tap on the screen (at one tier of the screen)
       if (!enemyClicked &&
           event.eventPosition.game.x < size.x - buttonsUnitSize.x &&
           event.eventPosition.game.y > size.y / 3) {
-        if (playerData.pointsPerso > 0 &&
-            UnitWidget.howMuchItCost(selectedUnit) <= playerData.pointsPerso) {
-          listUnit.add(UnitWidget.unitWidgetSpawn(
-              event.eventPosition.game.x,
-              event.eventPosition.game.y,
-              selectedUnit,
-              images,
-              playerData,
-              playerType));
-          tracking['spawn']+=1;
-          switch(selectedUnit){
-            case 0:
-            case 8:
-            tracking['archer/marshall']+=1;
-              break;
-            case 2:
-            case 10:
-              tracking['balista/pegase']+=1;
-              break;
-            case 4:
-            case 12:
-              tracking['berserker/spear']+=1;
-              break;
-            case 6:
-            case 14:
-              tracking['cavalrer/wizard']+=1;
-              break;
-            default:
-              break;
 
+        if(selectedButton >= 16) {
+          if(howMuchItCostSpell(selectedButton-16) <= playerData.pointsPerso) {
+            playerData.pointsPerso-=howMuchItCostSpell(selectedButton-16);
+            startSpell(selectedButton-16);
+          }
+        } else {
+          if (playerData.pointsPerso > 0 &&
+              UnitWidget.howMuchItCost(selectedButton) <=
+                  playerData.pointsPerso) {
+            listUnit.add(UnitWidget.unitWidgetSpawn(
+                event.eventPosition.game.x,
+                event.eventPosition.game.y,
+                selectedButton,
+                images,
+                playerData,
+                playerType));
+            tracking['spawn']+=1;
+            switch(selectedButton) {
+              case 0:
+              case 8:
+                tracking['archer/marshall'] += 1;
+                break;
+              case 2:
+              case 10:
+                tracking['balista/pegase'] += 1;
+                break;
+              case 4:
+              case 12:
+                tracking['berserker/spear'] += 1;
+                break;
+              case 6:
+              case 14:
+                tracking['cavalrer/wizard'] += 1;
+                break;
+              default:
+                break;
+            }
           }
         }
       }
@@ -327,7 +375,6 @@ class GameButtons extends GameNetwork with TapDetector {
       buttonArea = readyPosition & buttonsSize;
       if (buttonArea.contains(event.eventPosition.game.toOffset()) &&
           readyPressed == false) {
-        print("I'm ready");
         socket.emit('ready', 'true');
       }
       readyPressed = buttonArea.contains(event.eventPosition.game.toOffset());
@@ -391,15 +438,22 @@ class GameButtons extends GameNetwork with TapDetector {
       firstSpellButton = await loadSprite(
         'Spell/thunder_button.png',
         srcPosition:Vector2.zero() ,
-        srcSize: Vector2(580,540),
+        srcSize: Vector2(540,540),
+      );
+
+      firstSpellButtonSelected = await loadSprite(
+        'Spell/thunder_button_selected.png',
+        srcPosition:Vector2.zero() ,
+        srcSize: Vector2(540,540),
       );
 
       spellUnique=1;
-      selectedUnit = 8;
+      selectedButton = 8;
       firstButtonUnitType = 8;
       secondButtonUnitType = 10;
       thirdButtonUnitType = 12;
       fourthButtonUnitType = 14;
+      firstSpellButtonType = 17;
     }
   }
 

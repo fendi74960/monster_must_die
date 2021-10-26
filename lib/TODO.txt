@@ -5,18 +5,20 @@ tracking (ex utilisé xAPI)
 
 Menu/bouton expliquation du jeu au démarrage
 
-finir sort (barricade) + possibilité de les selectioné
+finir sort (barricade)
 
 Faire vidéo de présentation pour le prof!
 
 changer monstre dans vague ? + les faires spawn petit a petit ?
 ré-équilibrer
 
-Delete ready quand tout sera finis !
+Ecran game over + rejouer
+
+Delete "ready button" quand tout sera finis !
 
 bug:
 numéro de vague dépend de qui est ready en premier ? variable non partagé ?
-animation attaque cheval bizzare
+Pendant qu'on lance une vague, on ne peut pas send a son pote
 
 bug normalment disparu :
 Toast your comrade are here en solo quand envoie ?

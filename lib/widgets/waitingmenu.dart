@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:monster_must_die/controller/bestiarycontroller.dart';
 import 'package:monster_must_die/games/gamesetting.dart';
-import 'hud.dart';
+import 'package:monster_must_die/widgets/hud.dart';
 import 'package:provider/provider.dart';
 
 class WaitingMenu extends StatefulWidget {

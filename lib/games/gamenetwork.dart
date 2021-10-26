@@ -87,8 +87,12 @@ class GameNetwork extends GameLoader {
       var rng = Random();
       for(int i = 0; i < int.parse(msg['nb']); i++)
       {
-        double randomX = rng.nextInt(size.x.toInt()).toDouble();
-        listUnit.add(UnitWidget.unitWidgetSpawn(randomX, size.y-40, int.parse(msg['id']), images, null, playerType));
+        if(int.parse(msg['id'])>=16){
+          startSpell(int.parse(msg['id'])-16); // convert to the spell number
+        } else {
+          double randomX = rng.nextInt(size.x.toInt()).toDouble();
+          listUnit.add(UnitWidget.unitWidgetSpawn(randomX, size.y-40, int.parse(msg['id']), images, null, playerType));
+        }
       }
     });
   }

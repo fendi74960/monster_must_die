@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:monster_must_die/games/gamesetting.dart';
 import 'package:monster_must_die/widgets/waitingmenu.dart';
-import 'hud.dart';
+import 'package:monster_must_die/widgets/hud.dart';
 import 'package:numberpicker/numberpicker.dart';
 
 
