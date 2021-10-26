@@ -1,6 +1,7 @@
 
 tracking (ex utilisé xAPI)
     -> dire avec quoi l'unité est tué ? pour savoir si le joueur est plus solo ou demande de l'aide ? et aussi pour équilibrer
+    a peu pres fait
 
 Menu/bouton expliquation du jeu au démarrage
 

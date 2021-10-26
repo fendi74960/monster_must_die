@@ -194,24 +194,28 @@ class GameButtons extends GameNetwork with TapDetector {
   void sendThread() async {
     await Future.delayed(const Duration(seconds: 5), () {});
     if (arrayToSend[0] > 0) {
+      tracking['emit']+=arrayToSend[0];
       socket.emit('toother', {
         'id': firstButtonUnitType.toString(),
         'nb': arrayToSend[0].toString()
       });
     }
     if (arrayToSend[1] > 0) {
+      tracking['emit']+=arrayToSend[1];
       socket.emit('toother', {
         'id': secondButtonUnitType.toString(),
         'nb': arrayToSend[1].toString()
       });
     }
     if (arrayToSend[2] > 0) {
+      tracking['emit']+=arrayToSend[2];
       socket.emit('toother', {
         'id': thirdButtonUnitType.toString(),
         'nb': arrayToSend[2].toString()
       });
     }
     if (arrayToSend[3] > 0) {
+      tracking['emit']+=arrayToSend[3];
       socket.emit('toother', {
         'id': fourthButtonUnitType.toString(),
         'nb': arrayToSend[3].toString()
@@ -293,6 +297,28 @@ class GameButtons extends GameNetwork with TapDetector {
               images,
               playerData,
               playerType));
+          tracking['spawn']+=1;
+          switch(selectedUnit){
+            case 0:
+            case 8:
+            tracking['archer/marshall']+=1;
+              break;
+            case 2:
+            case 10:
+              tracking['balista/pegase']+=1;
+              break;
+            case 4:
+            case 12:
+              tracking['berserker/spear']+=1;
+              break;
+            case 6:
+            case 14:
+              tracking['cavalrer/wizard']+=1;
+              break;
+            default:
+              break;
+
+          }
         }
       }
       enemyClicked = false;

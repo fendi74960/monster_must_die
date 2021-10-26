@@ -105,7 +105,16 @@ class GameLoader extends FlameGame {
     listEnemy = List.empty(growable: true);
     changeBackground(typeBg);
     spell=SpriteAnimationComponent(position: Vector2.zero(),size:size );
-    if(!kIsWeb)
+    //Initialize les valeurs du json a 0 pour de ne pas avoir de pb de null
+    tracking['spawn']=0;
+    tracking['emit']=0;
+    tracking['spell']=0;
+    tracking['archer/marshall']=0;
+    tracking['balista/pegase']=0;
+    tracking['berserker/spear']=0;
+    tracking['cavalrer/wizard']=0;
+
+    /*if(!kIsWeb)
     {
       jsonFile= await _localFile;
       tracking['test']=1;
@@ -113,7 +122,7 @@ class GameLoader extends FlameGame {
       jsonFile.writeAsString(jsonn);
       final content = await readFile(jsonFile);
       print(content);
-    }
+    }*/
 
   }
 
@@ -201,6 +210,7 @@ class GameLoader extends FlameGame {
   }
  ///Lance l'animation d'un sort en fonction de [spellId] donnée
   void startSpell(int spellId){
+      tracking['spell']+=1;
       typeSpell=spellId;
       switch (spellId) {
       //fireball
