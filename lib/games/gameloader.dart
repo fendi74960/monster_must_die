@@ -1,12 +1,17 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/palette.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:monster_must_die/controller/wavecontroller.dart';
 import 'package:monster_must_die/widgets/enemywidget.dart';
 import 'package:monster_must_die/widgets/unit_widget.dart';
+import 'dart:convert';
+
+import 'package:path_provider/path_provider.dart';
 
 import '../models/player_data.dart';
 
@@ -69,6 +74,10 @@ class GameLoader extends FlameGame {
     const unitsCost = [40,30,60 ];
     return unitsCost[id];
   }
+
+  //Map a convert to json
+  Map<String, dynamic> tracking= {};
+
   late SpriteComponent background;
 
   late SpriteAnimationComponent spell;
@@ -84,6 +93,8 @@ class GameLoader extends FlameGame {
   //boolean temp pour voir si unit/ennemy ne bouge plus
   late bool tempAStopper;
 
+  late File jsonFile;
+
   var typePossible=[0,4,6,8,10,12,14,16];
   ///Charger plusieurs element au debut du jeu
   @override
@@ -94,6 +105,15 @@ class GameLoader extends FlameGame {
     listEnemy = List.empty(growable: true);
     changeBackground(typeBg);
     spell=SpriteAnimationComponent(position: Vector2.zero(),size:size );
+    if(!kIsWeb)
+    {
+      jsonFile= await _localFile;
+      tracking['test']=1;
+      String jsonn =json.encode(tracking);
+      jsonFile.writeAsString(jsonn);
+      final content = await readFile(jsonFile);
+      print(content);
+    }
 
   }
 
@@ -115,8 +135,26 @@ class GameLoader extends FlameGame {
     WaveController.newWave(7, listEnemy, 0.toDouble(), size.x, 0, size.y / 3, images, playerData);
     //A ENLEVER
     //startSpell(typeSpell);
-  }
 
+  }
+  Future<String> get _localPath async {
+    final directory = await getApplicationDocumentsDirectory();
+
+    return directory.path;
+  }
+  Future<String> readFile(File fil) async {
+      final file = fil;
+
+      // Read the file
+      final contents = await file.readAsString();
+
+      return contents;
+
+  }
+  Future<File> get _localFile async {
+    final path = await _localPath;
+    return File('$path/tracking.json');
+  }
   ///change le background en fonction de [bgID] donnée
   void changeBackground(int bgId) {
     typeBg=bgId;
@@ -394,7 +432,7 @@ class GameLoader extends FlameGame {
         if(spell.animation != null ){
           int? temp =spell.animation?.frames.length;
           if(spell.animation?.currentIndex ==temp!-2 ) {
-            var rnd = new Random();
+            var rnd = Random();
             double oldHealthPource;
             for(int i=0;i<listEnemy.length;i++){
               if(![18,19].contains(listEnemy[i].type)) {

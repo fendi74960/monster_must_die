@@ -442,6 +442,8 @@ class UnitWidget extends Unit  {
       //Peut taper volant
       case 8:
       case 9:
+      case 14:
+      case 15:
         if(typeU<4 || typeU==8 || typeU==9 || typeU==14 || typeU==15) {
           return true;
         }
