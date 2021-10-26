@@ -112,6 +112,8 @@ class GameLoader extends FlameGame {
     tracking['balista/pegase']=0;
     tracking['berserker/spear']=0;
     tracking['cavalrer/wizard']=0;
+    tracking['fire/thunder']=0;
+    tracking['barricade/transformation']=0;
 
     /*if(!kIsWeb)
     {

@@ -3,20 +3,19 @@ tracking (ex utilisé xAPI)
     -> dire avec quoi l'unité est tué ? pour savoir si le joueur est plus solo ou demande de l'aide ? et aussi pour équilibrer
     a peu pres fait
 
-Menu/bouton expliquation du jeu au démarrage
-
 finir sort (barricade)
 
 Faire vidéo de présentation pour le prof!
 
+Menu/bouton expliquation du jeu au démarrage
+
 changer monstre dans vague ? + les faires spawn petit a petit ?
 ré-équilibrer
-
-Ecran game over + rejouer
 
 Delete "ready button" quand tout sera finis !
 
 bug:
+Image bestiare trop grosse pour certaine résolution (normalement)
 numéro de vague dépend de qui est ready en premier ? variable non partagé ?
 Pendant qu'on lance une vague, on ne peut pas send a son pote
 

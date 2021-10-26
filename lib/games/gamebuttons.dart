@@ -38,7 +38,7 @@ class GameButtons extends GameNetwork with TapDetector {
   late Sprite firstSpellButton;
   late Sprite firstSpellButtonSelected;
   late Vector2 firstSpellButtonPosition;
-  int firstSpellButtonType = 16;                  //16 - 17 - 18 - 19
+  int firstSpellButtonType = 16;
 
   late Sprite secondSpellButton;
   late Sprite secondSpellButtonSelected;
@@ -305,23 +305,11 @@ class GameButtons extends GameNetwork with TapDetector {
       buttonArea = firstSpellButtonPosition & buttonsUnitSize;
       if (buttonArea.contains(event.eventPosition.game.toOffset())) {
         selectedButton = firstSpellButtonType;
-        /*
-        if(howMuchItCostSpell(spellUnique) <= playerData.pointsPerso) {
-          playerData.pointsPerso-=howMuchItCostSpell(spellUnique);
-          startSpell(spellUnique);
-        }
-         */
       }
 
       buttonArea = secondSpellButtonPosition & buttonsUnitSize;
       if (buttonArea.contains(event.eventPosition.game.toOffset())) {
         selectedButton = secondSpellButtonType;
-        /*
-        if(howMuchItCostSpell(2) <= playerData.pointsPerso) {
-          playerData.pointsPerso-=howMuchItCostSpell(2);
-          startSpell(2);
-        }
-        */
       }
 
       //add unit when we tap on the screen (at one tier of the screen)
@@ -333,6 +321,19 @@ class GameButtons extends GameNetwork with TapDetector {
           if(howMuchItCostSpell(selectedButton-16) <= playerData.pointsPerso) {
             playerData.pointsPerso-=howMuchItCostSpell(selectedButton-16);
             startSpell(selectedButton-16);
+            tracking['spawn']+=1;
+            switch(selectedButton) {
+              case 16:
+              case 17:
+                tracking['fire/thunder'] += 1;
+                break;
+              case 18:
+              case 19:
+                tracking['barricade/transformation'] += 1;
+                break;
+              default:
+                break;
+            }
           }
         } else {
           if (playerData.pointsPerso > 0 &&
