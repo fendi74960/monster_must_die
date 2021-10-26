@@ -12,8 +12,6 @@ Faire vidéo de présentation pour le prof!
 changer monstre dans vague ? + les faires spawn petit a petit ?
 ré-équilibrer
 
-Ecran game over + rejouer
-
 Delete ready quand tout sera finis !
 
 bug:

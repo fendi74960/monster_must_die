@@ -3,13 +3,12 @@ import 'dart:math';
 
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
-import 'package:flame/palette.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:monster_must_die/controller/wavecontroller.dart';
 import 'package:monster_must_die/widgets/enemywidget.dart';
+import 'package:monster_must_die/widgets/game_over_menu.dart';
+import 'package:monster_must_die/widgets/hud.dart';
 import 'package:monster_must_die/widgets/unit_widget.dart';
-import 'dart:convert';
 
 import 'package:path_provider/path_provider.dart';
 
@@ -358,11 +357,17 @@ class GameLoader extends FlameGame {
         if (listEnemy[i].position.y > size.y) {
           playerData.lives -= 1;
           listEnemy.removeAt(i);
+          if(playerData.lives<=0){
+            pauseEngine();
+            overlays.remove(Hud.id);
+            overlays.add(GameOverMenu.id);
+
+          }
         }
 
       } else {
           if(listEnemy[i].type==16){
-            var rnd = new Random();
+            var rnd = Random();
             listEnemy[i]=EnemyWidget(listEnemy[i].x, listEnemy[i].y,typePossible[rnd.nextInt(typePossible.length)] , images);
           }
           else{

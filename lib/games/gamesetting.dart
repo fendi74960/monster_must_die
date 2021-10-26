@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flame/flame.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../games/gamebuttons.dart';
@@ -30,5 +31,20 @@ class GameSetting extends GameButtons {
     super.render(canvas);
 
     //todo
+  }
+
+  void reset() {
+    listEnemy.clear();
+    listUnit.clear();
+    tracking['spawn']=0;
+    tracking['emit']=0;
+    tracking['spell']=0;
+    tracking['archer/marshall']=0;
+    tracking['balista/pegase']=0;
+    tracking['berserker/spear']=0;
+    tracking['cavalrer/wizard']=0;
+    playerData.lives=5;
+    playerData.pointsPerso=0;
+    playerData.pointsCoop=0;
   }
 }
