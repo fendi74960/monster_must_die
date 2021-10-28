@@ -448,6 +448,12 @@ class GameButtons extends GameNetwork with TapDetector {
         srcSize: Vector2(540,540),
       );
 
+      secondSpellButton = await loadSprite(
+        'Spell/barricade_button.png',
+        srcPosition:Vector2.zero() ,
+        srcSize: Vector2(77,78),
+      );
+
       spellUnique=1;
       selectedButton = 8;
       firstButtonUnitType = 8;
@@ -455,6 +461,7 @@ class GameButtons extends GameNetwork with TapDetector {
       thirdButtonUnitType = 12;
       fourthButtonUnitType = 14;
       firstSpellButtonType = 17;
+      secondSpellButtonType = 19;
     }
   }
 

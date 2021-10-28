@@ -66,11 +66,13 @@ class GameLoader extends FlameGame {
     'Spell/transformation_button.png',
     'Spell/thunder_button.png',
     'Spell/fireball_button.png',
+    'Spell/barricade_button.png',
+    'Spell/barricade.png'
 
   ];
   int howMuchItCostSpell(int id)
   {
-    const unitsCost = [40,30,60 ];
+    const unitsCost = [40,30,60,10 ];
     return unitsCost[id];
   }
 
@@ -80,6 +82,7 @@ class GameLoader extends FlameGame {
   late SpriteComponent background;
 
   late SpriteAnimationComponent spell;
+  late int counterBarricade=100;
   late int typeBg = 1;
   late int typeSpell=2;
 
@@ -213,6 +216,8 @@ class GameLoader extends FlameGame {
   void startSpell(int spellId){
       tracking['spell']+=1;
       typeSpell=spellId;
+      spell.position=Vector2(0,0);
+      spell.size=Vector2(size.x,size.y);
       switch (spellId) {
       //fireball
         case 0:
@@ -244,7 +249,18 @@ class GameLoader extends FlameGame {
                 stepTime: 0.1,
               ));
           break;
-
+        case 3:
+          counterBarricade=100;
+          spell.position=Vector2(0,size.y*0.8);
+          spell.size=Vector2(size.x,size.y*0.2);
+          spell.animation=SpriteAnimation.fromFrameData(
+              images.fromCache('Spell/barricade.png'),
+              SpriteAnimationData.sequenced(
+                amount: 15,
+                textureSize: Vector2(85, 107),
+                stepTime: 0.1,
+              ));
+          break;
         default:
           break;
       }
@@ -271,8 +287,10 @@ class GameLoader extends FlameGame {
     canvas.save();
     if(spell.animation != null ){
       bool? temp =spell.animation?.isLastFrame;
-      if( temp !=null && temp) {
-        spell.playing=false;
+      if( temp !=null && temp ) {
+        if(typeSpell!=3 || (counterBarricade<=0)) {
+          spell.playing=false;
+        }
       }
     }
 
@@ -460,6 +478,12 @@ class GameLoader extends FlameGame {
               }
             }
           }
+        }
+        break;
+      case 3:
+        if(unit.y>size.y*0.8){
+          unit.health-=5;
+          counterBarricade--;
         }
         break;
       default:
