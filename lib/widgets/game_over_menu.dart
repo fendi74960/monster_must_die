@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:monster_must_die/games/gamebuttons.dart';
 import 'package:monster_must_die/games/gamesetting.dart';
 import 'package:monster_must_die/widgets/unit_widget.dart';
+import 'package:monster_must_die/widgets/waitingmenu.dart';
 import 'package:provider/provider.dart';
 import '../models/player_data.dart';
 import 'main_menu.dart';
@@ -60,7 +61,7 @@ class GameOverMenu extends StatelessWidget {
                       ),
                       onPressed: () {
                         gameRef.overlays.remove(GameOverMenu.id);
-                        gameRef.overlays.add(MainMenu.id);
+                        gameRef.overlays.add(WaitingMenu.id);
                         gameRef.resumeEngine();
                         gameRef.reset();
                       },

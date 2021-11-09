@@ -447,7 +447,7 @@ class GameLoader extends FlameGame {
         break;
     }
   }
-
+  ///Fait l'effet du spell sur [unit]
   void EffectOfSpell(var unit) {
     switch (typeSpell) {
     //Fireball
