@@ -117,7 +117,7 @@ class GameLoader extends FlameGame {
     tracking['cavalrer/wizard']=0;
     tracking['fire/thunder']=0;
     tracking['barricade/transformation']=0;
-
+    //ne pas enlever sa permet d'acceder au donnes du json
     /*if(!kIsWeb)
     {
       jsonFile= await _localFile;
@@ -144,8 +144,8 @@ class GameLoader extends FlameGame {
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 12,images));*/
     /*listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 14,images));
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 16,images));*/
-    listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 18,images));
-    WaveController.newWave(7, listEnemy, 0.toDouble(), size.x, 0, size.y / 3, images, playerData);
+    //listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 18,images));
+    WaveController.newWave(10, listEnemy, 0.toDouble(), size.x*0.8, 0, size.y / 3, images, playerData);
     //A ENLEVER
     //startSpell(typeSpell);
 
@@ -371,7 +371,10 @@ class GameLoader extends FlameGame {
           if(isLast!=null && isLast){
             listEnemy[i].actualisationAnim();
             //fait spawn un zombie
-            listEnemy.add(EnemyWidget(listEnemy[i].x,listEnemy[i].y,12,images));
+            EnemyWidget tempEnemy = EnemyWidget(listEnemy[i].x,listEnemy[i].y,12,images);
+            tempEnemy.damage+=0.9;
+            tempEnemy.range+=20;
+            listEnemy.add(tempEnemy);
           }
         }
         if (listEnemy[i].position.y > size.y) {

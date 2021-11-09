@@ -115,7 +115,7 @@ class GameNetwork extends GameLoader {
   void waveEvent(IO.Socket socket) {
     socket.on('wave', (wave) async {
       print('wave number: ' + wave.toString());
-      await WaveController.newWave(wave.round(), listEnemy, 0.toDouble(), size.x , 0, size.y/3, images,playerData);
+      await WaveController.newWave(wave.round(), listEnemy, 0.toDouble(), size.x*0.8 , 0, size.y/3, images,playerData);
       waveFinished = false;
     });
   }

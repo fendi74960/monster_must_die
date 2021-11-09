@@ -99,15 +99,10 @@ class WaveController {
         break;
       }
       case 10: {
-        EnemyWidget tempEn=EnemyWidget.enemyWidgetRandom(minX, maxX, minY, maxY, 12,images);
-        tempEn.scale.x*=2;
-        tempEn.scale.y*=2;
-        tempEn.health+=2500;
-        tempEn.maxHealth+=2500;
-        tempEn.damage+=3;
-        tempEn.range+=30;
-        tempEn.speed+=0.5;
-        listEnemy.add(tempEn);
+        listEnemy.add(EnemyWidget.enemyWidgetRandom(minX, maxX, minY, maxY, 18,images));
+        listEnemy.add(EnemyWidget.enemyWidgetRandom(minX, maxX, minY, maxY, 4,images));
+        listEnemy.add(EnemyWidget.enemyWidgetRandom(minX, maxX, minY, maxY, 4,images));
+        listEnemy.add(EnemyWidget.enemyWidgetRandom(minX, maxX, minY, maxY, 4,images));
 
         break;
       }
