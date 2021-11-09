@@ -175,67 +175,6 @@ class _WaitingMenu extends State<WaitingMenu> {
                                 ),
                               ),
                             ])
-                          )))));
+                    )))));
   }
 }
-
-/* Save :
-return Center(
-        child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-            child: Card(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                color: Colors.black.withAlpha(100),
-                child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 20, horizontal: 100),
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Archer',
-                                style: TextStyle(
-                                  fontSize: 30,
-                                ),
-                              ),
-                              Image(image: AssetImage('images/Enemy/archer/attack.png')),
-                              Text(
-                                'It does ranged attack',
-                                style: TextStyle(
-                                  fontSize: 30,
-                                ),
-                              ),
-                              Text(
-                                'Efficient against wizard, spear',
-                                style: TextStyle(
-                                  fontSize: 30,
-                                ),
-                              ),
-                              Text(
-                                'Weak against cavalrie',
-                                style: TextStyle(
-                                  fontSize: 30,
-                                ),
-                              ),
-                              SizedBox(height: 32),
-                              ElevatedButton(
-                                onPressed: () async {
-
-                                  gameRef.startGame(); //TODO start que quand les deux joueurs sont ready
-                                  gameRef.setUnitType();
-
-                                  gameRef.overlays.remove(WaitingMenu.id);
-                                  gameRef.overlays.add(Hud.id);
-                                },
-                                child: Text(
-                                  'Ready',
-                                  style: TextStyle(
-                                    fontSize: 30,
-                                  ),
-                                ),
-                              ),
-                            ]))))));
- */

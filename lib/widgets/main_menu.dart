@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:monster_must_die/games/gamesetting.dart';
 import 'package:monster_must_die/widgets/networkmenu.dart';
+import 'package:monster_must_die/widgets/rulemenu.dart';
 
 // This represents the main menu overlay.
 class MainMenu extends StatelessWidget {
@@ -45,6 +46,19 @@ class MainMenu extends StatelessWidget {
                     },
                     child: Text(
                       'Play',
+                      style: TextStyle(
+                        fontSize: 30,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 32),
+                  ElevatedButton(
+                    onPressed: () {
+                      gameRef.overlays.remove(MainMenu.id);
+                      gameRef.overlays.add(RuleMenu.id);
+                    },
+                    child: Text(
+                      'Rules',
                       style: TextStyle(
                         fontSize: 30,
                       ),
