@@ -57,11 +57,6 @@ class GameNetwork extends GameLoader {
             .build());
 
     socket.on('fromServer', (msg) {
-      socket = IO.io('http://192.168.1.' + msg+ ':3000',
-          IO.OptionBuilder()
-              .setTransports(['websocket']) // for Flutter or Dart VM
-              .setExtraHeaders({'foo': 'bar'}) // optional
-              .build());
       print("connected");
       createCommonEvents(socket);
     });

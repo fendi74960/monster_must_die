@@ -145,7 +145,7 @@ class GameLoader extends FlameGame {
     /*listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 14,images));
     listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 16,images));*/
     //listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 18,images));
-    WaveController.newWave(10, listEnemy, 0.toDouble(), size.x*0.8, 0, size.y / 3, images, playerData);
+    //WaveController.newWave(10, listEnemy, 0.toDouble(), size.x*0.8, 0, size.y / 3, images, playerData);
     //A ENLEVER
     //startSpell(typeSpell);
 

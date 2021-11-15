@@ -76,11 +76,11 @@ class _NetworkMenu extends State<NetworkMenu> {
                                             '.' +
                                             field4.val.toString()
                                     );
-                                    /*
+
                                     while(gameRef.socketCreated == false) /////////////////////////////////////////////// if the socket don't connect, let's Alt+F4 !
                                     {
                                       await Future.delayed(const Duration(microseconds: 100), (){});
-                                    }*/
+                                    }
 
                                     gameRef.overlays.remove(NetworkMenu.id);
                                     gameRef.overlays.add(WaitingMenu.id);
