@@ -49,8 +49,9 @@ class Hud extends StatelessWidget {
                         }
 
                         //Check if it's a spell or a unit
-                        if(gameRef.selectedButton >= 16) {
+                        if(gameRef.selectedButton >= 16 && !gameRef.sortDejaSent) {
                           if(gameRef.howMuchItCostSpell(gameRef.selectedButton-16) <= gameRef.playerData.pointsCoop) {
+                            gameRef.sortDejaSent=true;
                             gameRef.buttonData.numberToSend++;
                             gameRef.playerData.pointsCoop-=gameRef.howMuchItCostSpell(gameRef.selectedButton-16);
                             if (gameRef.selectedButton == gameRef.firstSpellButtonType) {

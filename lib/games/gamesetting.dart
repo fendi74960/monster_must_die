@@ -47,5 +47,7 @@ class GameSetting extends GameButtons {
     playerData.lives=5;
     playerData.pointsPerso=0;
     playerData.pointsCoop=0;
+    sortDejaUse=false;
+    sortDejaSent=false;
   }
 }
