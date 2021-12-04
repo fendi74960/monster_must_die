@@ -14,6 +14,8 @@ class GameNetwork extends GameLoader {
   late IO.Socket socket;
   bool socketCreated = false;
   bool waveFinished = true;
+  bool sortDejaUse=false;
+  bool sortDejaSent=false;
 
   //It's the default type of unit that the player will have
   int playerType = 0;
@@ -112,6 +114,8 @@ class GameNetwork extends GameLoader {
       listUnit.clear();
       print('wave number: ' + wave.toString());
       await WaveController.newWave(wave.round(), listEnemy, 0.toDouble(), size.x*0.8 , 0, size.y/3, images,playerData);
+      sortDejaUse=false;
+      sortDejaSent=false;
       waveFinished = false;
     });
   }

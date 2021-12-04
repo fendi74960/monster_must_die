@@ -318,7 +318,8 @@ class GameButtons extends GameNetwork with TapDetector {
           event.eventPosition.game.y > size.y / 3) {
 
         if(selectedButton >= 16) {
-          if(howMuchItCostSpell(selectedButton-16) <= playerData.pointsPerso) {
+          if(howMuchItCostSpell(selectedButton-16) <= playerData.pointsPerso && !sortDejaUse) {
+            sortDejaUse=true;
             playerData.pointsPerso-=howMuchItCostSpell(selectedButton-16);
             startSpell(selectedButton-16);
             tracking['spawn']+=1;
