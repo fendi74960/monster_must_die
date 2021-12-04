@@ -90,7 +90,7 @@ class EnemieInformation {
 
   EnemieInformation(String nameC) {
     name = nameC;
-    picture = 'images/Enemy/' + nameC.toLowerCase() + '/profile.png';
+    picture = 'assets/images/Enemy/' + nameC.toLowerCase() + '/profile.png';
   }
 }
 
