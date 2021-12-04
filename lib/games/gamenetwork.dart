@@ -109,6 +109,7 @@ class GameNetwork extends GameLoader {
   /// it launch the wave of enemy !
   void waveEvent(IO.Socket socket) {
     socket.on('wave', (wave) async {
+      listUnit.clear();
       print('wave number: ' + wave.toString());
       await WaveController.newWave(wave.round(), listEnemy, 0.toDouble(), size.x*0.8 , 0, size.y/3, images,playerData);
       waveFinished = false;
