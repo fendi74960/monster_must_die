@@ -67,6 +67,11 @@ class _NetworkMenu extends State<NetworkMenu> {
                                 field4,
                                 ElevatedButton(
                                   onPressed: () async {
+                                    ///When we click on the "Connect" button,
+                                    /// it get the ip field entered by the user
+                                    /// then we wait that the socket is created
+                                    /// And the user go to the WaitingMenu
+                                    ///
                                     gameRef.socketFromIP(
                                         field1.val.toString() +
                                             '.' +
@@ -77,7 +82,7 @@ class _NetworkMenu extends State<NetworkMenu> {
                                             field4.val.toString()
                                     );
 
-                                    while(gameRef.socketCreated == false) /////////////////////////////////////////////// if the socket don't connect, let's Alt+F4 !
+                                    while(gameRef.socketCreated == false) // if the socket don't connect, let's Alt+F4 !
                                     {
                                       await Future.delayed(const Duration(microseconds: 100), (){});
                                     }
@@ -105,12 +110,17 @@ class _NetworkMenu extends State<NetworkMenu> {
                                 SizedBox(width: 32),
                                 ElevatedButton(
                                   onPressed: () async {
+                                    ///When we click on the "Auto-connect" button,
+                                    /// it search the IP of the local server
+                                    /// then we wait that the socket is created
+                                    /// And the user go to the WaitingMenu
+
                                     gameRef.unknowLocalIP();
-                                    /*
+
                                     while(gameRef.socketCreated == false)
                                     {
                                       await Future.delayed(const Duration(microseconds: 100), (){});
-                                    }*/
+                                    }
 
                                     gameRef.overlays.remove(NetworkMenu.id);
                                     gameRef.overlays.add(WaitingMenu.id);

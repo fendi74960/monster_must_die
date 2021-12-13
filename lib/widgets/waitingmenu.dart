@@ -158,6 +158,13 @@ class _WaitingMenu extends State<WaitingMenu> {
                               SizedBox(height: 32),
                               ElevatedButton(
                                 onPressed: () async {
+                                  ///The user click on "Ready",
+                                  /// it start the game,
+                                  /// change the unit of the user
+                                  /// and emit a ready event
+                                  /// (we need to ready to start the game),
+                                  /// then the user go to the Hud menu
+
                                   gameRef.startGame();
                                   gameRef.setUnitType();
 

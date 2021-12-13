@@ -8,6 +8,10 @@ void main(List<String> arguments) async {
   var players = []; //because i need pointer (so i can't use a int)
   int currentWave = 0;
 
+  ///when a player is connected,
+  /// it register the socket,
+  /// send the ip of the server to the client (necessary if the player click on auto-connect),
+  /// and create fex events
   io.on('connection', (socket) async {
     print('A player is connected');
     socket.join('room');
@@ -17,7 +21,7 @@ void main(List<String> arguments) async {
     createEvents(io, sockets, socket, players, readys, currentWave);
   });
 
-  //don't really work
+  //it's not really used
   io.on('disconnect', (socket) async {
     sockets.remove(socket);
     readys.remove(0);
