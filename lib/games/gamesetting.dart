@@ -14,6 +14,7 @@ class GameSetting extends GameButtons {
   Future<void> onLoad() async {
     await super.onLoad();
 
+    ///Force le full screen et une orientation portrait
     Flame.device.fullScreen();
     Flame.device.setOrientation(DeviceOrientation.portraitUp);
   }
@@ -32,6 +33,7 @@ class GameSetting extends GameButtons {
     //todo
   }
 
+  ///Remet a zero les diff parametres du joueur et de la partie
   void reset() {
     listEnemy.clear();
     listUnit.clear();

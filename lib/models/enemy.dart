@@ -29,6 +29,7 @@ class Enemy extends SpriteAnimationComponent {
   //16-17 : chicken
   //18-19 : lich
 
+  ///Retourne le nom du monstre lie au [type]
   static String TypeToName(int type) {
     switch(type) {
       case 0:

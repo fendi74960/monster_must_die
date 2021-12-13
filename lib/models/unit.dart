@@ -17,7 +17,6 @@ class Unit extends SpriteAnimationComponent{
   late bool isFlying;
   late bool isRanged;
 
-  //Vu que je sais pas faire les enum et que sa a l'air chiant a faire
   //TYPE
   //0-1 : archer
   //2-3 : balista

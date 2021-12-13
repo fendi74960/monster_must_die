@@ -11,7 +11,7 @@ import 'package:monster_must_die/widgets/enemywidget.dart';
 
 class UnitWidget extends Unit  {
 
-  //Lier a l'animation
+
 
   bool etatChanger=false;
   bool isStopped=false;
@@ -20,6 +20,7 @@ class UnitWidget extends Unit  {
 
   late Images images;
 
+  ///Determine combien l'unit cout en fonction de [id]
   static int howMuchItCost(int id)
   {
     const unitsCost = [25, 0, 20, 0, 30, 0, 15, 0, 15, 0, 30, 0, 10, 0, 40, 0 ];
@@ -437,6 +438,7 @@ class UnitWidget extends Unit  {
     }
   }
 
+  ///Est ce que l'unit peut taper l'ennemy de type [typeE]
   bool canHit(int typeU,int typeE){
     switch (typeE){
       //Peut taper volant

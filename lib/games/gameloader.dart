@@ -15,7 +15,7 @@ import 'package:path_provider/path_provider.dart';
 import '../models/player_data.dart';
 
 class GameLoader extends FlameGame {
-  //Permet de mettre en cache les images plus tard
+  ///Permet de mettre en cache les images pour plus  tard
   static const _imageAssets = [
     'heheboy.png',
     'lifebar.png',
@@ -70,6 +70,8 @@ class GameLoader extends FlameGame {
     'Spell/barricade.png'
 
   ];
+
+  ///Determine combien coute un sort
   int howMuchItCostSpell(int id)
   {
     const unitsCost = [40,30,60,10 ];
@@ -150,11 +152,13 @@ class GameLoader extends FlameGame {
     //startSpell(typeSpell);
 
   }
+  ///LocalPath pour le stockage json
   Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
 
     return directory.path;
   }
+
   Future<String> readFile(File fil) async {
       final file = fil;
 
@@ -305,8 +309,11 @@ class GameLoader extends FlameGame {
   void update(double dt) {
     //LOGIQUE POUR UNIT ALLIER
     for (int i = 0; i < listUnit.length; i++) {
+
       EffectOfBg(listUnit[i]);
       EnemyWidget target = EnemyWidget(0, 0, 0, images);
+      ///Si vivant fait alors check si liste ennemie non vide ensuite check si on est a porte de quelqu'un donc on doit changer d'etat (attaque/move)
+      ///puis ensuite attaque ou move l'ennemies
       if (listUnit[i].isAlive()) {
         if (listEnemy.isNotEmpty) {
           tempAStopper = listUnit[i].isStopped;
@@ -333,6 +340,9 @@ class GameLoader extends FlameGame {
         listUnit.removeAt(i);
       }
     }
+    ///Si vivant fait alors check si liste unit non vide ensuite check si on est a porte de quelqu'un donc on doit changer d'etat (attaque/move)
+    ///puis ensuite attaque ou move l'ennemies
+    ///PS : il y a des comportements speciales pour la lich
     //LOGIQUE POUR ENEMIES
     for (int i = 0; i < listEnemy.length; i++) {
       EffectOfBg(listEnemy[i]);
@@ -377,6 +387,8 @@ class GameLoader extends FlameGame {
             listEnemy.add(tempEnemy);
           }
         }
+
+        ///Fait perdre des pv a l'ennemie
         if (listEnemy[i].position.y > size.y) {
           playerData.lives -= 1;
           listEnemy.removeAt(i);
@@ -467,6 +479,7 @@ class GameLoader extends FlameGame {
         break;
     //Transfo
       case 2:
+        ///cHange le type de tous les monstres sauf la lich
         if(spell.animation != null ){
           int? temp =spell.animation?.frames.length;
           if(spell.animation?.currentIndex ==temp!-2 ) {
@@ -484,6 +497,7 @@ class GameLoader extends FlameGame {
         }
         break;
       case 3:
+        ///tout ennemies qui touche la barricade meurt rapidement
         if(unit.y>size.y*0.8){
           unit.health-=5;
           counterBarricade--;
