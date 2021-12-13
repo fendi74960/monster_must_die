@@ -1,18 +1,15 @@
 import 'dart:io';
 import 'dart:math';
-
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:monster_must_die/controller/wavecontroller.dart';
 import 'package:monster_must_die/widgets/enemywidget.dart';
 import 'package:monster_must_die/widgets/game_over_menu.dart';
 import 'package:monster_must_die/widgets/hud.dart';
 import 'package:monster_must_die/widgets/unit_widget.dart';
-
 import 'package:path_provider/path_provider.dart';
-
 import '../models/player_data.dart';
+
 
 class GameLoader extends FlameGame {
   ///Permet de mettre en cache les images pour plus  tard
@@ -133,25 +130,15 @@ class GameLoader extends FlameGame {
   }
 
   ///Lance le jeu en creant pour l'instant des ennemies random
+  /// on peut aussi créer des unités pour les tests et équilibrage
   void startGame() {
     /*for(int i = 0; i < 5 ; i++){
       listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 0,images));
-    }
-    //TODO y supprimer plus tard
-    listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 2,images));
-    listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 4,images));
-    listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 6,images));
-    listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 8,images));
-    listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 10,images));
-    listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 12,images));*/
-    /*listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 14,images));
-    listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 16,images));*/
-    //listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 18,images));
+    }*/
+    //listEnemy.add(EnemyWidget.enemyWidgetRandom(20, size.x - 20, 20, size.y - 20, 16,images));
     //WaveController.newWave(10, listEnemy, 0.toDouble(), size.x*0.8, 0, size.y / 3, images, playerData);
-    //A ENLEVER
-    //startSpell(typeSpell);
-
   }
+
   ///LocalPath pour le stockage json
   Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
@@ -166,12 +153,13 @@ class GameLoader extends FlameGame {
       final contents = await file.readAsString();
 
       return contents;
-
   }
+
   Future<File> get _localFile async {
     final path = await _localPath;
     return File('$path/tracking.json');
   }
+
   ///change le background en fonction de [bgID] donnée
   void changeBackground(int bgId) {
     typeBg=bgId;

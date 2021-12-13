@@ -11,8 +11,11 @@ class WaveController {
     showToast('The wave ' + wave.toString() + " is coming in 5 seconds !", position: ToastPosition.top, textStyle: TextStyle(color: Colors.white, fontSize: 30));
     await Future.delayed(Duration(seconds: 5));
 
+    //The points of the wave
     data.pointsCoop+=100+10*wave;
     data.pointsPerso+=100+10*wave;
+
+    //Then we add enemies depending on the wave id
     showToast('The wave ' + wave.toString() + " is starting !", position: ToastPosition.top, textStyle: TextStyle(color: Colors.white, fontSize: 30));
     switch(wave) {
       case 1: {

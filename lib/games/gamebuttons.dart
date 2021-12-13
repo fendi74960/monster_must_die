@@ -8,11 +8,6 @@ import 'package:monster_must_die/games/gamenetwork.dart';
 import 'package:monster_must_die/controller/bestiarycontroller.dart';
 
 class GameButtons extends GameNetwork with TapDetector {
-  //ready button
-  late Sprite readyPressedButton;
-  late Sprite readyUnpressedButton;
-  final readyPosition = Vector2(0, 0);
-  bool readyPressed = false;
 
   //first unit button
   late Sprite firstButton;
@@ -69,18 +64,6 @@ class GameButtons extends GameNetwork with TapDetector {
     await super.onLoad();
 
     buttonsUnitSize = Vector2(size.x * 0.15, size.x * 0.15);
-
-    //Ready and send buttons
-    readyUnpressedButton = await loadSprite(
-      'ready-buttons.png',
-      srcPosition: Vector2.zero(),
-      srcSize: Vector2(60, 20),
-    );
-    readyPressedButton = await loadSprite(
-      'ready-buttons.png',
-      srcPosition: Vector2(0, 20),
-      srcSize: Vector2(60, 20),
-    );
 
     //Unit buttons
     firstButton = await loadSprite(
@@ -161,10 +144,6 @@ class GameButtons extends GameNetwork with TapDetector {
   @override
   void render(Canvas canvas) {
     super.render(canvas);
-
-    //check if the button is pressed and it change the sprite if yes
-    var button = readyPressed ? readyPressedButton : readyUnpressedButton;
-    button.render(canvas, position: readyPosition, size: buttonsSize);
 
     //check if the unit is selected and it change the sprite if yes
     if (selectedButton == firstButtonUnitType) {
@@ -372,25 +351,7 @@ class GameButtons extends GameNetwork with TapDetector {
         }
       }
       enemyClicked = false;
-
-      //emit to the server a command (ready or toother)
-      buttonArea = readyPosition & buttonsSize;
-      if (buttonArea.contains(event.eventPosition.game.toOffset()) &&
-          readyPressed == false) {
-        socket.emit('ready', 'true');
-      }
-      readyPressed = buttonArea.contains(event.eventPosition.game.toOffset());
     }
-  }
-
-  @override
-  void onTapUp(TapUpInfo event) {
-    readyPressed = false;
-  }
-
-  @override
-  void onTapCancel() {
-    readyPressed = false;
   }
 
   ///Set the unit of the player (there's 2 possibility)

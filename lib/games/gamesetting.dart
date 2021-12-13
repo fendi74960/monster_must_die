@@ -22,15 +22,11 @@ class GameSetting extends GameButtons {
   @override
   void update(double dt) {
     super.update(dt);
-
-    //todo
   }
 
   @override
   void render(Canvas canvas) {
     super.render(canvas);
-
-    //todo
   }
 
   ///Remet a zero les diff parametres du joueur et de la partie

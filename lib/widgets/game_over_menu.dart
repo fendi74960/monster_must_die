@@ -1,13 +1,10 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:monster_must_die/games/gamebuttons.dart';
 import 'package:monster_must_die/games/gamesetting.dart';
-import 'package:monster_must_die/widgets/unit_widget.dart';
 import 'package:monster_must_die/widgets/waitingmenu.dart';
 import 'package:provider/provider.dart';
 import '../models/player_data.dart';
-import 'main_menu.dart';
 
 // This represents the game over overlay,
 // displayed with dino runs out of lives.

@@ -1,15 +1,2 @@
 
-changer monstre dans vague ? + les faires spawn petit a petit ?
-ré-équilibrer
-
-Delete "ready button" quand tout sera finis !
-
-faire vidéo pour présentation
-
-bug:
-Image bestiare trop grosse pour certaine résolution + rules
-numéro de vague dépend de qui est ready en premier ? variable non partagé ?
-
-bug normalment disparu :
-Toast your comrade are here en solo quand envoie ?
-wave number: répété trop de fois ?
+ré-ré-ré-équilibrer
