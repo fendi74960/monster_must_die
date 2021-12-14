@@ -17,3 +17,5 @@ dependencies:
 
 #You can generate a doc : dartdoc
 #https://dart.dev/tools/dartdoc
+
+#Generate a build : dart compile exe bin/main.dart
