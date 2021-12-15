@@ -104,6 +104,7 @@ class GameLoader extends FlameGame {
     playerData = PlayerData();
     listUnit = List.empty(growable: true);
     listEnemy = List.empty(growable: true);
+    typeBg=Random().nextInt(5)+1;
     changeBackground(typeBg);
     spell=SpriteAnimationComponent(position: Vector2.zero(),size:size );
     //Initialize les valeurs du json a 0 pour de ne pas avoir de pb de null
